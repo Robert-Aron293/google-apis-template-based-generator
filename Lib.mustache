@@ -1,0 +1,111 @@
+module gmail.gmail;
+
+public class {{#to_class_name}}{{lib_name}}{{/to_class_name}} {
+  /**
+  * The default encoded root URL of the service. This is determined when the library is generated
+  * and normally should not be changed.
+  *
+  * @since 1.7
+  */
+  public static const string DEFAULT_ROOT_URL = "{{rootUrl}}";
+
+  /**
+  * The default encoded service path of the service. This is determined when the library is
+  * generated and normally should not be changed.
+  *
+  * @since 1.7
+  */
+  public static const string DEFAULT_SERVICE_PATH = "{{servicePath}}";
+
+  /**
+  * The default encoded batch path of the service. This is determined when the library is
+  * generated and normally should not be changed.
+  *
+  * @since 1.23
+  */
+  public static const string DEFAULT_BATCH_PATH = "{{batchPath}}";
+
+  /**
+  * The default encoded base URL of the service. This is determined when the library is generated
+  * and normally should not be changed.
+  */
+  public static const string DEFAULT_BASE_URL = DEFAULT_ROOT_URL + DEFAULT_SERVICE_PATH;
+
+  private Client client;
+
+  /**
+  * Constructor.
+  */
+  this(string credentialsFile) {
+   this.client = new Client(credentialsFile, "{{lib_name}}");
+  }
+
+  void initialize(RequestT, ResponseT, alias Service)
+    (Service!(RequestT, ResponseT) req) {
+    req.setOauthToken(client.getToken());
+  }
+
+  {{#resources}}
+    public {{class}} {{resource_name}}() {
+      return new {{class}}();
+    }
+
+    public class {{class}} {
+      {{#methods}}
+        public {{method_class_name}}!(Request, Response) {{method_name}}({{#parameterOrder}}{{#last}}string {{name}}{{/last}}{{^last}}string {{name}}, {{/last}}{{/parameterOrder}}{{#request}}, {{lib_name}}.models.{{#to_lower}}{{request}}{{/to_lower}}.{{request}} content{{/request}}) {
+          {{method_class_name}}!(Request, Response) result = new {{method_class_name}}!(Request, Response)({{#parameters}}{{#required}}{{#last}}{{name}}{{/last}}{{^last}}{{name}}, {{/last}}{{/required}}{{/parameters}});
+          initialize!(Request, Response, {{method_class_name}})(result);
+          return result;
+        }
+
+        public class {{method_class_name}}(RequestT = Request, ResponseT = Response) :
+          APIRequest!({{lib_name}}.models.{{#response}}{{#to_lower}}{{response}}{{/to_lower}}.{{response}}{{/response}}{{^response}}void.Void{{/response}}, RequestT, ResponseT) {
+          private static const string REST_PATH = "{{#to_rest_path}}{{path}}{{/to_rest_path}}";
+
+          protected this({{#parameterOrder}}{{#last}}string {{name}}{{/last}}{{^last}}string {{name}}, {{/last}}{{/parameterOrder}}) {
+            {{#parameterOrder}}
+            enforce({{name}}, RequiredMessage!"{{name}}");
+            {{/parameterOrder}}
+
+            super(DEFAULT_BASE_URL ~ format!REST_PATH({{#parameterOrder}}{{name}}{{^last}}, {{/last}}{{/parameterOrder}}){{#request}}, {{name}}{{/request}});
+            {{#parameterOrder}}
+            this.{{name}} = {{name}};
+            {{/parameterOrder}}
+          }
+
+          override {
+            {{#query_parameters}}
+            public {{method_class_name}} set{{#to_class_name}}{{name}}{{/to_class_name}}({{type}} {{#to_var_name}}{{name}}{{/to_var_name}}) {
+              return cast({{method_class_name}}) super.set!{{type}}("{{name}}", {{#to_var_name}}{{name}}{{/to_var_name}});
+            }
+            {{/query_parameters}}
+          }
+
+          {{#parameters}}
+          private {{type}} {{name}};
+          public {{type}} get{{#to_class_name}}{{name}}{{/to_class_name}}() {
+            return this.{{name}};
+          }
+          public {{method_class_name}} set{{#to_class_name}}{{name}}{{/to_class_name}}({{type}} {{name}}) {
+            this.{{name}} = {{name}};
+          {{#required}}
+            return this;
+          {{/required}}
+          {{^required}}
+            return cast({{method_class_name}}) super.set!{{type}}("{{name}}", {{name}});
+          {{/required}}
+          }
+          {{/parameters}}
+
+          override public {{method_class_name}} set(T)(string parameterName, T value) {
+            return cast({{method_class_name}}) super.set!T(parameterName, value);
+          }
+
+          public {{lib_name}}.models.{{#response}}{{#to_lower}}{{response}}{{/to_lower}}.{{response}}{{/response}}{{^response}}void.Void{{/response}} execute() {
+            return super.exec!"{{httpMethod}}"();
+          }
+        }
+      {{/methods}}
+    }
+  {{/resources}}
+}
