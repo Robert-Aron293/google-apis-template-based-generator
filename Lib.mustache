@@ -67,7 +67,7 @@ public class {{#to_class_name}}{{lib_name}}{{/to_class_name}} {
             enforce({{name}}, RequiredMessage!"{{name}}");
             {{/parameterOrder}}
 
-            super(DEFAULT_BASE_URL ~ format!REST_PATH({{#parameterOrder}}{{name}}{{^last}}, {{/last}}{{/parameterOrder}}){{#request}}, {{name}}{{/request}});
+            super(DEFAULT_BASE_URL ~ {{#parameterOrder}}format!REST_PATH({{name}}{{^last}}, {{/last}}){{/parameterOrder}}{{^parameterOrder}}REST_PATH{{/parameterOrder}}{{#request}}, {{name}}{{/request}});
             {{#parameterOrder}}
             this.{{name}} = {{name}};
             {{/parameterOrder}}
