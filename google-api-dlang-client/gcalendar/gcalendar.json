@@ -1,0 +1,237 @@
+{
+  "libName": "gcalendar",
+  "id": "calendar:v3",
+  "name": "calendar",
+  "version": "v3",
+  "title": "Calendar API",
+  "description": "Manipulates events and other calendar data.",
+  "documentationLink": "https://developers.google.com/google-apps/calendar/firstapp",
+  "baseUrl": "https://www.googleapis.com/calendar/v3/",
+  "rootUrl": "https://www.googleapis.com/",
+  "servicePath": "calendar/v3/",
+  "batchPath": "batch/calendar/v3",
+  "queryParameters": [
+    {
+      "name": "quotaUser",
+      "type": "string",
+      "description": "An opaque string that represents a user for quota purposes. Must not exceed 40 characters."
+    },
+    {
+      "name": "prettyPrint",
+      "description": "Returns response with indentations and line breaks.",
+      "default": "true",
+      "type": "bool"
+    },
+    {
+      "name": "key",
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "type": "string"
+    },
+    {
+      "name": "oauth_token",
+      "type": "string",
+      "description": "OAuth 2.0 token for the current user."
+    },
+    {
+      "name": "fields",
+      "type": "string",
+      "description": "Selector specifying which fields to include in a partial response."
+    },
+    {
+      "name": "userIp",
+      "description": "Deprecated. Please use quotaUser instead.",
+      "type": "string",
+      "location": "query"
+    },
+    {
+      "name": "alt",
+      "default": "json",
+      "type": "string",
+      "description": "Data format for the response."
+    }
+  ],
+  "schemas": {
+
+  },
+  "resources": [
+    {
+      "resourceName": "colors",
+      "methods": [
+        {
+          "methodName": "get",
+          "description": "Returns the color definitions for calendars and events.",
+          "path": "colors",
+          "httpMethod": "GET",
+          "response": "Colors",
+          "id": "calendar.color.get"
+        }
+      ]
+    },
+    {
+      "resourceName": "acl",
+      "methods": [
+        {
+          "methodName": "watch",
+          "description": "Watch for changes to ACL resources.",
+          "request": "Channel",
+          "supportsSubscription": true,
+          "parameters": [
+            {
+              "name": "showDeleted",
+              "type": "bool",
+              "description": "Whether to include deleted ACLs in the result. Deleted ACLs are represented by role equal to \\\"none\\\". Deleted ACLs will always be included if syncToken is provided. Optional. The default is False."
+            },
+            {
+              "name": "maxResults",
+              "type": "int",
+              "description": "Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional."
+            },
+            {
+              "name": "syncToken",
+              "type": "string",
+              "description": "Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. All entries deleted since the previous list request will always be in the result set and it is not allowed to set showDeleted to False.\\nIf the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.\\nLearn more about incremental synchronization.\\nOptional. The default is to return all entries."
+            },
+            {
+              "name": "pageToken",
+              "type": "string",
+              "description": "Token specifying which result page to return. Optional."
+            }
+          ],
+          "parameterOrder": [
+            {
+              "name": "calendarId",
+              "type": "string",
+              "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \\\"primary\\\" keyword.",
+              "pathParameter": true,
+              "last": true
+            }
+          ],
+          "path": "calendars/{calendarId}/acl/watch",
+          "response": "Channel",
+          "httpMethod": "POST",
+          "id": "calendar.acl.watch"
+        },
+        {
+          "methodName": "patch",
+          "request": "AclRule",
+          "httpMethod": "PATCH",
+          "description": "Updates an access control rule. This method supports patch semantics.",
+          "parameters": [
+            {
+              "name": "sendNotifications",
+              "type": "bool",
+              "description": "Whether to send notifications about the calendar sharing change. Note that there are no notifications on access removal. Optional. The default is True."
+            }
+          ],
+          "parameterOrder": [
+            {
+              "name": "calendarId",
+              "type": "string",
+              "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \\\"primary\\\" keyword.",
+              "pathParameter": true,
+              "last": false
+            },
+            {
+              "name": "ruleId",
+              "type": "string",
+              "description": "ACL rule identifier.",
+              "pathParameter": true,
+              "last": true
+            }
+          ],
+          "path": "calendars/{calendarId}/acl/{ruleId}",
+          "response": "AclRule",
+          "id": "calendar.acl.patch"
+        },
+        {
+          "methodName": "insert",
+          "request": "AclRule",
+          "description": "Creates an access control rule.",
+          "response": "AclRule",
+          "path": "calendars/{calendarId}/acl",
+          "httpMethod": "POST",
+          "parameters": [
+            {
+              "name": "sendNotifications",
+              "type": "bool",
+              "description": "Whether to send notifications about the calendar sharing change. Optional. The default is True."
+            }
+          ],
+          "parameterOrder": [
+            {
+              "name": "calendarId",
+              "type": "string",
+              "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \\\"primary\\\" keyword.",
+              "pathParameter": true,
+              "last": false
+            }
+          ],
+          "id": "calendar.acl.insert"
+        },
+        {
+          "methodName": "delete",
+          "description": "Deletes an access control rule.",
+          "path": "calendars/{calendarId}/acl/{ruleId}",
+          "httpMethod": "DELETE",
+          "id": "calendar.acl.delete",
+          "parameters": [ ],
+          "parameterOrder": [
+            {
+              "name": "calendarId",
+              "type": "string",
+              "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \\\"primary\\\" keyword.",
+              "pathParameter": true,
+              "last": false
+            },
+            {
+              "name": "ruleId",
+              "type": "string",
+              "description": "ACL rule identifier.",
+              "pathParameter": true,
+              "last": true
+            }
+          ]
+        },
+        {
+          "methodName": "list",
+          "description": "Returns the rules in the access control list for the calendar.",
+          "path": "calendars/{calendarId}/acl",
+          "response": "Acl",
+          "httpMethod": "GET",
+          "id": "calendar.acl.list",
+          "parameters": [
+            {
+              "name":"pageToken",
+              "type": "string",
+              "description": "Token specifying which result page to return. Optional."
+            },
+            {
+              "name": "maxResults",
+              "description": "Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional.",
+              "type": "int"
+            },
+            {
+              "name": "syncToken",
+              "type": "string",
+              "description": "Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. All entries deleted since the previous list request will always be in the result set and it is not allowed to set showDeleted to False.\nIf the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.\nLearn more about incremental synchronization.\nOptional. The default is to return all entries."
+            },
+            {
+              "name": "showDeleted",
+              "description": "Whether to include deleted ACLs in the result. Deleted ACLs are represented by role equal to \"none\". Deleted ACLs will always be included if syncToken is provided. Optional. The default is False.",
+              "type": "bool"
+            }
+          ],
+          "parameterOrder": [
+            {
+              "name": "calendarId",
+              "type": "string",
+              "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword.",
+              "pathParameter": true,
+              "last": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
