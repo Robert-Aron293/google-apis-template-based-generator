@@ -27,51 +27,38 @@
       "name": "alt",
       "type": "string",
       "description": "Data format for the response.",
-      "default": "json",
-      "enum": [
-        "json"
-      ],
-      "enumDescriptions": [
-        "Responses with Content-Type of application/json"
-      ],
-      "location": "query"
+      "default": "json"
     },
     {
       "name": "fields",
       "type": "string",
-      "description": "Selector specifying which fields to include in a partial response.",
-      "location": "query"
+      "description": "Selector specifying which fields to include in a partial response."
     },
     {
       "name": "key",
       "type": "string",
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "location": "query"
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
     },
     {
       "name": "oauth_token",
       "type": "string",
-      "description": "OAuth 2.0 token for the current user.",
-      "location": "query"
+      "description": "OAuth 2.0 token for the current user."
     },
     {
       "name": "prettyPrint",
       "type": "bool",
       "description": "Returns response with indentations and line breaks.",
-      "default": "true",
-      "location": "query"
+      "default": "true"
     },
     {
       "name": "quotaUser",
       "type": "string",
-      "description": "An opaque string that represents a user for quota purposes. Must not exceed 40 characters.",
-      "location": "query"
+      "description": "An opaque string that represents a user for quota purposes. Must not exceed 40 characters."
     },
     {
       "name": "userIp",
       "type": "string",
-      "description": "Deprecated. Please use quotaUser instead.",
-      "location": "query"
+      "description": "Deprecated. Please use quotaUser instead."
     }
   ],
   "auth": {
@@ -1936,87 +1923,71 @@
             {
               "name": "driveId",
               "type": "string",
-              "description": "The shared drive from which changes are returned. If specified the change IDs will be reflective of the shared drive; use the combined drive ID and change ID as an identifier.",
-              "location": "query"
+              "description": "The shared drive from which changes are returned. If specified the change IDs will be reflective of the shared drive; use the combined drive ID and change ID as an identifier."
             },
             {
               "name": "includeCorpusRemovals",
               "type": "bool",
               "description": "Whether changes should include the file resource if the file is still accessible by the user at the time of the request, even when a file was removed from the list of changes and there will be no further change entries for this file.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "includeItemsFromAllDrives",
               "type": "bool",
               "description": "Whether both My Drive and shared drive items should be included in results.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "includePermissionsForView",
               "type": "string",
-              "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported.",
-              "location": "query"
+              "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported."
             },
             {
               "name": "includeRemoved",
               "type": "bool",
               "description": "Whether to include changes indicating that items have been removed from the list of changes, for example by deletion or loss of access.",
-              "default": "true",
-              "location": "query"
+              "default": "true"
             },
             {
               "name": "includeTeamDriveItems",
               "type": "bool",
               "description": "Deprecated use includeItemsFromAllDrives instead.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "pageSize",
               "type": "int",
               "description": "The maximum number of changes to return per page.",
-              "default": "100",
-              "format": "int32",
-              "minimum": "1",
-              "maximum": "1000",
-              "location": "query"
-
+              "default": "100"
             },
             {
               "name": "restrictToMyDrive",
               "type": "bool",
               "description": "Whether to restrict the results to changes inside the My Drive hierarchy. This omits changes to files such as those in the Application Data folder or shared files which have not been added to My Drive.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "spaces",
               "type": "string",
               "description": "A comma-separated list of spaces to query within the user corpus. Supported values are 'drive', 'appDataFolder' and 'photos'.",
-              "default": "drive",
-              "location": "query"
+              "default": "drive"
             },
             {
               "name": "supportsAllDrives",
               "type": "bool",
               "description": "Whether the requesting application supports both My Drives and shared drives.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "supportsTeamDrives",
               "type": "bool",
               "description": "Deprecated use supportsAllDrives instead.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "teamDriveId",
               "type": "string",
-              "description": "Deprecated use driveId instead.",
-              "location": "query"
+              "description": "Deprecated use driveId instead."
             }
           ],
           "parameterOrder": [
@@ -2048,98 +2019,77 @@
             {
               "name": "driveId",
               "type": "string",
-              "description": "The shared drive from which changes are returned. If specified the change IDs will be reflective of the shared drive; use the combined drive ID and change ID as an identifier.",
-              "location": "query"
+              "description": "The shared drive from which changes are returned. If specified the change IDs will be reflective of the shared drive; use the combined drive ID and change ID as an identifier."
             },
             {
               "name": "includeCorpusRemovals",
               "type": "bool",
               "description": "Whether changes should include the file resource if the file is still accessible by the user at the time of the request, even when a file was removed from the list of changes and there will be no further change entries for this file.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "includeItemsFromAllDrives",
               "type": "bool",
               "description": "Whether both My Drive and shared drive items should be included in results.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "includePermissionsForView",
               "type": "string",
-              "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported.",
-              "location": "query"
+              "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported."
             },
             {
               "name": "includeRemoved",
               "type": "bool",
               "description": "Whether to include changes indicating that items have been removed from the list of changes, for example by deletion or loss of access.",
-              "default": "true",
-              "location": "query"
+              "default": "true"
             },
             {
               "name": "includeTeamDriveItems",
               "type": "bool",
               "description": "Deprecated use includeItemsFromAllDrives instead.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "pageSize",
               "type": "int",
               "description": "The maximum number of changes to return per page.",
-              "default": "100",
-              "format": "int32",
-              "minimum": "1",
-              "maximum": "1000",
-              "location": "query"
-            },
-            {
-              "name": "pageToken",
-              "type": "string",
-              "description": "The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.",
-              "required": true,
-              "location": "query"
+              "default": "100"
             },
             {
               "name": "restrictToMyDrive",
               "type": "bool",
               "description": "Whether to restrict the results to changes inside the My Drive hierarchy. This omits changes to files such as those in the Application Data folder or shared files which have not been added to My Drive.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "spaces",
               "type": "string",
               "description": "A comma-separated list of spaces to query within the user corpus. Supported values are 'drive', 'appDataFolder' and 'photos'.",
-              "default": "drive",
-              "location": "query"
+              "default": "drive"
             },
             {
               "name": "supportsAllDrives",
               "type": "bool",
               "description": "Whether the requesting application supports both My Drives and shared drives.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "supportsTeamDrives",
               "type": "bool",
               "description": "Deprecated use supportsAllDrives instead.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "teamDriveId",
               "type": "string",
-              "description": "Deprecated use driveId instead.",
-              "location": "query"
+              "description": "Deprecated use driveId instead."
             }
           ],
           "parameterOrder": [
             {
               "name": "pageToken",
+              "type": "string",
               "description": "The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method."
             }
           ],
@@ -2192,15 +2142,7 @@
           "httpMethod": "POST",
           "description": "Creates a new comment on a file.",
           "hasPathParameters": true,
-          "parameters": [
-            {
-              "name": "fileId",
-              "type": "string",
-              "description": "The ID of the file.",
-              "required": true,
-              "location": "path"
-            }
-          ],
+          "parameters": [],
           "parameterOrder": [
             {
               "name": "fileId",
@@ -2258,8 +2200,7 @@
               "name": "includeDeleted",
               "type": "bool",
               "description": "Whether to return deleted comments. Deleted comments will not include their original content.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             }
           ],
           "parameterOrder": [
@@ -2297,30 +2238,23 @@
               "name": "includeDeleted",
               "type": "bool",
               "description": "Whether to include deleted comments. Deleted comments will not include their original content.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "pageSize",
               "type": "int",
               "description": "The maximum number of comments to return per page.",
-              "default": "20",
-              "format": "int32",
-              "minimum": "1",
-              "maximum": "100",
-              "location": "query"
+              "default": "20"
             },
             {
               "name": "pageToken",
               "type": "string",
-              "description": "The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.",
-              "location": "query"
+              "description": "The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response."
             },
             {
               "name": "startModifiedTime",
               "type": "string",
-              "description": "The minimum value of 'modifiedTime' for the result comments (RFC 3339 date-time).",
-              "location": "query"
+              "description": "The minimum value of 'modifiedTime' for the result comments (RFC 3339 date-time)."
             }
           ],
           "parameterOrder": [
@@ -2480,30 +2414,23 @@
               "name": "pageSize",
               "type": "int",
               "description": "Maximum number of shared drives to return.",
-              "default": "10",
-              "format": "int32",
-              "minimum": "1",
-              "maximum": "100",
-              "location": "query"
+              "default": "10"
             },
             {
               "name": "pageToken",
               "type": "string",
-              "description": "Page token for shared drives.",
-              "location": "query"
+              "description": "Page token for shared drives."
             },
             {
               "name": "q",
               "type": "string",
-              "description": "Query string for searching shared drives.",
-              "location": "query"
+              "description": "Query string for searching shared drives."
             },
             {
               "name": "useDomainAdminAccess",
               "type": "bool",
               "description": "Issue the request as a domain administrator; if set to true, then all shared drives of the domain in which the requester is an administrator are returned.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             }
           ],
           "response": "DriveList",
@@ -2546,8 +2473,7 @@
               "name": "useDomainAdminAccess",
               "type": "bool",
               "description": "Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the shared drive belongs.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             }
           ],
           "parameterOrder": [
@@ -2583,48 +2509,41 @@
               "name": "enforceSingleParent",
               "type": "bool",
               "description": "Deprecated. Copying files into multiple folders is no longer supported. Use shortcuts instead.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "ignoreDefaultVisibility",
               "type": "bool",
               "description": "Whether to ignore the domain's default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "includePermissionsForView",
               "type": "string",
-              "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported.",
-              "location": "query"
+              "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported."
             },
             {
               "name": "keepRevisionForever",
               "type": "bool",
               "description": "Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "ocrLanguage",
               "type": "string",
-              "description": "A language hint for OCR processing during image import (ISO 639-1 code).",
-              "location": "query"
+              "description": "A language hint for OCR processing during image import (ISO 639-1 code)."
             },
             {
               "name": "supportsAllDrives",
               "type": "bool",
               "description": "Whether the requesting application supports both My Drives and shared drives.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "supportsTeamDrives",
               "type": "bool",
               "description": "Deprecated use supportsAllDrives instead.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             }
           ],
           "parameterOrder": [
@@ -2656,55 +2575,47 @@
               "name": "enforceSingleParent",
               "type": "bool",
               "description": "Deprecated. Creating files in multiple folders is no longer supported.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "ignoreDefaultVisibility", 
               "type": "bool",
               "description": "Whether to ignore the domain's default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "includePermissionsForView",
               "type": "string",
-              "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported.",
-              "location": "query"
+              "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported."
             },
             {
               "name": "keepRevisionForever",
               "type": "bool",
               "description": "Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "ocrLanguage",
               "type": "string",
-              "description": "A language hint for OCR processing during image import (ISO 639-1 code).",
-              "location": "query"
+              "description": "A language hint for OCR processing during image import (ISO 639-1 code)."
             },
             {
               "name": "supportsAllDrives",
               "type": "bool",
               "description": "Whether the requesting application supports both My Drives and shared drives.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "supportsTeamDrives",
               "type": "bool",
               "description": "Deprecated use supportsAllDrives instead.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "useContentAsIndexableText",
               "type": "bool",
               "description": "Whether to use the uploaded content as indexable text.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             }
           ],
           "request": "File",
@@ -2745,22 +2656,19 @@
               "name": "enforceSingleParent",
               "type": "bool",
               "description": "Deprecated. If an item is not in a shared drive and its last parent is deleted but the item itself is not, the item will be placed under its owner's root.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "supportsAllDrives",
               "type": "bool",
               "description": "Whether the requesting application supports both My Drives and shared drives.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "supportsTeamDrives",
               "type": "bool",
               "description": "Deprecated use supportsAllDrives instead.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             }
           ],
           "parameterOrder": [
@@ -2789,8 +2697,7 @@
               "name": "enforceSingleParent",
               "type": "bool",
               "description": "Deprecated. If an item is not in a shared drive and its last parent is deleted but the item itself is not, the item will be placed under its owner's root.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             }
           ],
           "scopes": [
@@ -2837,18 +2744,13 @@
               "name": "count",
               "type": "int",
               "description": "The number of IDs to return.",
-              "default": "10",
-              "format": "int32",
-              "minimum": "1",
-              "maximum": "1000",
-              "location": "query"
+              "default": "10"
             },
             {
               "name": "space",
               "type": "string",
               "description": "The space in which the IDs can be used to create new files. Supported values are 'drive' and 'appDataFolder'.",
-              "default": "drive",
-              "location": "query"
+              "default": "drive"
             }
           ],
           "response": "GeneratedIds",
@@ -2870,28 +2772,23 @@
               "name": "acknowledgeAbuse",
               "type": "bool",
               "description": "Whether the user is acknowledging the risk of downloading known malware or other abusive files. This is only applicable when alt=media.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "includePermissionsForView",
               "type": "string",
-              "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported.",
-              "location": "query"
+              "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported."
             },
             {
               "name": "supportsAllDrives",
               "type": "bool",
-              "description": "Whether the requesting application supports both My Drives and shared drives.",
-              "default": "false",
-              "location": "query"
+              "description": "Whether the requesting application supports both My Drives and shared drives."
             },
             {
               "name": "supportsTeamDrives",
               "type": "bool",
               "description": "Deprecated use supportsAllDrives instead.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             }
           ],
           "parameterOrder": [
@@ -2933,97 +2830,73 @@
             {
               "name": "corpus",
               "type": "string",
-              "description": "The source of files to list. Deprecated: use 'corpora' instead.",
-              "enum": [
-                "domain",
-                "user"
-              ],
-              "enumDescriptions": [
-                "Files shared to the user's domain.",
-                "Files owned by or shared to the user. If a user has permissions on a Shared Drive, the files inside it won't be retrieved unless the user has created, opened, or shared the file."
-              ],
-              "location": "query"
+              "description": "The source of files to list. Deprecated: use 'corpora' instead."
             },
             {
               "name": "driveId",
               "type": "string",
-              "description": "ID of the shared drive to search.",
-              "location": "query"
+              "description": "ID of the shared drive to search."
             },
             {
               "name": "includeItemsFromAllDrives",
               "type": "bool",
               "description": "Whether both My Drive and shared drive items should be included in results.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "includePermissionsForView",
               "type": "string",
-              "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported.",
-              "location": "query"
+              "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported."
             },
             {
               "name": "includeTeamDriveItems",
               "type": "bool",
               "description": "Deprecated use includeItemsFromAllDrives instead.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "orderBy",
               "type": "string",
-              "description": "A comma-separated list of sort keys. Valid keys are 'createdTime', 'folder', 'modifiedByMeTime', 'modifiedTime', 'name', 'name_natural', 'quotaBytesUsed', 'recency', 'sharedWithMeTime', 'starred', and 'viewedByMeTime'. Each key sorts ascending by default, but may be reversed with the 'desc' modifier. Example usage: ?orderBy=folder,modifiedTime desc,name. Please note that there is a current limitation for users with approximately one million files in which the requested sort order is ignored.",
-              "location": "query"
+              "description": "A comma-separated list of sort keys. Valid keys are 'createdTime', 'folder', 'modifiedByMeTime', 'modifiedTime', 'name', 'name_natural', 'quotaBytesUsed', 'recency', 'sharedWithMeTime', 'starred', and 'viewedByMeTime'. Each key sorts ascending by default, but may be reversed with the 'desc' modifier. Example usage: ?orderBy=folder,modifiedTime desc,name. Please note that there is a current limitation for users with approximately one million files in which the requested sort order is ignored."
             },
             {
               "name": "pageSize",
               "type": "int",
               "description": "The maximum number of files to return per page. Partial or empty result pages are possible even before the end of the files list has been reached.",
-              "default": "100",
-              "format": "int32",
-              "minimum": "1",
-              "maximum": "1000",
-              "location": "query"
+              "default": "100"
             },
             {
               "name": "pageToken",
               "type": "string",
-              "description": "The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.",
-              "location": "query"
+              "description": "The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response."
             },
             {
               "name": "q",
               "type": "string",
-              "description": "A query for filtering the file results. See the \"Search for Files\" guide for supported syntax.",
-              "location": "query"
+              "description": "A query for filtering the file results. See the \"Search for Files\" guide for supported syntax."
             },
             {
               "name": "spaces",
               "type": "string",
               "description": "A comma-separated list of spaces to query within the corpus. Supported values are 'drive', 'appDataFolder' and 'photos'.",
-              "default": "drive",
-              "location": "query"
+              "default": "drive"
             },
             {
               "name": "supportsAllDrives",
               "type": "bool",
               "description": "Whether the requesting application supports both My Drives and shared drives.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "supportsTeamDrives",
               "type": "bool",
               "description": "Deprecated use supportsAllDrives instead.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "teamDriveId",
               "type": "string",
-              "description": "Deprecated use driveId instead.",
-              "location": "query"
+              "description": "Deprecated use driveId instead."
             }
           ],
           "response": "FileList",
@@ -3047,61 +2920,52 @@
             {
               "name": "addParents",
               "type": "string",
-              "description": "A comma-separated list of parent IDs to add.",
-              "location": "query"
+              "description": "A comma-separated list of parent IDs to add."
             },
             {
               "name": "enforceSingleParent",
               "type": "bool",
               "description": "Deprecated. Adding files to multiple folders is no longer supported. Use shortcuts instead.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "includePermissionsForView",
               "type": "string",
-              "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported.",
-              "location": "query"
+              "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported."
             },
             {
               "name": "keepRevisionForever",
               "type": "bool",
               "description": "Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "ocrLanguage",
               "type": "string",
-              "description": "A language hint for OCR processing during image import (ISO 639-1 code).",
-              "location": "query"
+              "description": "A language hint for OCR processing during image import (ISO 639-1 code)."
             },
             {
               "name": "removeParents",
               "type": "string",
-              "description": "A comma-separated list of parent IDs to remove.",
-              "location": "query"
+              "description": "A comma-separated list of parent IDs to remove."
             },
             {
               "name": "supportsAllDrives",
               "type": "bool",
               "description": "Whether the requesting application supports both My Drives and shared drives.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "supportsTeamDrives",
               "type": "bool",
               "description": "Deprecated use supportsAllDrives instead.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "useContentAsIndexableText",
               "type": "bool",
               "description": "Whether to use the uploaded content as indexable text.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             }
           ],
           "parameterOrder": [
@@ -3151,28 +3015,24 @@
               "name": "acknowledgeAbuse",
               "type": "bool",
               "description": "Whether the user is acknowledging the risk of downloading known malware or other abusive files. This is only applicable when alt=media.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "includePermissionsForView",
               "type": "string",
-              "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported.",
-              "location": "query"
+              "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported."
             },
             {
               "name": "supportsAllDrives",
               "type": "bool",
               "description": "Whether the requesting application supports both My Drives and shared drives.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "supportsTeamDrives",
               "type": "bool",
               "description": "Deprecated use supportsAllDrives instead.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             }
           ],
           "parameterOrder": [
@@ -3216,56 +3076,48 @@
             {
               "name": "emailMessage",
               "type": "string",
-              "description": "A plain text custom message to include in the notification email.",
-              "location": "query"
+              "description": "A plain text custom message to include in the notification email."
             },
             {
               "name": "enforceSingleParent",
               "type": "bool",
               "description": "Deprecated. See moveToNewOwnersRoot for details.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "moveToNewOwnersRoot",
               "type": "bool",
               "description": "This parameter will only take effect if the item is not in a shared drive and the request is attempting to transfer the ownership of the item. If set to true, the item will be moved to the new owner's My Drive root folder and all prior parents removed. If set to false, parents are not changed.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "sendNotificationEmail",
               "type": "bool",
-              "description": "Whether to send a notification email when sharing to users or groups. This defaults to true for users and groups, and is not allowed for other requests. It must not be disabled for ownership transfers.",
-              "location": "query"
+              "description": "Whether to send a notification email when sharing to users or groups. This defaults to true for users and groups, and is not allowed for other requests. It must not be disabled for ownership transfers."
             },
             {
               "name": "supportsAllDrives",
               "type": "bool",
               "description": "Whether the requesting application supports both My Drives and shared drives.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "supportsTeamDrives",
               "type": "bool",
               "description": "Deprecated use supportsAllDrives instead.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "transferOwnership",
               "type": "bool",
               "description": "Whether to transfer ownership to the specified user and downgrade the current owner to a writer. This parameter is required as an acknowledgement of the side effect.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "useDomainAdminAccess",
               "type": "bool",
               "description": "Issue the request as a domain administrator; if set to true, then the requester will be granted access if the file ID parameter refers to a shared drive and the requester is an administrator of the domain to which the shared drive belongs.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             }
           ],
           "parameterOrder": [
@@ -3296,22 +3148,19 @@
               "name": "supportsAllDrives",
               "type": "bool",
               "description": "Whether the requesting application supports both My Drives and shared drives.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "supportsTeamDrives",
               "type": "bool",
               "description": "Deprecated use supportsAllDrives instead.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "useDomainAdminAccess",
               "type": "bool",
               "description": "Issue the request as a domain administrator; if set to true, then the requester will be granted access if the file ID parameter refers to a shared drive and the requester is an administrator of the domain to which the shared drive belongs.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             }
           ],
           "parameterOrder": [
@@ -3347,22 +3196,19 @@
               "name": "supportsAllDrives",
               "type": "bool",
               "description": "Whether the requesting application supports both My Drives and shared drives.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "supportsTeamDrives",
               "type": "bool",
               "description": "Deprecated use supportsAllDrives instead.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "useDomainAdminAccess",
               "type": "bool",
               "description": "Issue the request as a domain administrator; if set to true, then the requester will be granted access if the file ID parameter refers to a shared drive and the requester is an administrator of the domain to which the shared drive belongs.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             }
           ],
           "parameterOrder": [
@@ -3402,44 +3248,35 @@
             {
               "name": "includePermissionsForView",
               "type": "string",
-              "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported.",
-              "location": "query"
+              "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported."
             },
             {
               "name": "pageSize",
               "type": "int",
-              "description": "The maximum number of permissions to return per page. When not set for files in a shared drive, at most 100 results will be returned. When not set for files that are not in a shared drive, the entire list will be returned.",
-              "format": "int32",
-              "minimum": "1",
-              "maximum": "100",
-              "location": "query"
+              "description": "The maximum number of permissions to return per page. When not set for files in a shared drive, at most 100 results will be returned. When not set for files that are not in a shared drive, the entire list will be returned."
             },
             {
               "name": "pageToken",
               "type": "string",
-              "description": "The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.",
-              "location": "query"
+              "description": "The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response."
             },
             {
               "name": "supportsAllDrives",
               "type": "bool",
               "description": "Whether the requesting application supports both My Drives and shared drives.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "supportsTeamDrives",
               "type": "bool",
               "description": "Deprecated use supportsAllDrives instead.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "useDomainAdminAccess",
               "type": "bool",
               "description": "Issue the request as a domain administrator; if set to true, then the requester will be granted access if the file ID parameter refers to a shared drive and the requester is an administrator of the domain to which the shared drive belongs.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             }
           ],
           "parameterOrder": [
@@ -3473,36 +3310,31 @@
               "name": "removeExpiration",
               "type": "bool",
               "description": "Whether to remove the expiration date.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "supportsAllDrives",
               "type": "bool",
               "description": "Whether the requesting application supports both My Drives and shared drives.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "supportsTeamDrives",
               "type": "bool",
               "description": "Deprecated use supportsAllDrives instead.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "transferOwnership",
               "type": "bool",
               "description": "Whether to transfer ownership to the specified user and downgrade the current owner to a writer. This parameter is required as an acknowledgement of the side effect.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "useDomainAdminAccess",
               "type": "bool",
               "description": "Issue the request as a domain administrator; if set to true, then the requester will be granted access if the file ID parameter refers to a shared drive and the requester is an administrator of the domain to which the shared drive belongs.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             }
           ],
           "parameterOrder": [
@@ -3613,8 +3445,7 @@
               "name": "includeDeleted",
               "type": "bool",
               "description": "Whether to return deleted replies. Deleted replies will not include their original content.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             }
           ],
           "parameterOrder": [
@@ -3659,24 +3490,18 @@
               "name": "includeDeleted",
               "type": "bool",
               "description": "Whether to include deleted replies. Deleted replies will not include their original content.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             },
             {
               "name": "pageSize",
               "type": "int",
               "description": "The maximum number of replies to return per page.",
-              "default": "20",
-              "format": "int32",
-              "minimum": "1",
-              "maximum": "100",
-              "location": "query"
+              "default": "20"
             },
             {
               "name": "pageToken",
               "type": "string",
-              "description": "The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.",
-              "location": "query"
+              "description": "The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response."
             }
           ],
           "parameterOrder": [
@@ -3788,8 +3613,7 @@
               "name": "acknowledgeAbuse",
               "type": "bool",
               "description": "Whether the user is acknowledging the risk of downloading known malware or other abusive files. This is only applicable when alt=media.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             }
           ],
           "parameterOrder": [
@@ -3833,17 +3657,12 @@
               "name": "pageSize",
               "type": "int",
               "description": "The maximum number of revisions to return per page.",
-              "default": "200",
-              "format": "int32",
-              "minimum": "1",
-              "maximum": "1000",
-              "location": "query"
+              "default": "200"
             },
             {
               "name": "pageToken",
               "type": "string",
-              "description": "The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.",
-              "location": "query"
+              "description": "The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response."
             }
           ],
           "parameterOrder": [
@@ -3958,8 +3777,7 @@
               "name": "useDomainAdminAccess",
               "type": "bool",
               "description": "Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the Team Drive belongs.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             }
           ],
           "parameterOrder": [
@@ -3988,30 +3806,23 @@
               "name": "pageSize",
               "type": "int",
               "description": "Maximum number of Team Drives to return.",
-              "default": "10",
-              "format": "int32",
-              "minimum": "1",
-              "maximum": "100",
-              "location": "query"
+              "default": "10"
             },
             {
               "name": "pageToken",
               "type": "string",
-              "description": "Page token for Team Drives.",
-              "location": "query"
+              "description": "Page token for Team Drives."
             },
             {
               "name": "q",
               "type": "string",
-              "description": "Query string for searching Team Drives.",
-              "location": "query"
+              "description": "Query string for searching Team Drives."
             },
             {
               "name": "useDomainAdminAccess",
               "type": "bool",
               "description": "Issue the request as a domain administrator; if set to true, then all Team Drives of the domain in which the requester is an administrator are returned.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             }
           ],
           "response": "TeamDriveList",
@@ -4032,8 +3843,7 @@
               "name": "useDomainAdminAccess",
               "type": "bool",
               "description": "Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the Team Drive belongs.",
-              "default": "false",
-              "location": "query"
+              "default": "false"
             }
           ],
           "parameterOrder": [
