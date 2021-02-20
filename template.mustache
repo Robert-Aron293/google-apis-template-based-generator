@@ -1,0 +1,129 @@
+module {{libName}}.{{libName}};
+
+public class {{#to_upper_camel_case}}{{libName}}{{/to_upper_camel_case}} {
+    /**
+    * The default encoded root URL of the service. This is determined when the library is generated
+    * and normally should not be changed.
+    *
+    * @since 1.7
+    */
+    public static const string DEFAULT_ROOT_URL = "{{rootUrl}}";
+
+    /**
+    * The default encoded service path of the service. This is determined when the library is
+    * generated and normally should not be changed.
+    *
+    * @since 1.7
+    */
+    public static const string DEFAULT_SERVICE_PATH = "{{servicePath}}";
+
+    /**
+    * The default encoded batch path of the service. This is determined when the library is
+    * generated and normally should not be changed.
+    *
+    * @since 1.23
+    */
+    public static const string DEFAULT_BATCH_PATH = "{{batchPath}}";
+
+    /**
+    * The default encoded base URL of the service. This is determined when the library is generated
+    * and normally should not be changed.
+    */
+    public static const string DEFAULT_BASE_URL = DEFAULT_ROOT_URL + DEFAULT_SERVICE_PATH;
+
+    private Client client;
+
+    /**
+    * Constructor.
+    */
+    this(string credentialsFile) {
+        this.client = new Client(credentialsFile, "{{libName}}");
+    }
+
+    void initialize(RequestT, ResponseT, alias Service)
+    (Service!(RequestT, ResponseT) req) {
+        req.setOauthToken(client.getToken());
+    }
+
+    {{#resources}}
+    public {{#to_upper_camel_case}}{{resourceName}}{{/to_upper_camel_case}} {{resourceName}}() {
+      return new {{#to_upper_camel_case}}{{resourceName}}{{/to_upper_camel_case}}();
+    }
+
+    public class {{#to_upper_camel_case}}{{resourceName}}{{/to_upper_camel_case}} {
+    {{#methods}}
+        public {{#to_upper_camel_case}}{{methodName}}{{/to_upper_camel_case}}!(Request, Response) {{methodName}}({{#parameterOrder}}string {{name}}{{^last}}, {{/last}}{{/parameterOrder}}{{#request}}, {{libName}}.models.{{#to_lower}}{{request}}{{/to_lower}}.{{request}} content{{/request}}) {
+            {{#to_upper_camel_case}}{{methodName}}{{/to_upper_camel_case}}!(Request, Response) result = new {{#to_upper_camel_case}}{{methodName}}{{/to_upper_camel_case}}!(Request, Response)({{#parameterOrder}}{{name}}{{^last}}, {{/last}}{{/parameterOrder}}{{#request}}, content{{/request}});
+            initialize!(Request, Response, {{#to_upper_camel_case}}{{methodName}}{{/to_upper_camel_case}})(result);
+            return result;
+        }
+        {{#supportsMediaUpload}}
+        public {{#to_upper_camel_case}}{{methodName}}{{/to_upper_camel_case}}!(Request, Response) {{methodName}}({{#parameterOrder}}string {{name}}{{^last}}, {{/last}}{{/parameterOrder}}{{#request}}, {{libName}}.models.{{#to_lower}}{{request}}{{/to_lower}}.{{request}} content{{/request}}, string mediaContent) {
+            {{#to_upper_camel_case}}{{methodName}}{{/to_upper_camel_case}}!(Request, Response) result = new {{#to_upper_camel_case}}{{methodName}}{{/to_upper_camel_case}}!(Request, Response)({{#parameterOrder}}{{name}}{{/parameterOrder}}{{^last}}, {{/last}}{{#request}}, content{{/request}}, mediaUpload);
+            initialize!(Request, Response, {{#to_upper_camel_case}}{{methodName}}{{/to_upper_camel_case}})(result);
+            return result;
+        }
+        {{/supportsMediaUpload}}
+
+        public class {{#to_upper_camel_case}}{{methodName}}{{/to_upper_camel_case}}(RequestT = Request, ResponseT = Response) :
+          APIRequest!({{libName}}.models.{{#response}}{{#to_lower}}{{response}}{{/to_lower}}.{{response}}{{/response}}{{^response}}void.Void{{/response}}, RequestT, ResponseT) {
+          private static const string REST_PATH = "{{#to_rest_path}}{{path}}{{/to_rest_path}}";
+
+          protected this({{#parameterOrder}}string {{name}}{{^last}}, {{/last}}{{/parameterOrder}}) {
+            {{#parameterOrder}}
+            enforce({{name}}, RequiredMessage!"{{name}}");
+            {{/parameterOrder}}
+            super(DEFAULT_BASE_URL ~ {{#parameterOrder}}format!REST_PATH({{name}}{{^last}}, {{/last}}){{/parameterOrder}}{{^parameterOrder}}REST_PATH{{/parameterOrder}}{{#request}}, {{name}}{{/request}});
+            {{#parameterOrder}}
+            this.{{name}} = {{name}};
+            {{/parameterOrder}}
+          }
+
+          override {
+            {{#queryParameters}}
+            public {{#to_upper_camel_case}}{{methodName}}{{/to_upper_camel_case}} set{{#to_upper_camel_case}}{{name}}{{/to_upper_camel_case}}({{type}} {{#to_camel_case}}{{name}}{{/to_camel_case}}) {
+              return cast({{#to_upper_camel_case}}{{methodName}}{{/to_upper_camel_case}}) super.set!{{type}}("{{name}}", {{#to_camel_case}}{{name}}{{/to_camel_case}});
+            }
+            {{/queryParameters}}
+          }
+
+          {{#parameterOrder}}
+          private {{type}} {{name}};
+          public {{type}} get{{#to_upper_camel_case}}{{name}}{{/to_upper_camel_case}}() {
+            return this.{{name}};
+          }
+
+          public {{#to_upper_camel_case}}{{methodName}}{{/to_upper_camel_case}} set{{#to_upper_camel_case}}{{name}}{{/to_upper_camel_case}}({{type}} {{name}}) {
+            this.{{name}} = {{name}};
+            {{#location}}
+            return this;
+            {{/location}}
+            {{^location}}
+            return set!{{type}}("{{name}}", {{name}});
+            {{/location}}
+          }
+          {{/parameterOrder}}
+
+          {{#parameters}}
+          private {{type}} {{name}};
+          public {{type}} get{{#to_upper_camel_case}}{{name}}{{/to_upper_camel_case}}() {
+            return this.{{name}};
+          }
+          public {{#to_upper_camel_case}}{{methodName}}{{/to_upper_camel_case}} set{{#to_upper_camel_case}}{{name}}{{/to_upper_camel_case}}({{type}} {{name}}) {
+            this.{{name}} = {{name}};
+            return set!{{type}}("{{name}}", {{name}});
+          }
+          {{/parameters}}
+
+          override public {{#to_upper_camel_case}}{{methodName}}{{/to_upper_camel_case}} set(T)(string parameterName, T value) {
+            return cast({{#to_upper_camel_case}}{{methodName}}{{/to_upper_camel_case}}) super.set!T(parameterName, value);
+          }
+
+          public {{libName}}.models.{{#response}}{{#to_lower}}{{response}}{{/to_lower}}.{{response}}{{/response}}{{^response}}void.Void{{/response}} execute() {
+            return super.exec!"{{httpMethod}}"();
+          }
+        }
+      {{/methods}}
+    }
+  {{/resources}}
+}

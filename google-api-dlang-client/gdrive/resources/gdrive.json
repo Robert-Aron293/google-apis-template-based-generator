@@ -1,4 +1,5 @@
 {
+  "libName": "gdrive",
   "kind": "discovery#restDescription",
   "etag": "\"-2NioU2H8y8siEzrBOV_qzRI6kQ/8FPw1QApcT2pBMVV3y4RrpfcbIE\"",
   "discoveryVersion": "v1",
@@ -21,7 +22,7 @@
   "rootUrl": "https://www.googleapis.com/",
   "servicePath": "drive/v3/",
   "batchPath": "batch/drive/v3",
-  "query_parameters": [
+  "queryParameters": [
     {
       "name": "alt",
       "type": "string",
@@ -1859,12 +1860,10 @@
   },
   "resources": [
     {
-      "class": "About",
-      "resource_name": "about",
+      "resourceName": "about",
       "methods": [
         {
-          "method_class_name": "Get",
-          "method_name": "get",
+          "methodName": "get",
           "id": "drive.about.get",
           "path": "about",
           "httpMethod": "GET",
@@ -1884,11 +1883,10 @@
     },
     {
       "class": "Changes",
-      "resource_name": "changes",
+      "resourceName": "changes",
       "methods": [
         {
-          "method_class_name": "GetStartPageToken",
-          "method_name": "getStartPageToken",
+          "methodName": "getStartPageToken",
           "id": "drive.changes.getStartPageToken",
           "path": "changes/startPageToken",
           "httpMethod": "GET",
@@ -1897,32 +1895,24 @@
             {
               "name": "driveId",
               "type": "string",
-              "description": "The ID of the shared drive for which the starting pageToken for listing future changes from that shared drive is returned.",
-              "location": "query",
-              "last": false
+              "description": "The ID of the shared drive for which the starting pageToken for listing future changes from that shared drive is returned."
             },
             {
               "name": "supportsAllDrives",
               "type": "bool",
               "description": "Whether the requesting application supports both My Drives and shared drives.",
-              "default": "false",
-              "location": "query",
-              "last": false
+              "default": "false"
             },
             {
               "name": "supportsTeamDrives",
               "type": "bool",
               "description": "Deprecated use supportsAllDrives instead.",
-              "default": "false",
-              "location": "query",
-              "last": false
+              "default": "false"
             },
             {
               "name": "teamDriveId",
               "type": "string",
-              "description": "Deprecated use driveId instead.",
-              "location": "query",
-              "last": false
+              "description": "Deprecated use driveId instead."
             }
           ],
           "response": "StartPageToken",
@@ -1937,7 +1927,7 @@
           ]
         },
         {
-          "method_name": "list",
+          "methodName": "list",
           "id": "drive.changes.list",
           "path": "changes",
           "httpMethod": "GET",
@@ -1947,47 +1937,41 @@
               "name": "driveId",
               "type": "string",
               "description": "The shared drive from which changes are returned. If specified the change IDs will be reflective of the shared drive; use the combined drive ID and change ID as an identifier.",
-              "location": "query",
-              "last": false
+              "location": "query"
             },
             {
               "name": "includeCorpusRemovals",
               "type": "bool",
               "description": "Whether changes should include the file resource if the file is still accessible by the user at the time of the request, even when a file was removed from the list of changes and there will be no further change entries for this file.",
               "default": "false",
-              "location": "query",
-              "last": false
+              "location": "query"
             },
             {
               "name": "includeItemsFromAllDrives",
               "type": "bool",
               "description": "Whether both My Drive and shared drive items should be included in results.",
               "default": "false",
-              "location": "query",
-              "last": false
+              "location": "query"
             },
             {
               "name": "includePermissionsForView",
               "type": "string",
               "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported.",
-              "location": "query",
-              "last": false
+              "location": "query"
             },
             {
               "name": "includeRemoved",
               "type": "bool",
               "description": "Whether to include changes indicating that items have been removed from the list of changes, for example by deletion or loss of access.",
               "default": "true",
-              "location": "query",
-              "last": false
+              "location": "query"
             },
             {
               "name": "includeTeamDriveItems",
               "type": "bool",
               "description": "Deprecated use includeItemsFromAllDrives instead.",
               "default": "false",
-              "location": "query",
-              "last": false
+              "location": "query"
             },
             {
               "name": "pageSize",
@@ -1997,64 +1981,49 @@
               "format": "int32",
               "minimum": "1",
               "maximum": "1000",
-              "location": "query",
-              "last": false
-            },
-            {
-              "name": "pageToken",
-              "type": "string",
-              "description": "The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.",
-              "required": true,
-              "location": "query",
-              "last": false
+              "location": "query"
+
             },
             {
               "name": "restrictToMyDrive",
               "type": "bool",
               "description": "Whether to restrict the results to changes inside the My Drive hierarchy. This omits changes to files such as those in the Application Data folder or shared files which have not been added to My Drive.",
               "default": "false",
-              "location": "query",
-              "last": false
+              "location": "query"
             },
             {
               "name": "spaces",
               "type": "string",
               "description": "A comma-separated list of spaces to query within the user corpus. Supported values are 'drive', 'appDataFolder' and 'photos'.",
               "default": "drive",
-              "location": "query",
-              "last": false
+              "location": "query"
             },
             {
               "name": "supportsAllDrives",
               "type": "bool",
               "description": "Whether the requesting application supports both My Drives and shared drives.",
               "default": "false",
-              "location": "query",
-              "last": false
+              "location": "query"
             },
             {
               "name": "supportsTeamDrives",
               "type": "bool",
               "description": "Deprecated use supportsAllDrives instead.",
               "default": "false",
-              "location": "query",
-              "last": false
+              "location": "query"
             },
             {
               "name": "teamDriveId",
               "type": "string",
               "description": "Deprecated use driveId instead.",
-              "location": "query",
-              "last": false
+              "location": "query"
             }
           ],
           "parameterOrder": [
             {
               "name": "pageToken",
               "type": "string",
-              "description": "The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.",
-              "location": "query",
-              "last": true
+              "description": "The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method."
             }
           ],
           "response": "ChangeList",
@@ -2070,7 +2039,7 @@
           "supportsSubscription": true
         },
         {
-          "method_name": "watch",
+          "methodName": "watch",
           "id": "drive.changes.watch",
           "path": "changes/watch",
           "httpMethod": "POST",
@@ -2171,9 +2140,7 @@
           "parameterOrder": [
             {
               "name": "pageToken",
-              "location": "query",
-              "description": "The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.",
-              "last": true
+              "description": "The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method."
             }
           ],
           "request": "Channel",
@@ -2193,10 +2160,10 @@
     },
     {
       "class": "Channels",
-      "resource_name": "channels",
+      "resourceName": "channels",
       "methods": [
         {
-          "method_name": "stop",
+          "methodName": "stop",
           "id": "drive.channels.stop",
           "path": "channels/stop",
           "httpMethod": "POST",
@@ -2216,10 +2183,10 @@
     },
     {
       "class": "Comments",
-      "resource_name": "comments",
+      "resourceName": "comments",
       "methods": [
         {
-          "method_name": "create",
+          "methodName": "create",
           "id": "drive.comments.create",
           "path": "files/{fileId}/comments",
           "httpMethod": "POST",
@@ -2251,11 +2218,12 @@
           ]
         },
         {
-          "method_name": "delete",
+          "methodName": "delete",
           "id": "drive.comments.delete",
           "path": "files/{fileId}/comments/{commentId}",
           "httpMethod": "DELETE",
           "description": "Deletes a comment.",
+          "hasPathParameters": true,
           "parameters": [],
           "parameterOrder": [
             {
@@ -2279,11 +2247,12 @@
           ]
         },
         {
-          "method_name": "get",
+          "methodName": "get",
           "id": "drive.comments.get",
           "path": "files/{fileId}/comments/{commentId}",
           "httpMethod": "GET",
           "description": "Gets a comment by ID.",
+          "hasPathParameters": true,
           "parameters": [
             {
               "name": "includeDeleted",
@@ -2317,11 +2286,12 @@
           ]
         },
         {
-          "method_name": "list",
+          "methodName": "list",
           "id": "drive.comments.list",
           "path": "files/{fileId}/comments",
           "httpMethod": "GET",
           "description": "Lists a file's comments.",
+          "hasPathParameters": true,
           "parameters": [
             {
               "name": "includeDeleted",
@@ -2370,11 +2340,12 @@
           ]
         },
         {
-          "method_name": "update",
+          "methodName": "update",
           "id": "drive.comments.update",
           "path": "files/{fileId}/comments/{commentId}",
           "httpMethod": "PATCH",
           "description": "Updates a comment with patch semantics.",
+          "hasPathParameters": true,
           "parameters": [],
           "parameterOrder": [
             {
@@ -2403,10 +2374,10 @@
     },
     {
       "class": "Drives",
-      "resource_name": "drives",
+      "resourceName": "drives",
       "methods": [
         {
-          "method_name": "create",
+          "methodName": "create",
           "id": "drive.drives.create",
           "path": "drives",
           "httpMethod": "POST",
@@ -2426,11 +2397,12 @@
           ]
         },
         {
-          "method_name": "delete",
+          "methodName": "delete",
           "id": "drive.drives.delete",
           "path": "drives/{driveId}",
           "httpMethod": "DELETE",
           "description": "Permanently deletes a shared drive for which the user is an organizer. The shared drive cannot contain any untrashed items.",
+          "hasPathParameters": true,
           "parameters": [],
           "parameterOrder": [
             {
@@ -2446,11 +2418,12 @@
           ]
         },
         {
-          "method_name": "get",
+          "methodName": "get",
           "id": "drive.drives.get",
           "path": "drives/{driveId}",
           "httpMethod": "GET",
           "description": "Gets a shared drive's metadata by ID.",
+          "hasPathParameters": true,
           "parameters": [
             {
               "name": "useDomainAdminAccess",
@@ -2475,11 +2448,12 @@
           ]
         },
         {
-          "method_name": "hide",
+          "methodName": "hide",
           "id": "drive.drives.hide",
           "path": "drives/{driveId}/hide",
           "httpMethod": "POST",
           "description": "Hides a shared drive from the default view.",
+          "hasPathParameters": true,
           "parameters": [],
           "parameterOrder": [
             {
@@ -2496,7 +2470,7 @@
           ]
         },
         {
-          "method_name": "list",
+          "methodName": "list",
           "id": "drive.drives.list",
           "path": "drives",
           "httpMethod": "GET",
@@ -2539,11 +2513,12 @@
           ]
         },
         {
-          "method_name": "unhide",
+          "methodName": "unhide",
           "id": "drive.drives.unhide",
           "path": "drives/{driveId}/unhide",
           "httpMethod": "POST",
           "description": "Restores a shared drive to the default view.",
+          "hasPathParameters": true,
           "parameters": [],
           "parameterOrder": [
             {
@@ -2560,11 +2535,12 @@
           ]
         },
         {
-          "method_name": "update",
+          "methodName": "update",
           "id": "drive.drives.update",
           "path": "drives/{driveId}",
           "httpMethod": "PATCH",
           "description": "Updates the metadate for a shared drive.",
+          "hasPathParameters": true,
           "parameters": [
             {
               "name": "useDomainAdminAccess",
@@ -2593,50 +2569,58 @@
     },
     {
       "class": "Files",
-      "resource_name": "files",
+      "resourceName": "files",
       "methods": [
         {
-          "method_name": "copy",
+          "methodName": "copy",
           "id": "drive.files.copy",
           "path": "files/{fileId}/copy",
           "httpMethod": "POST",
           "description": "Creates a copy of a file and applies any requested updates with patch semantics. Folders cannot be copied.",
+          "hasPathParameters": true,
           "parameters": [
-            "enforceSingleParent": {
+            {
+              "name": "enforceSingleParent",
               "type": "bool",
               "description": "Deprecated. Copying files into multiple folders is no longer supported. Use shortcuts instead.",
               "default": "false",
               "location": "query"
             },
-            "ignoreDefaultVisibility": {
+            {
+              "name": "ignoreDefaultVisibility",
               "type": "bool",
               "description": "Whether to ignore the domain's default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders.",
               "default": "false",
               "location": "query"
             },
-            "includePermissionsForView": {
+            {
+              "name": "includePermissionsForView",
               "type": "string",
               "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported.",
               "location": "query"
             },
-            "keepRevisionForever": {
+            {
+              "name": "keepRevisionForever",
               "type": "bool",
               "description": "Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.",
               "default": "false",
               "location": "query"
             },
-            "ocrLanguage": {
+            {
+              "name": "ocrLanguage",
               "type": "string",
               "description": "A language hint for OCR processing during image import (ISO 639-1 code).",
               "location": "query"
             },
-            "supportsAllDrives": {
+            {
+              "name": "supportsAllDrives",
               "type": "bool",
               "description": "Whether the requesting application supports both My Drives and shared drives.",
               "default": "false",
               "location": "query"
             },
-            "supportsTeamDrives": {
+            {
+              "name": "supportsTeamDrives",
               "type": "bool",
               "description": "Deprecated use supportsAllDrives instead.",
               "default": "false",
@@ -2662,53 +2646,61 @@
           ]
         },
         {
-          "method_name": "create",
+          "methodName": "create",
           "id": "drive.files.create",
           "path": "files",
           "httpMethod": "POST",
           "description": "Creates a new file.",
           "parameters": [
-            "enforceSingleParent": {
+            {
+              "name": "enforceSingleParent",
               "type": "bool",
               "description": "Deprecated. Creating files in multiple folders is no longer supported.",
               "default": "false",
               "location": "query"
             },
-            "ignoreDefaultVisibility": {
+            {
+              "name": "ignoreDefaultVisibility", 
               "type": "bool",
               "description": "Whether to ignore the domain's default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders.",
               "default": "false",
               "location": "query"
             },
-            "includePermissionsForView": {
+            {
+              "name": "includePermissionsForView",
               "type": "string",
               "description": "Specifies which additional view's permissions to include in the response. Only 'published' is supported.",
               "location": "query"
             },
-            "keepRevisionForever": {
+            {
+              "name": "keepRevisionForever",
               "type": "bool",
               "description": "Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.",
               "default": "false",
               "location": "query"
             },
-            "ocrLanguage": {
+            {
+              "name": "ocrLanguage",
               "type": "string",
               "description": "A language hint for OCR processing during image import (ISO 639-1 code).",
               "location": "query"
             },
-            "supportsAllDrives": {
+            {
+              "name": "supportsAllDrives",
               "type": "bool",
               "description": "Whether the requesting application supports both My Drives and shared drives.",
               "default": "false",
               "location": "query"
             },
-            "supportsTeamDrives": {
+            {
+              "name": "supportsTeamDrives",
               "type": "bool",
               "description": "Deprecated use supportsAllDrives instead.",
               "default": "false",
               "location": "query"
             },
-            "useContentAsIndexableText": {
+            {
+              "name": "useContentAsIndexableText",
               "type": "bool",
               "description": "Whether to use the uploaded content as indexable text.",
               "default": "false",
@@ -2742,25 +2734,29 @@
           "supportsSubscription": true
         },
         {
-          "method_name": "delete",
+          "methodName": "delete",
           "id": "drive.files.delete",
           "path": "files/{fileId}",
           "httpMethod": "DELETE",
           "description": "Permanently deletes a file owned by the user without moving it to the trash. If the file belongs to a shared drive the user must be an organizer on the parent. If the target is a folder, all descendants owned by the user are also deleted.",
+          "hasPathParameters": true,
           "parameters": [
-            "enforceSingleParent": {
+            {
+              "name": "enforceSingleParent",
               "type": "bool",
               "description": "Deprecated. If an item is not in a shared drive and its last parent is deleted but the item itself is not, the item will be placed under its owner's root.",
               "default": "false",
               "location": "query"
             },
-            "supportsAllDrives": {
+            {
+              "name": "supportsAllDrives",
               "type": "bool",
               "description": "Whether the requesting application supports both My Drives and shared drives.",
               "default": "false",
               "location": "query"
             },
-            "supportsTeamDrives": {
+            {
+              "name": "supportsTeamDrives",
               "type": "bool",
               "description": "Deprecated use supportsAllDrives instead.",
               "default": "false",
@@ -2783,7 +2779,7 @@
           ]
         },
         {
-          "method_name": "emptyTrash",
+          "methodName": "emptyTrash",
           "id": "drive.files.emptyTrash",
           "path": "files/trash",
           "httpMethod": "DELETE",
@@ -2802,7 +2798,7 @@
           ]
         },
         {
-          "name": "export",
+          "methodName": "export",
           "id": "drive.files.export",
           "path": "files/{fileId}/export",
           "httpMethod": "GET",
@@ -2820,7 +2816,7 @@
             {
               "name": "mimeType",
               "type": "string",
-              "description": "The MIME type of the format requested for this export.",
+              "description": "The MIME type of the format requested for this export."
             }
           ],
           "scopes": [
@@ -2837,7 +2833,8 @@
           "httpMethod": "GET",
           "description": "Generates a set of file IDs which can be provided in create or copy requests.",
           "parameters": [
-            "count": {
+            {
+              "name": "count",
               "type": "int",
               "description": "The number of IDs to return.",
               "default": "10",
@@ -2846,7 +2843,8 @@
               "maximum": "1000",
               "location": "query"
             },
-            "space": {
+            {
+              "name": "space",
               "type": "string",
               "description": "The space in which the IDs can be used to create new files. Supported values are 'drive' and 'appDataFolder'.",
               "default": "drive",
@@ -3015,7 +3013,7 @@
               "location": "query"
             },
             {
-              "name": supportsTeamDrives,
+              "name": "supportsTeamDrives",
               "type": "bool",
               "description": "Deprecated use supportsAllDrives instead.",
               "default": "false",
@@ -3208,7 +3206,7 @@
       "resourceName": "permissions",
       "methods": [
         {
-          "methodName": "create".
+          "methodName": "create",
           "id": "drive.permissions.create",
           "path": "files/{fileId}/permissions",
           "httpMethod": "POST",
@@ -3918,6 +3916,7 @@
               "name": "requestId",
               "type": "string",
               "description": "The ID of the request.",
+              "last": true
             }
           ],
           "request": "TeamDrive",

@@ -153,8 +153,7 @@
       "resource_name": "users",
       "methods": [
         {
-          "method_class_name": "GetProfile",
-          "method_name": "getProfile",
+          "methodName": "getProfile",
           "path": "gmail/v1/users/{userId}/profile",
           "id": "gmail.users.getProfile",
           "flatPath": "gmail/v1/users/{userId}/profile",
@@ -188,7 +187,7 @@
         },
         {
           "method_class_name": "Watch",
-          "method_name": "watch",
+          "methodName": "watch",
           "path": "gmail/v1/users/{userId}/watch",
           "parameters": [
             {
@@ -222,7 +221,7 @@
         },
         {
           "method_class_name": "Stop",
-          "method_name": "stop",
+          "methodName": "stop",
           "httpMethod": "POST",
           "parameterOrder": [
             {
@@ -260,7 +259,7 @@
       "methods": [
         {
           "method_class_name": "Get",
-          "method_name": "get",
+          "methodName": "get",
           "path": "gmail/v1/users/{userId}/labels/{id}",
           "parameters": [
             {
@@ -306,7 +305,7 @@
         },
         {
           "method_class_name": "Patch",
-          "method_name": "patch",
+          "methodName": "patch",
           "description": "Patch the specified label.",
           "path": "gmail/v1/users/{userId}/labels/{id}",
           "id": "gmail.users.labels.patch",
@@ -351,7 +350,7 @@
         },
         {
           "method_class_name": "Delete",
-          "method_name": "delete",
+          "methodName": "delete",
           "scopes": [
             "https://mail.google.com/",
             "https://www.googleapis.com/auth/gmail.labels",
@@ -428,7 +427,7 @@
         },
         {
           "method_class_name": "Create",
-          "method_name": "create",
+          "methodName": "create",
           "path": "gmail/v1/users/{userId}/labels",
           "flatPath": "gmail/v1/users/{userId}/labels",
           "id": "gmail.users.labels.create",
@@ -461,7 +460,7 @@
         },
         {
           "method_class_name": "Update",
-          "method_name": "update",
+          "methodName": "update",
           "request": "Label",
           "parameters": [
             {
@@ -512,7 +511,7 @@
       "methods": [
         {
           "method_class_name": "List",
-          "method_name": "list",
+          "methodName": "list",
           "scopes": [
             "https://mail.google.com/",
             "https://www.googleapis.com/auth/gmail.metadata",
@@ -601,7 +600,7 @@
       "methods": [
         {
           "method_class_name": "Get",
-          "method_name": "get",
+          "methodName": "get",
           "description": "Gets the specified delegate. Note that a delegate user must be referred to by their primary email address, and not an email alias. This method is only available to service account clients that have been delegated domain-wide authority.",
           "response": "Delegate",
           "parameterOrder": [
@@ -646,7 +645,7 @@
         },
         {
           "method_class_name": "Delete",
-          "method_name": "delete",
+          "methodName": "delete",
           "parameterOrder": [
             {
               "name": "userId",
@@ -687,7 +686,7 @@
         },
         {
           "method_class_name": "List",
-          "method_name": "list",
+          "methodName": "list",
           "path": "gmail/v1/users/{userId}/settings/delegates",
           "id": "gmail.users.settings.delegates.list",
           "httpMethod": "GET",
@@ -720,7 +719,7 @@
         },
         {
           "method_class_name": "Create",
-          "method_name": "create",
+          "methodName": "create",
           "request": "Delegate",
           "description": "Adds a delegate with its verification status set directly to `accepted`, without sending any verification email. The delegate user must be a member of the same G Suite organization as the delegator user. Gmail imposes limitations on the number of delegates and delegators each user in a G Suite organization can have. These limits depend on your organization, but in general each user can have up to 25 delegates and up to 10 delegators. Note that a delegate user must be referred to by their primary email address, and not an email alias. Also note that when a new delegate is created, there may be up to a one minute delay before the new delegate is available for use. This method is only available to service account clients that have been delegated domain-wide authority.",
           "path": "gmail/v1/users/{userId}/settings/delegates",
@@ -757,7 +756,7 @@
       "methods": [
         {
           "method_class_name": "Insert",
-          "method_name": "insert",
+          "methodName": "insert",
           "response": "SmimeInfo",
           "parameterOrder": [
             {
@@ -801,7 +800,7 @@
         },
         {
           "method_class_name": "Delete",
-          "method_name": "delete",
+          "methodName": "delete",
           "description": "Deletes the specified S/MIME config for the specified send-as alias.",
           "scopes": [
             "https://www.googleapis.com/auth/gmail.settings.basic",
@@ -855,7 +854,7 @@
         },
         {
           "method_class_name": "List",
-          "method_name": "list",
+          "methodName": "list",
           "parameterOrder": [
             {
               "name": "userId",
@@ -901,7 +900,7 @@
         },
         {
           "method_class_name": "SetDefault",
-          "method_name": "setDefault",
+          "methodName": "setDefault",
           "path": "gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo/{id}/setDefault",
           "parameters": [
             {
@@ -955,7 +954,7 @@
         },
         {
           "method_class_name": "Get",
-          "method_name": "get",
+          "methodName": "get",
           "response": "SmimeInfo",
           "flatPath": "gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo/{id}",
           "description": "Gets the specified S/MIME config for the specified send-as alias.",
@@ -1019,7 +1018,7 @@
       "methods": [
         {
           "method_class_name": "Get",
-          "method_name": "get",
+          "methodName": "get",
           "httpMethod": "GET",
           "parameterOrder": [
             {
@@ -1064,7 +1063,7 @@
         },
         {
           "method_class_name": "List",
-          "method_name": "list",
+          "methodName": "list",
           "id": "gmail.users.settings.sendAs.list",
           "description": "Lists the send-as aliases for the specified account. The result includes the primary send-as address associated with the account as well as any custom \"from\" aliases.",
           "scopes": [
@@ -1097,7 +1096,7 @@
         },
         {
           "method_class_name": "Verify",
-          "method_name": "verify",
+          "methodName": "verify",
           "path": "gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/verify",
           "flatPath": "gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/verify",
           "description": "Sends a verification email to the specified send-as alias address. The verification status must be `pending`. This method is only available to service account clients that have been delegated domain-wide authority.",
@@ -1138,7 +1137,7 @@
         },
         {
           "method_class_name": "Delete",
-          "method_name": "delete",
+          "methodName": "delete",
           "description": "Deletes the specified send-as alias. Revokes any verification that may have been required for using it. This method is only available to service account clients that have been delegated domain-wide authority.",
           "flatPath": "gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}",
           "httpMethod": "DELETE",
@@ -1179,7 +1178,7 @@
         },
         {
           "method_class_name": "Update",
-          "method_name": "update",
+          "methodName": "update",
           "response": "SendAs",
           "description": "Updates a send-as alias. If a signature is provided, Gmail will sanitize the HTML before saving it with the alias. Addresses other than the primary address for the account can only be updated by service account clients that have been delegated domain-wide authority.",
           "id": "gmail.users.settings.sendAs.update",
@@ -1223,7 +1222,7 @@
         },
         {
           "method_class_name": "Patch",
-          "method_name": "patch",
+          "methodName": "patch",
           "request": "SendAs",
           "scopes": [
             "https://www.googleapis.com/auth/gmail.settings.basic",
@@ -1261,7 +1260,7 @@
         },
         {
           "method_class_name": "Create",
-          "method_name": "create",
+          "methodName": "create",
           "id": "gmail.users.settings.sendAs.create",
           "parameterOrder": [
             {
@@ -1298,7 +1297,7 @@
       "methods": [
         {
           "method_class_name": "Delete",
-          "method_name": "delete",
+          "methodName": "delete",
           "parameterOrder": [
             {
               "name": "userId",
@@ -1339,7 +1338,7 @@
         },
         {
           "method_class_name": "List",
-          "method_name": "list",
+          "methodName": "list",
           "path": "gmail/v1/users/{userId}/settings/forwardingAddresses",
           "flatPath": "gmail/v1/users/{userId}/settings/forwardingAddresses",
           "response": "ListForwardingAddressesResponse",
@@ -1372,7 +1371,7 @@
         },
         {
           "method_class_name": "Get",
-          "method_name": "get",
+          "methodName": "get",
           "scopes": [
             "https://mail.google.com/",
             "https://www.googleapis.com/auth/gmail.modify",
@@ -1417,7 +1416,7 @@
         },
         {
           "method_class_name": "Create",
-          "method_name": "create",
+          "methodName": "create",
           "httpMethod": "POST",
           "scopes": [
             "https://www.googleapis.com/auth/gmail.settings.sharing"
@@ -1454,7 +1453,7 @@
       "methods": [
         {
           "method_class_name": "Create",
-          "method_name": "create",
+          "methodName": "create",
           "response": "Filter",
           "scopes": [
             "https://www.googleapis.com/auth/gmail.settings.basic"
@@ -1485,7 +1484,7 @@
         },
         {
           "method_class_name": "Delete",
-          "method_name": "delete",
+          "methodName": "delete",
           "flatPath": "gmail/v1/users/{userId}/settings/filters/{id}",
           "scopes": [
             "https://www.googleapis.com/auth/gmail.settings.basic"
@@ -1526,7 +1525,7 @@
         },
         {
           "method_class_name": "Get",
-          "method_name": "get",
+          "methodName": "get",
           "description": "Gets a filter.",
           "scopes": [
             "https://mail.google.com/",
@@ -1571,7 +1570,7 @@
         },
         {
           "method_class_name": "List",
-          "method_name": "list",
+          "methodName": "list",
           "scopes": [
             "https://mail.google.com/",
             "https://www.googleapis.com/auth/gmail.modify",
@@ -1610,7 +1609,7 @@
       "methods": [
         {
           "method_class_name": "GetAutoForwarding",
-          "method_name": "getAutoForwarding",
+          "methodName": "getAutoForwarding",
           "parameters": [
             {
               "name": "userId",
@@ -1643,7 +1642,7 @@
         },
         {
           "method_class_name": "UpdateAutoForwarding",
-          "method_name": "updateAutoForwarding",
+          "methodName": "updateAutoForwarding",
           "id": "gmail.users.settings.updateAutoForwarding",
           "path": "gmail/v1/users/{userId}/settings/autoForwarding",
           "scopes": [
@@ -1674,7 +1673,7 @@
         },
         {
           "method_class_name": "GetImap",
-          "method_name": "getImap",
+          "methodName": "getImap",
           "description": "Gets IMAP settings.",
           "parameters": [
             {
@@ -1707,7 +1706,7 @@
         },
         {
           "method_class_name": "UpdatePop",
-          "method_name": "updatePop",
+          "methodName": "updatePop",
           "description": "Updates POP settings.",
           "response": "PopSettings",
           "path": "gmail/v1/users/{userId}/settings/pop",
@@ -1738,7 +1737,7 @@
         },
         {
           "method_class_name": "UpdateVacation",
-          "method_name": "updateVacation",
+          "methodName": "updateVacation",
           "httpMethod": "PUT",
           "parameters": [
             {
@@ -1769,7 +1768,7 @@
         },
         {
           "method_class_name": "GetPop",
-          "method_name": "getPop",
+          "methodName": "getPop",
           "flatPath": "gmail/v1/users/{userId}/settings/pop",
           "path": "gmail/v1/users/{userId}/settings/pop",
           "response": "PopSettings",
@@ -1802,7 +1801,7 @@
         },
         {
           "method_class_name": "GetVacation",
-          "method_name": "getVacation",
+          "methodName": "getVacation",
           "description": "Gets vacation responder settings.",
           "id": "gmail.users.settings.getVacation",
           "response": "VacationSettings",
@@ -1835,7 +1834,7 @@
         },
         {
           "method_class_name": "UpdateImap",
-          "method_name": "updateImap",
+          "methodName": "updateImap",
           "scopes": [
             "https://www.googleapis.com/auth/gmail.settings.basic"
           ],
@@ -1866,7 +1865,7 @@
         },
         {
           "method_class_name": "UpdateLanguage",
-          "method_name": "updateLanguage",
+          "methodName": "updateLanguage",
           "parameterOrder": [
             {
               "name": "userId",
@@ -1897,7 +1896,7 @@
         },
         {
           "method_class_name": "GetLanguage",
-          "method_name": "getLanguage",
+          "methodName": "getLanguage",
           "response": "LanguageSettings",
           "httpMethod": "GET",
           "parameterOrder": [
@@ -1936,7 +1935,7 @@
       "methods": [
         {
           "method_class_name": "List",
-          "method_name": "list",
+          "methodName": "list",
           "path": "gmail/v1/users/{userId}/threads",
           "scopes": [
             "https://mail.google.com/",
@@ -2008,7 +2007,7 @@
         },
         {
           "method_class_name": "Trash",
-          "method_name": "trash",
+          "methodName": "trash",
           "scopes": [
             "https://mail.google.com/",
             "https://www.googleapis.com/auth/gmail.modify"
@@ -2051,7 +2050,7 @@
         },
         {
           "method_class_name": "Delete",
-          "method_name": "delete",
+          "methodName": "delete",
           "path": "gmail/v1/users/{userId}/threads/{id}",
           "scopes": [
             "https://mail.google.com/"
@@ -2092,7 +2091,7 @@
         },
         {
           "method_class_name": "Untrash",
-          "method_name": "untrash",
+          "methodName": "untrash",
           "id": "gmail.users.threads.untrash",
           "description": "Removes the specified thread from the trash.",
           "scopes": [
@@ -2135,7 +2134,7 @@
         },
         {
           "method_class_name": "Modify",
-          "method_name": "modify",
+          "methodName": "modify",
           "path": "gmail/v1/users/{userId}/threads/{id}/modify",
           "httpMethod": "POST",
           "response": "Thread",
@@ -2179,7 +2178,7 @@
         },
         {
           "method_class_name": "Get",
-          "method_name": "get",
+          "methodName": "get",
           "httpMethod": "GET",
           "scopes": [
             "https://mail.google.com/",
@@ -2259,7 +2258,7 @@
       "methods": [
         {
           "method_class_name": "Get",
-          "method_name": "get",
+          "methodName": "get",
           "description": "Gets the specified message attachment.",
           "parameterOrder": [
             {
@@ -2323,7 +2322,7 @@
       "methods": [
         {
           "method_class_name": "Modify",
-          "method_name": "modify",
+          "methodName": "modify",
           "flatPath": "gmail/v1/users/{userId}/messages/{id}/modify",
           "description": "Modifies the labels on the specified message.",
           "request": "ModifyMessageRequest",
@@ -2367,7 +2366,7 @@
         },
         {
           "method_class_name": "BatchDelete",
-          "method_name": "batchDelete",
+          "methodName": "batchDelete",
           "flatPath": "gmail/v1/users/{userId}/messages/batchDelete",
           "id": "gmail.users.messages.batchDelete",
           "httpMethod": "POST",
@@ -2397,7 +2396,7 @@
         },
         {
           "method_class_name": "Trash",
-          "method_name": "trash",
+          "methodName": "trash",
           "httpMethod": "POST",
           "scopes": [
             "https://mail.google.com/",
@@ -2440,7 +2439,7 @@
         },
         {
           "method_class_name": "Untrash",
-          "method_name": "untrash",
+          "methodName": "untrash",
           "id": "gmail.users.messages.untrash",
           "response": "Message",
           "parameters": [
@@ -2483,7 +2482,7 @@
         },
         {
           "method_class_name": "List",
-          "method_name": "list",
+          "methodName": "list",
           "httpMethod": "GET",
           "path": "gmail/v1/users/{userId}/messages",
           "flatPath": "gmail/v1/users/{userId}/messages",
@@ -2555,7 +2554,7 @@
         },
         {
           "method_class_name": "Import",
-          "method_name": "import",
+          "methodName": "import",
           "scopes": [
             "https://mail.google.com/",
             "https://www.googleapis.com/auth/gmail.insert",
@@ -2645,7 +2644,7 @@
         },
         {
           "method_class_name": "Get",
-          "method_name": "get",
+          "methodName": "get",
           "response": "Message",
           "httpMethod": "GET",
           "parameters": [
@@ -2721,7 +2720,7 @@
         },
         {
           "method_class_name": "Delete",
-          "method_name": "delete",
+          "methodName": "delete",
           "scopes": [
             "https://mail.google.com/"
           ],
@@ -2762,7 +2761,7 @@
         },
         {
           "method_class_name": "Insert",
-          "method_name": "insert",
+          "methodName": "insert",
           "response": "Message",
           "supportsMediaUpload": true,
           "description": "Directly inserts a message into only this user's mailbox similar to `IMAP APPEND`, bypassing most scanning and classification. Does not send a message.",
@@ -2836,7 +2835,7 @@
         },
         {
           "method_class_name": "BatchModify",
-          "method_name": "batchModify",
+          "methodName": "batchModify",
           "parameters": [
             {
               "name": "userId",
@@ -2867,7 +2866,7 @@
         },
         {
           "method_class_name": "Send",
-          "method_name": "send",
+          "methodName": "send",
           "supportsMediaUpload": true,
           "description": "Sends the specified message to the recipients in the `To`, `Cc`, and `Bcc` headers.",
           "mediaUpload": {
@@ -2925,7 +2924,7 @@
       "methods": [
         {
           "method_class_name": "List",
-          "method_name": "list",
+          "methodName": "list",
           "flatPath": "gmail/v1/users/{userId}/drafts",
           "id": "gmail.users.drafts.list",
           "description": "Lists the drafts in the user's mailbox.",
@@ -2989,7 +2988,7 @@
         },
         {
           "method_class_name": "Update",
-          "method_name": "update",
+          "methodName": "update",
           "request": "Draft",
           "description": "Replaces a draft's content.",
           "response": "Draft",
@@ -3052,7 +3051,7 @@
         },
         {
           "method_class_name": "Get",
-          "method_name": "get",
+          "methodName": "get",
           "description": "Gets the specified draft.",
           "response": "Draft",
           "flatPath": "gmail/v1/users/{userId}/drafts/{id}",
@@ -3117,7 +3116,7 @@
         },
         {
           "method_class_name": "Delete",
-          "method_name": "delete",
+          "methodName": "delete",
           "id": "gmail.users.drafts.delete",
           "description": "Immediately and permanently deletes the specified draft. Does not simply trash it.",
           "parameters": [
@@ -3161,7 +3160,7 @@
         },
         {
           "method_class_name": "Send",
-          "method_name": "send",
+          "methodName": "send",
           "httpMethod": "POST",
           "mediaUpload": {
             "maxSize": "36700160",
@@ -3212,7 +3211,7 @@
         },
         {
           "method_class_name": "Create",
-          "method_name": "create",
+          "methodName": "create",
           "request": "Draft",
           "path": "gmail/v1/users/{userId}/drafts",
           "parameters": [

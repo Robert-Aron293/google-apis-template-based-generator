@@ -1,58 +1,138 @@
-
 import os
 import json
+import sys
+
 import chevron
 import re
+import argparse
 
-PATH = "google-api-dlang-client"
-MUSTACHE_FILE = "Lib.mustache"
-ALL_FILES = list()
+JSON_FILE_EXTENSION = ".json"
+D_FILE_EXTENSION = ".d"
 
-for (dirpath, dirnames, filenames) in os.walk(PATH):
-    ALL_FILES += [os.path.join(dirpath, file) for file in filenames]
 
-print(ALL_FILES)
-
-JSON_RESOURCE_FILES = list(filter(lambda x: (x.split(".")[1] == "json"), ALL_FILES))
-
-print(JSON_RESOURCE_FILES)
-
-def to_class_name(text, render):
+def to_camel_case(text, render):
     result = render(text)
-    return ''.join(map(lambda x: x[0].upper() + x[1:], result.split("_"))).replace('.', '')
+    return ''.join(
+        [result.split("_")[0]] + list(map(lambda x: x[0].upper() + x[1:], result.split("_")[1:]))
+    ).replace(".", "")
 
-def to_var_name(text, render):
-    result = render(text)
-    return ''.join(list([result.split("_")[0]]) + list(map(lambda x: x[0].upper() + x[1:], result.split("_")[1:]))).replace('.', '')
+
+def to_upper_camel_case(text, render):
+    return ''.join(
+        map(lambda x: x[0].upper() + x[1:], render(text).split("_"))
+    ).replace(".", "")
+
 
 def to_lower(text, render):
-    result = render(text)
-    return ''.join(result.split("_")).lower()
+    return ''.join(render(text).split("_")).lower()
+
 
 def to_rest_path(text, render):
     result = render(text)
-    for format in re.findall("{[a-zA-Z]+}", result):
-        print(format)
-        result = result.replace(format, "%s");
+    for pattern in re.findall("{[a-zA-Z]+}", result):
+        result = result.replace(pattern, "%s")
     return result
 
-with open(MUSTACHE_FILE) as mustache_file:
-    for json_file in JSON_RESOURCE_FILES:
-        with open(json_file) as open_json_file:
-            data = open_json_file.read()
 
-            json_content = json.loads(data)
-            json_content['to_class_name'] = to_class_name
-            json_content['to_var_name'] = to_var_name
-            json_content['to_lower'] = to_lower
-            json_content['to_rest_path'] = to_rest_path
-
-            result = chevron.render(mustache_file, json_content)
-            #print(result)
-            output_file_name = json_file.split(".")[0] + ".d"
-            output_file_name_handler = open(output_file_name, "w")
-            output_file_name_handler.write(result)
-            output_file_name_handler.close()
+json_helper_function = {
+    "to_upper_camel_case":   to_upper_camel_case,
+    "to_camel_case":        to_camel_case,
+    "to_lower":            to_lower,
+    "to_rest_path":       to_rest_path
+}
 
 
-print(JSON_RESOURCE_FILES)
+def get_file_extension(filename):
+    """
+    @type filename: string
+    """
+    _, extension = os.path.splitext(filename)
+    print(extension)
+    return extension
+
+
+def get_lib_services_directory(output_directory, resource_filename):
+    """
+    @type output_directory string
+    @type resource_filename string
+    """
+    _, resource_file_path = os.path.split(resource_filename)
+    libname, _ = os.path.splitext(resource_file_path)
+    return (output_directory + os.sep + libname + os.sep\
+        + "services" + os.sep, libname)
+
+def get_lib_filename(output_directory, resource_filename):
+    """
+    @type output_directory string
+    @type resource_filename string
+    """
+    (services_directory, libname) =\
+        get_lib_services_directory(output_directory, resource_filename)
+    if not os.path.exists(services_directory):
+        os.mkdir(services_directory)
+    print(libname)
+    print(services_directory)
+    return services_directory + libname + D_FILE_EXTENSION
+
+
+def build_lib_file(resource_filename, output_directory, mustache_file):
+    """
+    @type resource_filename: string
+    @type output_directory: string
+    @type mustache_file: object
+    """
+    try:
+        with open(resource_filename) as resource_file:
+            resource_data = json.loads(resource_file.read())
+            resource_data.update(json_helper_function)
+
+            result = chevron.render(mustache_file, resource_data)
+
+            try:
+                with open(get_lib_filename(output_directory, resource_filename), "w") as output_file:
+                    output_file.write(result)
+            except FileNotFoundError as exception:
+                print(str(exception))
+                sys.exit(os.EX_NOTFOUND)
+    except FileNotFoundError as exception:
+        print(str(exception))
+        sys.exit(os.EX_NOTFOUND)
+
+
+def get_json_files(dirname):
+    """
+    @type dirname string
+    """
+    files = list()
+    for (dirpath, dirnames, filenames) in os.walk(dirname):
+        files += [os.path.join(dirpath, file) for file in filenames]
+
+    return list(filter(lambda file: (get_file_extension(file) == JSON_FILE_EXTENSION), files))
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Generate dlang libs.")
+    parser.add_argument("-tmpl",
+                        "--template_file",
+                        action="store",
+                        default="template.mustache",
+                        help="Set the template filename.")
+    parser.add_argument("-dir",
+                        "--resources_directory",
+                        action="store",
+                        default="./google-api-dlang-client",
+                        help="Set the resource files directory.")
+    locals().update(vars(parser.parse_args()))
+
+    output_directory = resources_directory
+
+    try:
+        with open(template_file) as mustache_file:
+            resource_files = get_json_files(resources_directory)
+            for resource_filename in resource_files:
+                build_lib_file(resource_filename, output_directory, mustache_file)
+    except FileNotFoundError as exception:
+        print(str(exception))
+        sys.exit(os.EX_NOTFOUND)
+
+
