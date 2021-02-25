@@ -1,0 +1,184 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "type": { "type": "string" },
+        "description": { "type": "string" },
+        "default": { "type": "string" },
+        "pathParameter": { "type": "boolean" },
+        "last": { "type": "boolean" }
+      },
+      "required": ["name", "type", "description"]
+    },
+    "protocol": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "multipart": { "type": "boolean" },
+        "path": { "type": "string" }
+      }
+    },
+    "method": {
+      "type": "object",
+      "properties": {
+        "methodName": { "type": "string" },
+        "id": { "type": "string" },
+        "path": { "type": "string" },
+        "httpMethod": { "type": "string" },
+        "description": { "type": "string" },
+        "supportsMediaUpload": { "type": "boolean" },
+        "supportsMediaDownload": { "type": "boolean" },
+        "hasPathParameters": { "type": "boolean" },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/parameter"
+          },
+          "default": []
+        },
+        "parameterOrder": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/parameter"
+          },
+          "default": []
+        },
+        "request": { "type": "string" },
+        "response": { "type": "string" },
+        "mediaUpload": {
+          "type": "object",
+          "properties": {
+            "protocols": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/protocol"
+              },
+              "default": []
+            }
+          }
+        }
+      },
+      "required": [
+        "methodName",
+        "id",
+        "path",
+        "httpMethod",
+        "description"
+      ]
+    },
+    "resource": {
+      "type": "object",
+      "properties": {
+        "resourceName": { "type": "string" },
+        "methods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/method"
+          },
+          "default": []
+        }
+      },
+      "required": ["resourceName", "methods"]
+    },
+    "property": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "type": { "type": "string" },
+        "import": { "type":  "string" },
+        "description": { "type": "string" },
+        "default": { "type": "string" },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/property"
+          },
+          "default": []
+        }
+      },
+      "required": ["name", "type", "description"]
+    },
+    "model": {
+      "type": "object",
+      "properties": {
+        "modelName": { "type": "string" },
+        "id": { "type": "string" },
+        "description": { "type": "string" },
+        "innerModels": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model"
+          },
+          "default": []
+        },
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/property"
+          },
+          "default": []
+        }
+      },
+      "required": [
+        "modelName",
+        "id",
+        "description",
+        "innerModels",
+        "properties"
+      ]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "libName": { "type": "string" },
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "version": { "type": "string" },
+    "title": { "type": "string" },
+    "description": { "type": "string" },
+    "ownerDomain": { "type": "string" },
+    "ownerName": { "type": "string" },
+    "documentationLink": { "type": "string" },
+    "baseUrl": { "type": "string" },
+    "basePath": { "type": "string" },
+    "rootUrl": { "type": "string" },
+    "servicePath": { "type": "string" },
+    "batchPath": { "type": "string" },
+    "queryParameters": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/parameter"
+      },
+      "default": []
+    },
+    "resources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/resource"
+      },
+      "default": []
+    },
+    "models": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/model"
+      },
+      "default": []
+    }
+  },
+  "required": [
+    "libName",
+    "description",
+    "baseUrl",
+    "basePath",
+    "documentationLink",
+    "rootUrl",
+    "servicePath",
+    "queryParameters",
+    "resources",
+    "models"
+  ]
+}
