@@ -89,7 +89,7 @@ def build_lib_file(resource_filename, output_directory, mustache_file, schema):
             try:
                 validate(instance=resource_data, schema=schema)
             except exceptions.ValidationError as exception:
-                print(exception.message)
+                print("In file '" + resource_filename + "': " + exception.message)
                 sys.exit(errno.EINVAL)
 
             resource_data.update(json_helper_function)
@@ -99,7 +99,7 @@ def build_lib_file(resource_filename, output_directory, mustache_file, schema):
                 output_file.write(result)
     except FileNotFoundError as exception:
         print(str(exception))
-        sys.exit(os.EX_NOTFOUND)
+        sys.exit(errno.ENOENT)
 
 
 def get_json_files(dirname):
@@ -148,4 +148,4 @@ if __name__ == "__main__":
                 )
     except FileNotFoundError as exception:
         print(str(exception))
-        sys.exit(os.EX_NOTFOUND)
+        sys.exit(errno.ENOENT)
