@@ -2904,16 +2904,16 @@
           "hasPathParameters": true,
           "parameterOrder": [
             {
+              "name": "mimeType",
+              "type": "string",
+              "description": "The MIME type of the format requested for this export."
+            },
+            {
               "name": "fileId",
               "type": "string",
               "description": "The ID of the file.",
               "pathParameter": true,
               "last": true
-            },
-            {
-              "name": "mimeType",
-              "type": "string",
-              "description": "The MIME type of the format requested for this export."
             }
           ]
         },
@@ -3835,7 +3835,7 @@
           ],
           "parameterOrder": [
             {
-              "name": "teamDriveId,",
+              "name": "teamDriveId",
               "type": "string",
               "description": "The ID of the Team Drive.",
               "pathParameter": true,
