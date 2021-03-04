@@ -1,22 +1,14 @@
 {
   "libName": "gdrive",
-  "kind": "discovery#restDescription",
   "etag": "\"-2NioU2H8y8siEzrBOV_qzRI6kQ/8FPw1QApcT2pBMVV3y4RrpfcbIE\"",
-  "discoveryVersion": "v1",
   "id": "drive:v3",
   "name": "drive",
   "version": "v3",
-  "revision": "20201115",
   "title": "Drive API",
   "description": "Manages files in Drive including uploading, downloading, searching, detecting changes, and updating sharing permissions.",
   "ownerDomain": "google.com",
   "ownerName": "Google",
-  "icons": {
-    "x16": "https://ssl.gstatic.com/docs/doclist/images/drive_icon_16.png",
-    "x32": "https://ssl.gstatic.com/docs/doclist/images/drive_icon_32.png"
-  },
   "documentationLink": "https://developers.google.com/drive/",
-  "protocol": "rest",
   "baseUrl": "https://www.googleapis.com/drive/v3/",
   "basePath": "/drive/v3/",
   "rootUrl": "https://www.googleapis.com/",
@@ -61,1790 +53,2104 @@
       "description": "Deprecated. Please use quotaUser instead."
     }
   ],
-  "auth": {
-    "oauth2": {
-      "scopes": {
-        "https://www.googleapis.com/auth/drive": {
-          "description": "See, edit, create, and delete all of your Google Drive files"
-        },
-        "https://www.googleapis.com/auth/drive.appdata": {
-          "description": "View and manage its own configuration data in your Google Drive"
-        },
-        "https://www.googleapis.com/auth/drive.file": {
-          "description": "View and manage Google Drive files and folders that you have opened or created with this app"
-        },
-        "https://www.googleapis.com/auth/drive.metadata": {
-          "description": "View and manage metadata of files in your Google Drive"
-        },
-        "https://www.googleapis.com/auth/drive.metadata.readonly": {
-          "description": "View metadata for files in your Google Drive"
-        },
-        "https://www.googleapis.com/auth/drive.photos.readonly": {
-          "description": "View the photos, videos and albums in your Google Photos"
-        },
-        "https://www.googleapis.com/auth/drive.readonly": {
-          "description": "See and download all your Google Drive files"
-        },
-        "https://www.googleapis.com/auth/drive.scripts": {
-          "description": "Modify your Google Apps Script scripts' behavior"
-        }
-      }
-    }
-  },
-  "schemas": {
-    "About": {
+  "models": [
+    {
+      "modelName": "About",
       "id": "About",
-      "type": "object",
       "description": "Information about the user, the user's Drive, and system capabilities.",
-      "properties": {
-        "appInstalled": {
+      "innerModels": [
+        {
+          "modelName": "DriveThemes",
+          "id": "DriveThemes",
+          "description": "A list of themes that are supported for shared drives.",
+          "innerModels": [],
+          "properties": [
+            {
+              "name": "backgroundImageLink",
+              "type": "string",
+              "description": "A link to this theme's background image."
+            },
+            {
+              "name": "colorRgb",
+              "type": "string",
+              "description": "The color of this theme as an RGB hex string."
+            },
+            {
+              "name": "id",
+              "type": "string",
+              "description": "The ID of the theme."
+            }
+          ]
+        },
+        {
+          "modelName": "StorageQuota",
+          "id": "StorageQuota",
+          "description": "The user's storage quota limits and usage. All fields are measured in bytes.",
+          "innerModels": [],
+          "properties": [
+            {
+              "name": "limit",
+              "type": "long",
+              "description": "The usage limit, if applicable. This will not be present if the user has unlimited storage."
+            },
+            {
+              "name": "usage",
+              "type": "long",
+              "description": "The total usage across all services."
+            },
+            {
+              "name": "usageInDrive",
+              "type": "long",
+              "description": "The usage by all files in Google Drive."
+            },
+            {
+              "name": "usageInDriveTrash",
+              "type": "long",
+              "description": "The usage by trashed files in Google Drive."
+            }
+          ]
+        },
+        {
+          "modelName": "TeamDriveThemes",
+          "id": "TeamDriveThemes",
+          "description": "Deprecated - use driveThemes instead.",
+          "innerModels": [],
+          "properties": [
+            {
+              "name": "backgroundImageLink",
+              "type": "string",
+              "description": "Deprecated - use driveThemes/backgroundImageLink instead."
+            },
+            {
+              "name": "colorRgb",
+              "type": "string",
+              "description": "Deprecated - use driveThemes/colorRgb instead."
+            },
+            {
+              "name": "id",
+              "type": "string",
+              "description": "Deprecated - use driveThemes/id instead."
+            }
+          ]
+        }
+      ],
+      "properties": [
+        {
+          "name": "appInstalled",
           "type": "bool",
           "description": "Whether the user has installed the requesting app."
         },
-        "canCreateDrives": {
+        {
+          "name": "canCreateDrives",
           "type": "bool",
           "description": "Whether the user can create shared drives."
         },
-        "canCreateTeamDrives": {
+        {
+          "name": "canCreateTeamDrives",
           "type": "bool",
           "description": "Deprecated - use canCreateDrives instead."
         },
-        "driveThemes": {
-          "type": "array",
-          "description": "A list of themes that are supported for shared drives.",
-          "items": {
-            "type": "object",
-            "properties": {
-              "backgroundImageLink": {
-                "type": "string",
-                "description": "A link to this theme's background image."
-              },
-              "colorRgb": {
-                "type": "string",
-                "description": "The color of this theme as an RGB hex string."
-              },
-              "id": {
-                "type": "string",
-                "description": "The ID of the theme."
-              }
-            }
-          }
+        {
+          "name": "driveThemes",
+          "type": "DriveThemes[]",
+          "description": "A list of themes that are supported for shared drives."
         },
-        "exportFormats": {
-          "type": "object",
-          "description": "A map of source MIME type to possible targets for all supported exports.",
-          "additionalProperties": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
+        {
+          "name": "exportFormats",
+          "type": "string[][string]",
+          "description": "A map of source MIME type to possible targets for all supported exports."
         },
-        "folderColorPalette": {
-          "type": "array",
-          "description": "The currently supported folder colors as RGB hex strings.",
-          "items": {
-            "type": "string"
-          }
+        {
+          "name": "folderColorPalette",
+          "type": "string[]",
+          "description": "The currently supported folder colors as RGB hex strings."
         },
-        "importFormats": {
-          "type": "object",
-          "description": "A map of source MIME type to possible targets for all supported imports.",
-          "additionalProperties": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
+        {
+          "name": "importFormats",
+          "type": "string[][string]",
+          "description": "A map of source MIME type to possible targets for all supported imports."
         },
-        "kind": {
+        {
+          "name": "kind",
           "type": "string",
           "description": "Identifies what kind of resource this is. Value: the fixed string \"drive#about\".",
           "default": "drive#about"
         },
-        "maxImportSizes": {
-          "type": "object",
-          "description": "A map of maximum import sizes by MIME type, in bytes.",
-          "additionalProperties": {
-            "type": "string",
-            "format": "int64"
-          }
+        {
+          "name": "maxImportSizes",
+          "type": "long[string]",
+          "description": "A map of maximum import sizes by MIME type, in bytes."
         },
-        "maxUploadSize": {
-          "type": "string",
-          "description": "The maximum upload size in bytes.",
-          "format": "int64"
+        {
+          "name": "maxUploadSize",
+          "type": "long",
+          "description": "The maximum upload size in bytes."
         },
-        "storageQuota": {
-          "type": "object",
-          "description": "The user's storage quota limits and usage. All fields are measured in bytes.",
-          "properties": {
-            "limit": {
-              "type": "string",
-              "description": "The usage limit, if applicable. This will not be present if the user has unlimited storage.",
-              "format": "int64"
-            },
-            "usage": {
-              "type": "string",
-              "description": "The total usage across all services.",
-              "format": "int64"
-            },
-            "usageInDrive": {
-              "type": "string",
-              "description": "The usage by all files in Google Drive.",
-              "format": "int64"
-            },
-            "usageInDriveTrash": {
-              "type": "string",
-              "description": "The usage by trashed files in Google Drive.",
-              "format": "int64"
-            }
-          }
+        {
+          "name": "storageQuota",
+          "type": "StorageQuota",
+          "description": "The user's storage quota limits and usage. All fields are measured in bytes."
         },
-        "teamDriveThemes": {
-          "type": "array",
-          "description": "Deprecated - use driveThemes instead.",
-          "items": {
-            "type": "object",
-            "properties": {
-              "backgroundImageLink": {
-                "type": "string",
-                "description": "Deprecated - use driveThemes/backgroundImageLink instead."
-              },
-              "colorRgb": {
-                "type": "string",
-                "description": "Deprecated - use driveThemes/colorRgb instead."
-              },
-              "id": {
-                "type": "string",
-                "description": "Deprecated - use driveThemes/id instead."
-              }
-            }
-          }
+        {
+          "name": "teamDriveThemes",
+          "type": "TeamDriveThemes[]",
+          "description": "Deprecated - use driveThemes instead."
         },
-        "user": {
-          "$ref": "User",
+        {
+          "name": "user",
+          "type": "User",
           "description": "The authenticated user."
         }
-      }
+      ]
     },
-    "Change": {
+    {
+      "modelName": "Change",
       "id": "Change",
-      "type": "object",
       "description": "A change to a file or shared drive.",
-      "properties": {
-        "changeType": {
+      "imports": [
+        "drive",
+        "file",
+        "teamdrive"
+      ],
+      "innerModels": [],
+      "properties": [
+        {
+          "name": "changeType",
           "type": "string",
           "description": "The type of the change. Possible values are file and drive."
         },
-        "drive": {
-          "$ref": "Drive",
+        {
+          "name": "drive",
+          "type": "Drive",
           "description": "The updated state of the shared drive. Present if the changeType is drive, the user is still a member of the shared drive, and the shared drive has not been deleted."
         },
-        "driveId": {
+        {
+          "name": "driveId",
           "type": "string",
           "description": "The ID of the shared drive associated with this change."
         },
-        "file": {
-          "$ref": "File",
+        {
+          "name": "file",
+          "type": "File",
           "description": "The updated state of the file. Present if the type is file and the file has not been removed from this list of changes."
         },
-        "fileId": {
+        {
+          "name": "fileId",
           "type": "string",
           "description": "The ID of the file which has changed."
         },
-        "kind": {
+        {
+          "name": "kind",
           "type": "string",
           "description": "Identifies what kind of resource this is. Value: the fixed string \"drive#change\".",
           "default": "drive#change"
         },
-        "removed": {
+        {
+          "name": "removed",
           "type": "bool",
           "description": "Whether the file or shared drive has been removed from this list of changes, for example by deletion or loss of access."
         },
-        "teamDrive": {
-          "$ref": "TeamDrive",
+        {
+          "name": "teamDrive",
+          "type": "TeamDrive",
           "description": "Deprecated - use drive instead."
         },
-        "teamDriveId": {
+        {
+          "name": "teamDriveId",
           "type": "string",
           "description": "Deprecated - use driveId instead."
         },
-        "time": {
-          "type": "string",
-          "description": "The time of this change (RFC 3339 date-time).",
-          "format": "date-time"
+        {
+          "name": "time",
+          "type": "SysTime",
+          "import": "SysTime",
+          "description": "The time of this change (RFC 3339 date-time)."
         },
-        "type": {
+        {
+          "name": "type",
           "type": "string",
           "description": "Deprecated - use changeType instead."
         }
-      }
+      ]
     },
-    "ChangeList": {
+    {
+      "modelName": "ChangeList",
       "id": "ChangeList",
-      "type": "object",
       "description": "A list of changes for a user.",
-      "properties": {
-        "changes": {
-          "type": "array",
-          "description": "The list of changes. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.",
-          "items": {
-            "$ref": "Change"
-          }
+      "imports": [
+        "change"
+      ],
+      "innerModels": [],
+      "properties": [
+        {
+          "name": "changes",
+          "type": "Change[]",
+          "description": "The list of changes. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched."
         },
-        "kind": {
+        {
+          "name": "kind",
           "type": "string",
           "description": "Identifies what kind of resource this is. Value: the fixed string \"drive#changeList\".",
           "default": "drive#changeList"
         },
-        "newStartPageToken": {
+        {
+          "name": "newStartPageToken",
           "type": "string",
           "description": "The starting page token for future changes. This will be present only if the end of the current changes list has been reached."
         },
-        "nextPageToken": {
+        {
+          "name": "nextPageToken",
           "type": "string",
           "description": "The page token for the next page of changes. This will be absent if the end of the changes list has been reached. If the token is rejected for any reason, it should be discarded, and pagination should be restarted from the first page of results."
         }
-      }
+      ]
     },
-    "Channel": {
+    {
+      "modelName": "Channel",
       "id": "Channel",
-      "type": "object",
       "description": "An notification channel used to watch for resource changes.",
-      "properties": {
-        "address": {
+      "innerModels": [],
+      "properties": [
+        {
+          "name": "address",
           "type": "string",
           "description": "The address where notifications are delivered for this channel."
         },
-        "expiration": {
-          "type": "string",
-          "description": "Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.",
-          "format": "int64"
+        {
+          "name": "expiration",
+          "type": "long",
+          "description": "Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional."
         },
-        "id": {
+        {
+          "name": "id",
           "type": "string",
           "description": "A UUID or similar unique string that identifies this channel."
         },
-        "kind": {
+        {
+          "name": "kind",
           "type": "string",
           "description": "Identifies this as a notification channel used to watch for changes to a resource, which is \"api#channel\".",
           "default": "api#channel"
         },
-        "params": {
-          "type": "object",
-          "description": "Additional parameters controlling delivery channel behavior. Optional.",
-          "additionalProperties": {
-            "type": "string",
-            "description": "Declares a new parameter by name."
-          }
+        {
+          "name": "params",
+          "type": "string[string]",
+          "description": "Additional parameters controlling delivery channel behavior. Optional."
         },
-        "payload": {
+        {
+          "name": "payload",
           "type": "bool",
           "description": "A bool value to indicate whether payload is wanted. Optional."
         },
-        "resourceId": {
+        {
+          "name": "resourceId",
           "type": "string",
           "description": "An opaque ID that identifies the resource being watched on this channel. Stable across different API versions."
         },
-        "resourceUri": {
+        {
+          "name": "resourceUri",
           "type": "string",
           "description": "A version-specific identifier for the watched resource."
         },
-        "token": {
+        {
+          "name": "token",
           "type": "string",
           "description": "An arbitrary string delivered to the target address with each notification delivered over this channel. Optional."
         },
-        "type": {
+        {
+          "name": "type",
           "type": "string",
           "description": "The type of delivery mechanism used for this channel."
         }
-      }
+      ]
     },
-    "Comment": {
+    {
+      "modelName": "Comment",
       "id": "Comment",
-      "type": "object",
       "description": "A comment on a file.",
-      "properties": {
-        "anchor": {
+      "imports": [
+        "user",
+        "reply"
+      ],
+      "innerModels": [
+        {
+          "modelName": "QuotedFileContent",
+          "id": "QuotedFileContent",
+          "description": "The file content to which the comment refers, typically within the anchor region. For a text file, for example, this would be the text at the location of the comment.",
+          "innerModels": [],
+          "properties": [
+            {
+              "name": "mimeType",
+              "type": "string",
+              "description": "The MIME type of the quoted content."
+            },
+            {
+              "name": "value",
+              "type": "string",
+              "description": "The quoted content itself. This is interpreted as plain text if set through the API."
+            }
+          ]
+        }
+      ],
+      "properties": [
+        {
+          "name": "anchor",
           "type": "string",
           "description": "A region of the document represented as a JSON string. See anchor documentation for details on how to define and interpret anchor properties."
         },
-        "author": {
-          "$ref": "User",
+        {
+          "name": "author",
+          "type": "User",
           "description": "The author of the comment. The author's email address and permission ID will not be populated."
         },
-        "content": {
+        {
+          "name": "content",
           "type": "string",
-          "description": "The plain text content of the comment. This field is used for setting the content, while htmlContent should be displayed.",
-          "annotations": {
-            "required": [
-              "drive.comments.create",
-              "drive.comments.update"
-            ]
-          }
+          "description": "The plain text content of the comment. This field is used for setting the content, while htmlContent should be displayed."
         },
-        "createdTime": {
-          "type": "string",
-          "description": "The time at which the comment was created (RFC 3339 date-time).",
-          "format": "date-time"
+        {
+          "name": "createdTime",
+          "type": "SysTime",
+          "description": "The time at which the comment was created (RFC 3339 date-time)."
         },
-        "deleted": {
+        {
+          "name": "deleted",
           "type": "bool",
           "description": "Whether the comment has been deleted. A deleted comment has no content."
         },
-        "htmlContent": {
+        {
+          "name": "htmlContent",
           "type": "string",
           "description": "The content of the comment with HTML formatting."
         },
-        "id": {
+        {
+          "name": "id",
           "type": "string",
           "description": "The ID of the comment."
         },
-        "kind": {
+        {
+          "name": "kind",
           "type": "string",
           "description": "Identifies what kind of resource this is. Value: the fixed string \"drive#comment\".",
           "default": "drive#comment"
         },
-        "modifiedTime": {
-          "type": "string",
-          "description": "The last time the comment or any of its replies was modified (RFC 3339 date-time).",
-          "format": "date-time"
+        {
+          "name": "modifiedTime",
+          "type": "SysTime",
+          "description": "The last time the comment or any of its replies was modified (RFC 3339 date-time)."
         },
-        "quotedFileContent": {
-          "type": "object",
-          "description": "The file content to which the comment refers, typically within the anchor region. For a text file, for example, this would be the text at the location of the comment.",
-          "properties": {
-            "mimeType": {
-              "type": "string",
-              "description": "The MIME type of the quoted content."
-            },
-            "value": {
-              "type": "string",
-              "description": "The quoted content itself. This is interpreted as plain text if set through the API."
-            }
-          }
+        {
+          "name": "quotedFileContent",
+          "type": "QuotedFileContent",
+          "description": "The file content to which the comment refers, typically within the anchor region. For a text file, for example, this would be the text at the location of the comment."
         },
-        "replies": {
-          "type": "array",
-          "description": "The full list of replies to the comment in chronological order.",
-          "items": {
-            "$ref": "Reply"
-          }
+        {
+          "name": "replies",
+          "type": "Reply[]",
+          "description": "The full list of replies to the comment in chronological order."
         },
-        "resolved": {
+        {
+          "name": "resolved",
           "type": "bool",
           "description": "Whether the comment has been resolved by one of its replies."
         }
-      }
+      ]
     },
-    "CommentList": {
+    {
+      "modelName": "CommentList",
       "id": "CommentList",
-      "type": "object",
       "description": "A list of comments on a file.",
-      "properties": {
-        "comments": {
-          "type": "array",
-          "description": "The list of comments. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.",
-          "items": {
-            "$ref": "Comment"
-          }
+      "imports": [
+        "comment"
+      ],
+      "innerModels": [],
+      "properties": [
+        {
+          "name": "comments",
+          "type": "Comment[]",
+          "description": "The list of comments. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched."
         },
-        "kind": {
+        {
+          "name": "kind",
           "type": "string",
           "description": "Identifies what kind of resource this is. Value: the fixed string \"drive#commentList\".",
           "default": "drive#commentList"
         },
-        "nextPageToken": {
+        {
+          "name": "nextPageToken",
           "type": "string",
           "description": "The page token for the next page of comments. This will be absent if the end of the comments list has been reached. If the token is rejected for any reason, it should be discarded, and pagination should be restarted from the first page of results."
         }
-      }
+      ]
     },
-    "ContentRestriction": {
+    {
+      "modelName": "ContentRestriction",
       "id": "ContentRestriction",
-      "type": "object",
       "description": "A restriction for accessing the content of the file.",
-      "properties": {
-        "readOnly": {
+      "imports": [
+        "user"
+      ],
+      "innerModels": [],
+      "properties": [
+        {
+          "name": "readOnly",
           "type": "bool",
           "description": "Whether the content of the file is read-only. If a file is read-only, a new revision of the file may not be added, comments may not be added or modified, and the title of the file may not be modified."
         },
-        "reason": {
+        {
+          "name": "reason",
           "type": "string",
           "description": "Reason for why the content of the file is restricted. This is only mutable on requests that also set readOnly=true."
         },
-        "restrictingUser": {
-          "$ref": "User",
+        {
+          "name": "restrictingUser",
+          "type": "User",
           "description": "The user who set the content restriction. Only populated if readOnly is true."
         },
-        "restrictionTime": {
-          "type": "string",
-          "description": "The time at which the content restriction was set (formatted RFC 3339 timestamp). Only populated if readOnly is true.",
-          "format": "date-time"
+        {
+          "name": "restrictionTime",
+          "type": "SysTime",
+          "description": "The time at which the content restriction was set (formatted RFC 3339 timestamp). Only populated if readOnly is true."
         },
-        "type": {
+        {
+          "name": "type",
           "type": "string",
           "description": "The type of the content restriction. Currently the only possible value is globalContentRestriction."
         }
-      }
+      ]
     },
-    "Drive": {
+    {
+      "modelName": "Drive",
       "id": "Drive",
-      "type": "object",
       "description": "Representation of a shared drive.",
-      "properties": {
-        "backgroundImageFile": {
-          "type": "object",
-          "description": "An image file and cropping parameters from which a background image for this shared drive is set. This is a write only field; it can only be set on drive.drives.update requests that don't set themeId. When specified, all fields of the backgroundImageFile must be set.",
-          "properties": {
-            "id": {
+      "innerModels": [
+        {
+          "modelName": "BackgroundImage",
+          "id": "BackgroundImage",
+          "description": "",
+          "innerModels": [],
+          "properties": [
+            {
+              "name": "id",
               "type": "string",
               "description": "The ID of an image file in Google Drive to use for the background image."
             },
-            "width": {
-              "type": "number",
-              "description": "The width of the cropped image in the closed range of 0 to 1. This value represents the width of the cropped image divided by the width of the entire image. The height is computed by applying a width to height aspect ratio of 80 to 9. The resulting image must be at least 1280 pixels wide and 144 pixels high.",
-              "format": "float"
+            {
+              "name": "width",
+              "type": "float",
+              "description": "The width of the cropped image in the closed range of 0 to 1. This value represents the width of the cropped image divided by the width of the entire image. The height is computed by applying a width to height aspect ratio of 80 to 9. The resulting image must be at least 1280 pixels wide and 144 pixels high."
             },
-            "xCoordinate": {
-              "type": "number",
-              "description": "The X coordinate of the upper left corner of the cropping area in the background image. This is a value in the closed range of 0 to 1. This value represents the horizontal distance from the left side of the entire image to the left side of the cropping area divided by the width of the entire image.",
-              "format": "float"
+            {
+              "name": "xCoordinate",
+              "type": "float",
+              "description": "The X coordinate of the upper left corner of the cropping area in the background image. This is a value in the closed range of 0 to 1. This value represents the horizontal distance from the left side of the entire image to the left side of the cropping area divided by the width of the entire image."
             },
-            "yCoordinate": {
-              "type": "number",
-              "description": "The Y coordinate of the upper left corner of the cropping area in the background image. This is a value in the closed range of 0 to 1. This value represents the vertical distance from the top side of the entire image to the top side of the cropping area divided by the height of the entire image.",
-              "format": "float"
+            {
+              "name": "yCoordinate",
+              "type": "float",
+              "description": "The Y coordinate of the upper left corner of the cropping area in the background image. This is a value in the closed range of 0 to 1. This value represents the vertical distance from the top side of the entire image to the top side of the cropping area divided by the height of the entire image."
             }
-          }
+          ]
         },
-        "backgroundImageLink": {
-          "type": "string",
-          "description": "A short-lived link to this shared drive's background image."
-        },
-        "capabilities": {
-          "type": "object",
+        {
+          "modelName": "Capabilities",
+          "id": "Capabilities",
           "description": "Capabilities the current user has on this shared drive.",
-          "properties": {
-            "canAddChildren": {
+          "innerModels": [],
+          "properties": [
+            {
+              "name": "canAddChildren",
               "type": "bool",
               "description": "Whether the current user can add children to folders in this shared drive."
             },
-            "canChangeCopyRequiresWriterPermissionRestriction": {
+            {
+              "name": "canChangeCopyRequiresWriterPermissionRestriction",
               "type": "bool",
               "description": "Whether the current user can change the copyRequiresWriterPermission restriction of this shared drive."
             },
-            "canChangeDomainUsersOnlyRestriction": {
+            {
+              "name": "canChangeDomainUsersOnlyRestriction",
               "type": "bool",
               "description": "Whether the current user can change the domainUsersOnly restriction of this shared drive."
             },
-            "canChangeDriveBackground": {
+            {
+              "name": "canChangeDriveBackGround",
               "type": "bool",
               "description": "Whether the current user can change the background of this shared drive."
             },
-            "canChangeDriveMembersOnlyRestriction": {
+            {
+              "name": "canChangeDriveMembersOnlyRestriction",
               "type": "bool",
               "description": "Whether the current user can change the driveMembersOnly restriction of this shared drive."
             },
-            "canComment": {
+            {
+              "name": "canComment",
               "type": "bool",
               "description": "Whether the current user can comment on files in this shared drive."
             },
-            "canCopy": {
+            {
+              "name": "canCopy",
               "type": "bool",
               "description": "Whether the current user can copy files in this shared drive."
             },
-            "canDeleteChildren": {
+            {
+              "name": "canDeleteChildren",
               "type": "bool",
               "description": "Whether the current user can delete children from folders in this shared drive."
             },
-            "canDeleteDrive": {
+            {
+              "name": "canDeleteDrive",
               "type": "bool",
               "description": "Whether the current user can delete this shared drive. Attempting to delete the shared drive may still fail if there are untrashed items inside the shared drive."
             },
-            "canDownload": {
+            {
+              "name": "canDownload",
               "type": "bool",
               "description": "Whether the current user can download files in this shared drive."
             },
-            "canEdit": {
+            {
+              "name": "canEdit",
               "type": "bool",
               "description": "Whether the current user can edit files in this shared drive"
             },
-            "canListChildren": {
+            {
+              "name": "canListChildren",
               "type": "bool",
               "description": "Whether the current user can list the children of folders in this shared drive."
             },
-            "canManageMembers": {
+            {
+              "name": "canManageMembers",
               "type": "bool",
               "description": "Whether the current user can add members to this shared drive or remove them or change their role."
             },
-            "canReadRevisions": {
+            {
+              "name": "canReadRevisions",
               "type": "bool",
               "description": "Whether the current user can read the revisions resource of files in this shared drive."
             },
-            "canRename": {
+            {
+              "name": "canRename",
               "type": "bool",
               "description": "Whether the current user can rename files or folders in this shared drive."
             },
-            "canRenameDrive": {
+            {
+              "name": "canRenameDrive",
               "type": "bool",
               "description": "Whether the current user can rename this shared drive."
             },
-            "canShare": {
+            {
+              "name": "canShare",
               "type": "bool",
               "description": "Whether the current user can share files or folders in this shared drive."
             },
-            "canTrashChildren": {
+            {
+              "name": "canTrashChildren",
               "type": "bool",
               "description": "Whether the current user can trash children from folders in this shared drive."
             }
-          }
+          ]
         },
-        "colorRgb": {
+        {
+          "modelName": "Restrictions",
+          "id": "Restriction",
+          "description": "A set of restrictions that apply to this shared drive or items inside this shared drive.",
+          "innerModels": [],
+          "properties": [
+            {
+              "name": "adminManagedRestrictions",
+              "type": "bool",
+              "description": "Whether administrative privileges on this shared drive are required to modify restrictions."
+            },
+            {
+              "name": "copyRequiresWriterPermission",
+              "type": "bool",
+              "description": "Whether the options to copy, print, or download files inside this shared drive, should be disabled for readers and commenters. When this restriction is set to true, it will override the similarly named field to true for any file inside this shared drive."
+            },
+            {
+              "name": "domainUsersOnly",
+              "type": "bool",
+              "description": "Whether access to this shared drive and items inside this shared drive is restricted to users of the domain to which this shared drive belongs. This restriction may be overridden by other sharing policies controlled outside of this shared drive."
+            },
+            {
+              "name": "driveMembersOnly",
+              "type": "bool",
+              "description": "Whether access to items inside this shared drive is restricted to its members."
+            }
+          ]
+        }
+      ],
+      "properties": [
+        {
+          "name": "backgroundImage",
+          "type": "BackgroundImage",
+          "description": ""
+        },
+        {
+          "name": "backgroundImageLink",
+          "type": "string",
+          "description": "A short-lived link to this shared drive's background image."
+        },
+        {
+          "name": "capabilities",
+          "type": "Capabilities",
+          "description": "Capabilities the current user has on this shared drive."
+        },
+        {
+          "name": "colorRgb",
           "type": "string",
           "description": "The color of this shared drive as an RGB hex string. It can only be set on a drive.drives.update request that does not set themeId."
         },
-        "createdTime": {
-          "type": "string",
-          "description": "The time at which the shared drive was created (RFC 3339 date-time).",
-          "format": "date-time"
+        {
+          "name": "createdTime",
+          "type": "SysTime",
+          "description": "The time at which the shared drive was created (RFC 3339 date-time)."
         },
-        "hidden": {
+        {
+          "name": "hidden",
           "type": "bool",
           "description": "Whether the shared drive is hidden from default view."
         },
-        "id": {
+        {
+          "name": "id",
           "type": "string",
           "description": "The ID of this shared drive which is also the ID of the top level folder of this shared drive."
         },
-        "kind": {
+        {
+          "name": "kind",
           "type": "string",
           "description": "Identifies what kind of resource this is. Value: the fixed string \"drive#drive\".",
           "default": "drive#drive"
         },
-        "name": {
+        {
+          "name": "name",
           "type": "string",
           "description": "The name of this shared drive."
         },
-        "restrictions": {
-          "type": "object",
-          "description": "A set of restrictions that apply to this shared drive or items inside this shared drive.",
-          "properties": {
-            "adminManagedRestrictions": {
-              "type": "bool",
-              "description": "Whether administrative privileges on this shared drive are required to modify restrictions."
-            },
-            "copyRequiresWriterPermission": {
-              "type": "bool",
-              "description": "Whether the options to copy, print, or download files inside this shared drive, should be disabled for readers and commenters. When this restriction is set to true, it will override the similarly named field to true for any file inside this shared drive."
-            },
-            "domainUsersOnly": {
-              "type": "bool",
-              "description": "Whether access to this shared drive and items inside this shared drive is restricted to users of the domain to which this shared drive belongs. This restriction may be overridden by other sharing policies controlled outside of this shared drive."
-            },
-            "driveMembersOnly": {
-              "type": "bool",
-              "description": "Whether access to items inside this shared drive is restricted to its members."
-            }
-          }
+        {
+          "name": "restrictions",
+          "type": "Restriction",
+          "description": "A set of restrictions that apply to this shared drive or items inside this shared drive."
         },
-        "themeId": {
+        {
+          "name": "themeId",
           "type": "string",
           "description": "The ID of the theme from which the background image and color will be set. The set of possible driveThemes can be retrieved from a drive.about.get response. When not specified on a drive.drives.create request, a random theme is chosen from which the background image and color are set. This is a write-only field; it can only be set on requests that don't set colorRgb or backgroundImageFile."
         }
-      }
+      ]
     },
-    "DriveList": {
+    {
+      "modelName": "DriveList",
       "id": "DriveList",
-      "type": "object",
       "description": "A list of shared drives.",
-      "properties": {
-        "drives": {
-          "type": "array",
-          "description": "The list of shared drives. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.",
-          "items": {
-            "$ref": "Drive"
-          }
+      "imports": [
+        "drive"
+      ],
+      "innerModels": [],
+      "properties": [
+        {
+          "name": "drives",
+          "type": "Drive[]",
+          "description": "The list of shared drives. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched."
         },
-        "kind": {
+        {
+          "name": "kind",
           "type": "string",
           "description": "Identifies what kind of resource this is. Value: the fixed string \"drive#driveList\".",
           "default": "drive#driveList"
         },
-        "nextPageToken": {
+        {
+          "name": "nextPageToken",
           "type": "string",
           "description": "The page token for the next page of shared drives. This will be absent if the end of the list has been reached. If the token is rejected for any reason, it should be discarded, and pagination should be restarted from the first page of results."
         }
-      }
+      ]
     },
-    "File": {
+    {
+      "modelName": "File",
       "id": "File",
-      "type": "object",
       "description": "The metadata for a file.",
-      "properties": {
-        "appProperties": {
-          "type": "object",
-          "description": "A collection of arbitrary key-value pairs which are private to the requesting app.\nEntries with null values are cleared in update and copy requests.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "capabilities": {
-          "type": "object",
-          "description": "Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.",
-          "properties": {
-            "canAddChildren": {
+      "imports": [
+        "contentrestriction",
+        "user",
+        "permission"
+      ],
+      "innerModels": [
+        {
+          "modelName": "Capabilities",
+          "id": "Capabilities",
+          "description": "Capabilities the current user has on this shared drive.",
+          "innerModels": [],
+          "properties": [
+            {
+              "name": "canAddChildren",
               "type": "bool",
               "description": "Whether the current user can add children to this folder. This is always false when the item is not a folder."
             },
-            "canAddFolderFromAnotherDrive": {
+            {
+              "name": "canAddFolderFromAnotherDrive",
               "type": "bool",
               "description": "Whether the current user can add a folder from another drive (different shared drive or My Drive) to this folder. This is false when the item is not a folder. Only populated for items in shared drives."
             },
-            "canAddMyDriveParent": {
+            {
+              "name": "canAddMyDriveParent",
               "type": "bool",
               "description": "Whether the current user can add a parent for the item without removing an existing parent in the same request. Not populated for shared drive files."
             },
-            "canChangeCopyRequiresWriterPermission": {
+            {
+              "name": "canChangeCopyRequiresWriterPermission",
               "type": "bool",
               "description": "Whether the current user can change the copyRequiresWriterPermission restriction of this file."
             },
-            "canChangeViewersCanCopyContent": {
+            {
+              "name": "canChangeViewersCanCopyContent",
               "type": "bool",
               "description": "Deprecated"
             },
-            "canComment": {
+            {
+              "name": "canComment",
               "type": "bool",
               "description": "Whether the current user can comment on this file."
             },
-            "canCopy": {
+            {
+              "name": "canCopy",
               "type": "bool",
               "description": "Whether the current user can copy this file. For an item in a shared drive, whether the current user can copy non-folder descendants of this item, or this item itself if it is not a folder."
             },
-            "canDelete": {
+            {
+              "name": "canDelete",
               "type": "bool",
               "description": "Whether the current user can delete this file."
             },
-            "canDeleteChildren": {
+            {
+              "name": "canDeleteChildren",
               "type": "bool",
               "description": "Whether the current user can delete children of this folder. This is false when the item is not a folder. Only populated for items in shared drives."
             },
-            "canDownload": {
+            {
+              "name": "canDownload",
               "type": "bool",
               "description": "Whether the current user can download this file."
             },
-            "canEdit": {
+            {
+              "name": "canEdit",
               "type": "bool",
               "description": "Whether the current user can edit this file. Other factors may limit the type of changes a user can make to a file. For example, see canChangeCopyRequiresWriterPermission or canModifyContent."
             },
-            "canListChildren": {
+            {
+              "name": "canListChildren",
               "type": "bool",
               "description": "Whether the current user can list the children of this folder. This is always false when the item is not a folder."
             },
-            "canModifyContent": {
+            {
+              "name": "canModifyContent",
               "type": "bool",
               "description": "Whether the current user can modify the content of this file."
             },
-            "canModifyContentRestriction": {
+            {
+              "name": "canModifyContentRestriction",
               "type": "bool",
               "description": "Whether the current user can modify restrictions on content of this file."
             },
-            "canMoveChildrenOutOfDrive": {
+            {
+              "name": "canMoveChildrenOutOfDrive",
               "type": "bool",
               "description": "Whether the current user can move children of this folder outside of the shared drive. This is false when the item is not a folder. Only populated for items in shared drives."
             },
-            "canMoveChildrenOutOfTeamDrive": {
+            {
+              "name": "canMoveChildrenOutOfTeamDrive",
               "type": "bool",
               "description": "Deprecated - use canMoveChildrenOutOfDrive instead."
             },
-            "canMoveChildrenWithinDrive": {
+            {
+              "name": "canMoveChildrenWithinDrive",
               "type": "bool",
               "description": "Whether the current user can move children of this folder within this drive. This is false when the item is not a folder. Note that a request to move the child may still fail depending on the current user's access to the child and to the destination folder."
             },
-            "canMoveChildrenWithinTeamDrive": {
+            {
+              "name": "canMoveChildrenWithinTeamDrive",
               "type": "bool",
               "description": "Deprecated - use canMoveChildrenWithinDrive instead."
             },
-            "canMoveItemIntoTeamDrive": {
+            {
+              "name": "canMoveItemIntoTeamDrive",
               "type": "bool",
               "description": "Deprecated - use canMoveItemOutOfDrive instead."
             },
-            "canMoveItemOutOfDrive": {
+            {
+              "name": "canMoveItemOutOfDrive",
               "type": "bool",
               "description": "Whether the current user can move this item outside of this drive by changing its parent. Note that a request to change the parent of the item may still fail depending on the new parent that is being added."
             },
-            "canMoveItemOutOfTeamDrive": {
+            {
+              "name": "canMoveItemOutOfTeamDrive",
               "type": "bool",
               "description": "Deprecated - use canMoveItemOutOfDrive instead."
             },
-            "canMoveItemWithinDrive": {
+            {
+              "name": "canMoveItemWithinDrive",
               "type": "bool",
               "description": "Whether the current user can move this item within this drive. Note that a request to change the parent of the item may still fail depending on the new parent that is being added and the parent that is being removed."
             },
-            "canMoveItemWithinTeamDrive": {
+            {
+              "name": "canMoveItemWithinTeamDrive",
               "type": "bool",
               "description": "Deprecated - use canMoveItemWithinDrive instead."
             },
-            "canMoveTeamDriveItem": {
+            {
+              "name": "canMoveTeamDriveItem",
               "type": "bool",
               "description": "Deprecated - use canMoveItemWithinDrive or canMoveItemOutOfDrive instead."
             },
-            "canReadDrive": {
+            {
+              "name": "canReadDrive",
               "type": "bool",
               "description": "Whether the current user can read the shared drive to which this file belongs. Only populated for items in shared drives."
             },
-            "canReadRevisions": {
+            {
+              "name": "canReadRevisions",
               "type": "bool",
               "description": "Whether the current user can read the revisions resource of this file. For a shared drive item, whether revisions of non-folder descendants of this item, or this item itself if it is not a folder, can be read."
             },
-            "canReadTeamDrive": {
+            {
+              "name": "canReadTeamDrive",
               "type": "bool",
               "description": "Deprecated - use canReadDrive instead."
             },
-            "canRemoveChildren": {
+            {
+              "name": "canRemoveChildren",
               "type": "bool",
               "description": "Whether the current user can remove children from this folder. This is always false when the item is not a folder. For a folder in a shared drive, use canDeleteChildren or canTrashChildren instead."
             },
-            "canRemoveMyDriveParent": {
+            {
+              "name": "canRemoveMyDriveParent",
               "type": "bool",
               "description": "Whether the current user can remove a parent from the item without adding another parent in the same request. Not populated for shared drive files."
             },
-            "canRename": {
+            {
+              "name": "canRename",
               "type": "bool",
               "description": "Whether the current user can rename this file."
             },
-            "canShare": {
+            {
+              "name": "canShare",
               "type": "bool",
               "description": "Whether the current user can modify the sharing settings for this file."
             },
-            "canTrash": {
+            {
+              "name": "canTrash",
               "type": "bool",
               "description": "Whether the current user can move this file to trash."
             },
-            "canTrashChildren": {
+            {
+              "name": "canTrashChildren",
               "type": "bool",
               "description": "Whether the current user can trash children of this folder. This is false when the item is not a folder. Only populated for items in shared drives."
             },
-            "canUntrash": {
+            {
+              "name": "canTrash",
               "type": "bool",
               "description": "Whether the current user can restore this file from trash."
             }
-          }
+          ]
         },
-        "contentHints": {
-          "type": "object",
+        {
+          "modelName": "ContentHints",
+          "id": "ContentHints",
           "description": "Additional information about the content of the file. These fields are never populated in responses.",
-          "properties": {
-            "indexableText": {
+          "innerModels": [],
+          "properties": [
+            {
+              "name": "image",
               "type": "string",
-              "description": "Text to be indexed for the file to improve fullText queries. This is limited to 128KB in length and may contain HTML elements."
+              "description": "The thumbnail data encoded with URL-safe Base64 (RFC 4648 section 5)."
             },
-            "thumbnail": {
-              "type": "object",
-              "description": "A thumbnail for the file. This will only be used if Google Drive cannot generate a standard thumbnail.",
-              "properties": {
-                "image": {
-                  "type": "string",
-                  "description": "The thumbnail data encoded with URL-safe Base64 (RFC 4648 section 5).",
-                  "format": "byte"
-                },
-                "mimeType": {
-                  "type": "string",
-                  "description": "The MIME type of the thumbnail."
-                }
-              }
+            {
+              "name": "mimeType",
+              "type": "string",
+              "description": "The MIME type of the thumbnail."
             }
-          }
+          ]
         },
-        "contentRestrictions": {
-          "type": "array",
-          "description": "Restrictions for accessing the content of the file. Only populated if such a restriction exists.",
-          "items": {
-            "$ref": "ContentRestriction"
-          }
-        },
-        "copyRequiresWriterPermission": {
-          "type": "bool",
-          "description": "Whether the options to copy, print, or download this file, should be disabled for readers and commenters."
-        },
-        "createdTime": {
-          "type": "string",
-          "description": "The time at which the file was created (RFC 3339 date-time).",
-          "format": "date-time"
-        },
-        "description": {
-          "type": "string",
-          "description": "A short description of the file."
-        },
-        "driveId": {
-          "type": "string",
-          "description": "ID of the shared drive the file resides in. Only populated for items in shared drives."
-        },
-        "explicitlyTrashed": {
-          "type": "bool",
-          "description": "Whether the file has been explicitly trashed, as opposed to recursively trashed from a parent folder."
-        },
-        "exportLinks": {
-          "type": "object",
-          "description": "Links for exporting Docs Editors files to specific formats.",
-          "additionalProperties": {
-            "type": "string",
-            "description": "A mapping from export format to URL"
-          }
-        },
-        "fileExtension": {
-          "type": "string",
-          "description": "The final component of fullFileExtension. This is only available for files with binary content in Google Drive."
-        },
-        "folderColorRgb": {
-          "type": "string",
-          "description": "The color for a folder as an RGB hex string. The supported colors are published in the folderColorPalette field of the About resource.\nIf an unsupported color is specified, the closest color in the palette will be used instead."
-        },
-        "fullFileExtension": {
-          "type": "string",
-          "description": "The full file extension extracted from the name field. May contain multiple concatenated extensions, such as \"tar.gz\". This is only available for files with binary content in Google Drive.\nThis is automatically updated when the name field changes, however it is not cleared if the new name does not contain a valid extension."
-        },
-        "hasAugmentedPermissions": {
-          "type": "bool",
-          "description": "Whether there are permissions directly on this file. This field is only populated for items in shared drives."
-        },
-        "hasThumbnail": {
-          "type": "bool",
-          "description": "Whether this file has a thumbnail. This does not indicate whether the requesting app has access to the thumbnail. To check access, look for the presence of the thumbnailLink field."
-        },
-        "headRevisionId": {
-          "type": "string",
-          "description": "The ID of the file's head revision. This is currently only available for files with binary content in Google Drive."
-        },
-        "iconLink": {
-          "type": "string",
-          "description": "A static, unauthenticated link to the file's icon."
-        },
-        "id": {
-          "type": "string",
-          "description": "The ID of the file."
-        },
-        "imageMediaMetadata": {
-          "type": "object",
+        {
+          "modelName": "ImageMediaMetadata",
+          "id": "ImageMediaMetadata",
           "description": "Additional metadata about image media, if available.",
-          "properties": {
-            "aperture": {
-              "type": "number",
-              "description": "The aperture used to create the photo (f-number).",
-              "format": "float"
+          "innerModels": [
+            {
+              "modelName": "Location",
+              "id": "Location",
+              "description": "Geographic location information stored in the image.",
+              "innerModels": [],
+              "properties": [
+                {
+                  "name": "altitude",
+                  "type": "double",
+                  "description": "The altitude stored in the image."
+                },
+                {
+                  "name": "latitude",
+                  "type": "double",
+                  "description": "The latitude stored in the image."
+                },
+                {
+                  "name": "longitude",
+                  "type": "double",
+                  "description": "The longitude stored in the image."
+                }
+              ]
+            }
+          ],
+          "properties": [
+            {
+              "name": "aperture",
+              "type": "float",
+              "description": "The aperture used to create the photo (f-number)."
             },
-            "cameraMake": {
+            {
+              "name": "cameraMake",
               "type": "string",
               "description": "The make of the camera used to create the photo."
             },
-            "cameraModel": {
+            {
+              "name": "cameraModel",
               "type": "string",
               "description": "The model of the camera used to create the photo."
             },
-            "colorSpace": {
+            {
+              "name": "colorSpace",
               "type": "string",
               "description": "The color space of the photo."
             },
-            "exposureBias": {
-              "type": "number",
-              "description": "The exposure bias of the photo (APEX value).",
-              "format": "float"
+            {
+              "name": "exposureBias",
+              "type": "float",
+              "description": "The exposure bias of the photo (APEX value)."
             },
-            "exposureMode": {
+            {
+              "name": "exposureMode",
               "type": "string",
               "description": "The exposure mode used to create the photo."
             },
-            "exposureTime": {
-              "type": "number",
-              "description": "The length of the exposure, in seconds.",
-              "format": "float"
+            {
+              "name": "exposureTime",
+              "type": "float",
+              "description": "The length of the exposure, in seconds."
             },
-            "flashUsed": {
+            {
+              "name": "flashUsed",
               "type": "bool",
               "description": "Whether a flash was used to create the photo."
             },
-            "focalLength": {
-              "type": "number",
-              "description": "The focal length used to create the photo, in millimeters.",
-              "format": "float"
+            {
+              "name": "focalLength",
+              "type": "float",
+              "description": "The focal length used to create the photo, in millimeters."
             },
-            "height": {
-              "type": "integer",
-              "description": "The height of the image in pixels.",
-              "format": "int32"
+            {
+              "name": "height",
+              "type": "int",
+              "description": "The height of the image in pixels."
             },
-            "isoSpeed": {
-              "type": "integer",
-              "description": "The ISO speed used to create the photo.",
-              "format": "int32"
+            {
+              "name": "isoSpeed",
+              "type": "int",
+              "description": "The ISO speed used to create the photo."
             },
-            "lens": {
+            {
+              "name": "lens",
               "type": "string",
               "description": "The lens used to create the photo."
             },
-            "location": {
-              "type": "object",
-              "description": "Geographic location information stored in the image.",
-              "properties": {
-                "altitude": {
-                  "type": "number",
-                  "description": "The altitude stored in the image.",
-                  "format": "double"
-                },
-                "latitude": {
-                  "type": "number",
-                  "description": "The latitude stored in the image.",
-                  "format": "double"
-                },
-                "longitude": {
-                  "type": "number",
-                  "description": "The longitude stored in the image.",
-                  "format": "double"
-                }
-              }
+            {
+              "name": "location",
+              "type": "Location",
+              "description": "Geographic location information stored in the image."
             },
-            "maxApertureValue": {
-              "type": "number",
-              "description": "The smallest f-number of the lens at the focal length used to create the photo (APEX value).",
-              "format": "float"
+            {
+              "name": "maxApertureValue",
+              "type": "float",
+              "description": "The smallest f-number of the lens at the focal length used to create the photo (APEX value)."
             },
-            "meteringMode": {
+            {
+              "name": "meteringMode",
               "type": "string",
               "description": "The metering mode used to create the photo."
             },
-            "rotation": {
-              "type": "integer",
-              "description": "The number of clockwise 90 degree rotations applied from the image's original orientation.",
-              "format": "int32"
+            {
+              "name": "rotation",
+              "type": "int",
+              "description": "The number of clockwise 90 degree rotations applied from the image's original orientation."
             },
-            "sensor": {
+            {
+              "name": "sensor",
               "type": "string",
               "description": "The type of sensor used to create the photo."
             },
-            "subjectDistance": {
-              "type": "integer",
-              "description": "The distance to the subject of the photo, in meters.",
-              "format": "int32"
+            {
+              "name": "subjectDistance",
+              "type": "int",
+              "description": "The distance to the subject of the photo, in meters."
             },
-            "time": {
+            {
+              "name": "time",
               "type": "string",
               "description": "The date and time the photo was taken (EXIF DateTime)."
             },
-            "whiteBalance": {
+            {
+              "name": "whiteBalance",
               "type": "string",
               "description": "The white balance mode used to create the photo."
             },
-            "width": {
-              "type": "integer",
-              "description": "The width of the image in pixels.",
-              "format": "int32"
+            {
+              "name": "width",
+              "type": "int",
+              "description": "The width of the image in pixels."
             }
-          }
+          ]
         },
-        "isAppAuthorized": {
+        {
+          "modelName": "ShortcutDetails",
+          "id": "ShortcutDetails",
+          "description": "Shortcut file details. Only populated for shortcut files, which have the mimeType field set to application/vnd.google-apps.shortcut.",
+          "innerModels": [],
+          "properties": [
+            {
+              "name": "targetId",
+              "type": "string",
+              "description": "The ID of the file that this shortcut points to."
+            },
+            {
+              "name": "targetMimeType",
+              "type": "string",
+              "description": "The MIME type of the file that this shortcut points to. The value of this field is a snapshot of the target's MIME type, captured when the shortcut is created."
+            }
+          ]
+        },
+        {
+          "modelName": "VideoMediaMetadata",
+          "id": "VideoMediaMetadata",
+          "description": "Additional metadata about video media. This may not be available immediately upon upload.",
+          "innerModels": [],
+          "properties": [
+            {
+              "name": "durationMillis",
+              "type": "long",
+              "description": "The duration of the video in milliseconds."
+            },
+            {
+              "name": "height",
+              "type": "int",
+              "description": "The height of the video in pixels."
+            },
+            {
+              "name": "width",
+              "type": "int",
+              "description": "The width of the video in pixels."
+            }
+          ]
+        }
+      ],
+      "properties": [
+        {
+          "name": "appProperties",
+          "type": "string[string]",
+          "description": "A collection of arbitrary key-value pairs which are private to the requesting app.\nEntries with null values are cleared in update and copy requests."
+        },
+        {
+          "name": "capabilities",
+          "type": "Capabilities",
+          "description": "Capabilities the current user has on this shared drive."
+        },
+        {
+          "name": "contentHints",
+          "type": "ContentHints",
+          "description": "Additional information about the content of the file. These fields are never populated in responses."
+        },
+        {
+          "name": "contentRestrictions",
+          "type": "ContentRestriction[]",
+          "description": "Restrictions for accessing the content of the file. Only populated if such a restriction exists."
+        },
+        {
+          "name": "copyRequiresWriterPermission",
+          "type": "bool",
+          "description": "Whether the options to copy, print, or download this file, should be disabled for readers and commenters."
+        },
+        {
+          "name": "createdTime",
+          "type": "SysTime",
+          "description": "The time at which the file was created (RFC 3339 date-time)."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "description": "A short description of the file."
+        },
+        {
+          "name": "driveId",
+          "type": "string",
+          "description": "ID of the shared drive the file resides in. Only populated for items in shared drives."
+        },
+        {
+          "name": "explicitlyTrashed",
+          "type": "bool",
+          "description": "Whether the file has been explicitly trashed, as opposed to recursively trashed from a parent folder."
+        },
+        {
+          "name": "exportLinks",
+          "type": "string[string]",
+          "description": "Links for exporting Docs Editors files to specific formats."
+        },
+        {
+          "name": "fileExtension",
+          "type": "string",
+          "description": "The final component of fullFileExtension. This is only available for files with binary content in Google Drive."
+        },
+        {
+          "name": "folderColorRgb",
+          "type": "string",
+          "description": "The color for a folder as an RGB hex string. The supported colors are published in the folderColorPalette field of the About resource.\nIf an unsupported color is specified, the closest color in the palette will be used instead."
+        },
+        {
+          "name": "fullFileExtension",
+          "type": "string",
+          "description": "The full file extension extracted from the name field. May contain multiple concatenated extensions, such as \"tar.gz\". This is only available for files with binary content in Google Drive.\nThis is automatically updated when the name field changes, however it is not cleared if the new name does not contain a valid extension."
+        },
+        {
+          "name": "hasAugmentedPermissions",
+          "type": "bool",
+          "description": "Whether there are permissions directly on this file. This field is only populated for items in shared drives."
+        },
+        {
+          "name": "hasThumbnail",
+          "type": "bool",
+          "description": "Whether this file has a thumbnail. This does not indicate whether the requesting app has access to the thumbnail. To check access, look for the presence of the thumbnailLink field."
+        },
+        {
+          "name": "headRevisionId",
+          "type": "string",
+          "description": "The ID of the file's head revision. This is currently only available for files with binary content in Google Drive."
+        },
+        {
+          "name": "iconLink",
+          "type": "string",
+          "description": "A static, unauthenticated link to the file's icon."
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "description": "The ID of the file."
+        },
+        {
+          "name": "imageMediaMetadata",
+          "type": "ImageMediaMetadata",
+          "description": "Additional metadata about image media, if available."
+        },
+        {
+          "name": "isAppAuthorized",
           "type": "bool",
           "description": "Whether the file was created or opened by the requesting app."
         },
-        "kind": {
+        {
+          "name": "kind",
           "type": "string",
           "description": "Identifies what kind of resource this is. Value: the fixed string \"drive#file\".",
           "default": "drive#file"
         },
-        "lastModifyingUser": {
-          "$ref": "User",
+        {
+          "name": "lastModifyingUser",
+          "type": "User",
           "description": "The last user to modify the file."
         },
-        "md5Checksum": {
+        {
+          "name": "md5Checksum",
           "type": "string",
           "description": "The MD5 checksum for the content of the file. This is only applicable to files with binary content in Google Drive."
         },
-        "mimeType": {
+        {
+          "name": "mimeType",
           "type": "string",
           "description": "The MIME type of the file.\nGoogle Drive will attempt to automatically detect an appropriate value from uploaded content if no value is provided. The value cannot be changed unless a new revision is uploaded.\nIf a file is created with a Google Doc MIME type, the uploaded content will be imported if possible. The supported import formats are published in the About resource."
         },
-        "modifiedByMe": {
+        {
+          "name": "modifiedByMe",
           "type": "bool",
           "description": "Whether the file has been modified by this user."
         },
-        "modifiedByMeTime": {
-          "type": "string",
-          "description": "The last time the file was modified by the user (RFC 3339 date-time).",
-          "format": "date-time"
+        {
+          "name": "modifiedTime",
+          "type": "SysTime",
+          "description":  "The last time the file was modified by anyone (RFC 3339 date-time).\nNote that setting modifiedTime will also update modifiedByMeTime for the user."
         },
-        "modifiedTime": {
-          "type": "string",
-          "description": "The last time the file was modified by anyone (RFC 3339 date-time).\nNote that setting modifiedTime will also update modifiedByMeTime for the user.",
-          "format": "date-time"
-        },
-        "name": {
+        {
+          "name": "name",
           "type": "string",
           "description": "The name of the file. This is not necessarily unique within a folder. Note that for immutable items such as the top level folders of shared drives, My Drive root folder, and Application Data folder the name is constant."
         },
-        "originalFilename": {
+        {
+          "name": "originalFilename",
           "type": "string",
           "description": "The original filename of the uploaded content if available, or else the original value of the name field. This is only available for files with binary content in Google Drive."
         },
-        "ownedByMe": {
+        {
+          "name": "ownedByMe",
           "type": "bool",
           "description": "Whether the user owns the file. Not populated for items in shared drives."
         },
-        "owners": {
-          "type": "array",
-          "description": "The owners of the file. Currently, only certain legacy files may have more than one owner. Not populated for items in shared drives.",
-          "items": {
-            "$ref": "User"
-          }
+        {
+          "name": "owners",
+          "type": "User[]",
+          "description": "The owners of the file. Currently, only certain legacy files may have more than one owner. Not populated for items in shared drives."
         },
-        "parents": {
-          "type": "array",
-          "description": "The IDs of the parent folders which contain the file.\nIf not specified as part of a create request, the file will be placed directly in the user's My Drive folder. If not specified as part of a copy request, the file will inherit any discoverable parents of the source file. Update requests must use the addParents and removeParents parameters to modify the parents list.",
-          "items": {
-            "type": "string"
-          }
+        {
+          "name": "parents",
+          "type": "string[]",
+          "description": "The IDs of the parent folders which contain the file.\nIf not specified as part of a create request, the file will be placed directly in the user's My Drive folder. If not specified as part of a copy request, the file will inherit any discoverable parents of the source file. Update requests must use the addParents and removeParents parameters to modify the parents list."
         },
-        "permissionIds": {
-          "type": "array",
-          "description": "List of permission IDs for users with access to this file.",
-          "items": {
-            "type": "string"
-          }
+        {
+          "name": "permissionIds",
+          "type": "string[]",
+          "description": "List of permission IDs for users with access to this file."
         },
-        "permissions": {
-          "type": "array",
-          "description": "The full list of permissions for the file. This is only available if the requesting user can share the file. Not populated for items in shared drives.",
-          "items": {
-            "$ref": "Permission"
-          }
+        {
+          "name": "permissions",
+          "type": "Permission[]",
+          "description": "The full list of permissions for the file. This is only available if the requesting user can share the file. Not populated for items in shared drives."
         },
-        "properties": {
-          "type": "object",
-          "description": "A collection of arbitrary key-value pairs which are visible to all apps.\nEntries with null values are cleared in update and copy requests.",
-          "additionalProperties": {
-            "type": "string"
-          }
+        {
+          "name": "properties",
+          "type": "string[string]",
+          "description": "A collection of arbitrary key-value pairs which are visible to all apps.\nEntries with null values are cleared in update and copy requests."
         },
-        "quotaBytesUsed": {
+        {
+          "name": "quotaBytesUsed",
           "type": "string",
-          "description": "The number of storage quota bytes used by the file. This includes the head revision as well as previous revisions with keepForever enabled.",
-          "format": "int64"
+          "description": "The number of storage quota bytes used by the file. This includes the head revision as well as previous revisions with keepForever enabled."
         },
-        "shared": {
+        {
+          "name": "shared",
           "type": "bool",
           "description": "Whether the file has been shared. Not populated for items in shared drives."
         },
-        "sharedWithMeTime": {
-          "type": "string",
-          "description": "The time at which the file was shared with the user, if applicable (RFC 3339 date-time).",
-          "format": "date-time"
+        {
+          "name": "sharedWithMeTime",
+          "type": "SysTime",
+          "description": "The time at which the file was shared with the user, if applicable (RFC 3339 date-time)."
         },
-        "sharingUser": {
-          "$ref": "User",
+        {
+          "name": "sharingUser",
+          "type": "User",
           "description": "The user who shared the file with the requesting user, if applicable."
         },
-        "shortcutDetails": {
-          "type": "object",
-          "description": "Shortcut file details. Only populated for shortcut files, which have the mimeType field set to application/vnd.google-apps.shortcut.",
-          "properties": {
-            "targetId": {
-              "type": "string",
-              "description": "The ID of the file that this shortcut points to."
-            },
-            "targetMimeType": {
-              "type": "string",
-              "description": "The MIME type of the file that this shortcut points to. The value of this field is a snapshot of the target's MIME type, captured when the shortcut is created."
-            }
-          }
+        {
+          "name": "shortcutDetails",
+          "type": "ShortcutDetails",
+          "description": "Shortcut file details. Only populated for shortcut files, which have the mimeType field set to application/vnd.google-apps.shortcut."
         },
-        "size": {
-          "type": "string",
-          "description": "The size of the file's content in bytes. This is applicable to binary files in Google Drive and Google Docs files.",
-          "format": "int64"
+        {
+          "name": "size",
+          "type": "long",
+          "description": "The size of the file's content in bytes. This is applicable to binary files in Google Drive and Google Docs files."
         },
-        "spaces": {
-          "type": "array",
-          "description": "The list of spaces which contain the file. The currently supported values are 'drive', 'appDataFolder' and 'photos'.",
-          "items": {
-            "type": "string"
-          }
+        {
+          "name": "spaces",
+          "type": "string[]",
+          "description": "The list of spaces which contain the file. The currently supported values are 'drive', 'appDataFolder' and 'photos'."
         },
-        "starred": {
+        {
+          "name": "starred",
           "type": "bool",
           "description": "Whether the user has starred the file."
         },
-        "teamDriveId": {
+        {
+          "name": "teamDriveId",
           "type": "string",
           "description": "Deprecated - use driveId instead."
         },
-        "thumbnailLink": {
+        {
+          "name": "thumbnailLink",
           "type": "string",
           "description": "A short-lived link to the file's thumbnail, if available. Typically lasts on the order of hours. Only populated when the requesting app can access the file's content. If the file isn't shared publicly, the URL returned in Files.thumbnailLink must be fetched using a credentialed request."
         },
-        "thumbnailVersion": {
-          "type": "string",
-          "description": "The thumbnail version for use in thumbnail cache invalidation.",
-          "format": "int64"
+        {
+          "name": "thumbnailVersion",
+          "type": "long",
+          "description": "The thumbnail version for use in thumbnail cache invalidation."
         },
-        "trashed": {
+        {
+          "name": "trashed",
           "type": "bool",
           "description": "Whether the file has been trashed, either explicitly or from a trashed parent folder. Only the owner may trash a file. The trashed item is excluded from all files.list responses returned for any user who does not own the file. However, all users with access to the file can see the trashed item metadata in an API response. All users with access can copy, download, export, and share the file."
         },
-        "trashedTime": {
-          "type": "string",
-          "description": "The time that the item was trashed (RFC 3339 date-time). Only populated for items in shared drives.",
-          "format": "date-time"
+        {
+          "name": "trashedTime",
+          "type": "SysTime",
+          "description": "The time that the item was trashed (RFC 3339 date-time). Only populated for items in shared drives."
         },
-        "trashingUser": {
-          "$ref": "User",
+        {
+          "name": "trashingUser",
+          "type": "User",
           "description": "If the file has been explicitly trashed, the user who trashed it. Only populated for items in shared drives."
         },
-        "version": {
-          "type": "string",
-          "description": "A monotonically increasing version number for the file. This reflects every change made to the file on the server, even those not visible to the user.",
-          "format": "int64"
+        {
+          "name": "version",
+          "type": "long",
+          "description": "A monotonically increasing version number for the file. This reflects every change made to the file on the server, even those not visible to the user."
         },
-        "videoMediaMetadata": {
-          "type": "object",
-          "description": "Additional metadata about video media. This may not be available immediately upon upload.",
-          "properties": {
-            "durationMillis": {
-              "type": "string",
-              "description": "The duration of the video in milliseconds.",
-              "format": "int64"
-            },
-            "height": {
-              "type": "integer",
-              "description": "The height of the video in pixels.",
-              "format": "int32"
-            },
-            "width": {
-              "type": "integer",
-              "description": "The width of the video in pixels.",
-              "format": "int32"
-            }
-          }
+        {
+          "name": "videoMediaMetadata",
+          "type": "VideoMediaMetadata",
+          "description": "Additional metadata about video media. This may not be available immediately upon upload."
         },
-        "viewedByMe": {
+        {
+          "name": "viewedByMe",
           "type": "bool",
           "description": "Whether the file has been viewed by this user."
         },
-        "viewedByMeTime": {
-          "type": "string",
-          "description": "The last time the file was viewed by the user (RFC 3339 date-time).",
-          "format": "date-time"
+        {
+          "name": "viewedByMeTime",
+          "type": "SysTime",
+          "description": "The last time the file was viewed by the user (RFC 3339 date-time)."
         },
-        "viewersCanCopyContent": {
+        {
+          "name": "viewersCanCopyContent",
           "type": "bool",
           "description": "Deprecated - use copyRequiresWriterPermission instead."
         },
-        "webContentLink": {
+        {
+          "name": "webContentLink",
           "type": "string",
           "description": "A link for downloading the content of the file in a browser. This is only available for files with binary content in Google Drive."
         },
-        "webViewLink": {
+        {
+          "name": "webViewLink",
           "type": "string",
           "description": "A link for opening the file in a relevant Google editor or viewer in a browser."
         },
-        "writersCanShare": {
+        {
+          "name": "writersCanShare",
           "type": "bool",
           "description": "Whether users with only writer permission can modify the file's permissions. Not populated for items in shared drives."
         }
-      }
+      ]
     },
-    "FileList": {
+    {
+      "modelName": "FileList",
       "id": "FileList",
-      "type": "object",
       "description": "A list of files.",
-      "properties": {
-        "files": {
-          "type": "array",
-          "description": "The list of files. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.",
-          "items": {
-            "$ref": "File"
-          }
+      "imports": [
+        "file"
+      ],
+      "innerModels": [],
+      "properties": [
+        {
+          "name": "files",
+          "type": "File[]",
+          "description": "The list of files. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched."
         },
-        "incompleteSearch": {
+        {
+          "name": "incompleteSearch",
           "type": "bool",
           "description": "Whether the search process was incomplete. If true, then some search results may be missing, since all documents were not searched. This may occur when searching multiple drives with the \"allDrives\" corpora, but all corpora could not be searched. When this happens, it is suggested that clients narrow their query by choosing a different corpus such as \"user\" or \"drive\"."
         },
-        "kind": {
+        {
+          "name": "kind",
           "type": "string",
           "description": "Identifies what kind of resource this is. Value: the fixed string \"drive#fileList\".",
           "default": "drive#fileList"
         },
-        "nextPageToken": {
+        {
+          "name": "nextPageToken",
           "type": "string",
           "description": "The page token for the next page of files. This will be absent if the end of the files list has been reached. If the token is rejected for any reason, it should be discarded, and pagination should be restarted from the first page of results."
         }
-      }
+      ]
     },
-    "GeneratedIds": {
-      "id": "GeneratedIds",
-      "type": "object",
+    {
+      "modelName": "GenerateIds",
+      "id": "GenerateIds",
       "description": "A list of generated file IDs which can be provided in create requests.",
-      "properties": {
-        "ids": {
-          "type": "array",
-          "description": "The IDs generated for the requesting user in the specified space.",
-          "items": {
-            "type": "string"
-          }
+      "innerModels": [],
+      "properties": [
+        {
+          "name": "ids",
+          "type": "string[]",
+          "description": "The IDs generated for the requesting user in the specified space."
         },
-        "kind": {
+        {
+          "name": "kind",
           "type": "string",
           "description": "Identifies what kind of resource this is. Value: the fixed string \"drive#generatedIds\".",
-          "default": "drive#generatedIds"
+          "default": "drive#generateIds"
         },
-        "space": {
+        {
+          "name": "space",
           "type": "string",
           "description": "The type of file that can be created with these IDs."
         }
-      }
+      ]
     },
-    "Permission": {
+    {
+      "modelName": "Permission",
       "id": "Permission",
-      "type": "object",
       "description": "A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.",
-      "properties": {
-        "allowFileDiscovery": {
+      "innerModels": [
+        {
+          "modelName": "PermissionDetails",
+          "id": "PermissionDetails",
+          "type": "PermissionDetails",
+          "description": "Details of whether the permissions on this shared drive item are inherited or directly on this item. This is an output-only field which is present only for shared drive items.",
+          "innerModels": [],
+          "properties": [
+            {
+              "name": "inherited",
+              "type": "bool",
+              "description": "Whether this permission is inherited. This field is always populated. This is an output-only field."
+            },
+            {
+              "name": "inheritedFrom",
+              "type": "string",
+              "description": "The ID of the item from which this permission is inherited. This is an output-only field."
+            },
+            {
+              "name": "permissionType",
+              "type": "string",
+              "description": "The permission type for this user. While new values may be added in future, the following are currently possible:  \n- file \n- member"
+            },
+            {
+              "name": "role",
+              "type": "string",
+              "description": "The primary role for this user. While new values may be added in the future, the following are currently possible:  \n- organizer \n- fileOrganizer \n- writer \n- commenter \n- reader"
+            }
+          ]
+        },
+        {
+          "modelName": "TeamDrivePermissionDetails",
+          "id": "TeamDrivePermissionDetails",
+          "type": "TeamDrivePermissionDetails",
+          "description": "Deprecated - use permissionDetails instead.",
+          "innerModels": [],
+          "properties": [
+            {
+              "name": "inherited",
+              "type": "bool",
+              "description": "Deprecated - use permissionDetails/inherited instead."
+            },
+            {
+              "name": "inheritedFrom",
+              "type": "string",
+              "description": "Deprecated - use permissionDetails/inheritedFrom instead."
+            },
+            {
+              "name": "role",
+              "type": "string",
+              "description": "Deprecated - use permissionDetails/role instead."
+            },
+            {
+              "name": "teamDrivePermissionType",
+              "type": "string",
+              "description": "Deprecated - use permissionDetails/permissionType instead."
+            }
+          ]
+        }
+      ],
+      "properties": [
+        {
+          "name": "allowFileDiscovery",
           "type": "bool",
           "description": "Whether the permission allows the file to be discovered through search. This is only applicable for permissions of type domain or anyone."
         },
-        "deleted": {
+        {
+          "name": "deleted",
           "type": "bool",
           "description": "Whether the account associated with this permission has been deleted. This field only pertains to user and group permissions."
         },
-        "displayName": {
+        {
+          "name": "displayName",
           "type": "string",
           "description": "The \"pretty\" name of the value of the permission. The following is a list of examples for each type of permission:  \n- user - User's full name, as defined for their Google account, such as \"Joe Smith.\" \n- group - Name of the Google Group, such as \"The Company Administrators.\" \n- domain - String domain name, such as \"thecompany.com.\" \n- anyone - No displayName is present."
         },
-        "domain": {
+        {
+          "name": "domain",
           "type": "string",
           "description": "The domain to which this permission refers."
         },
-        "emailAddress": {
+        {
+          "name": "emailAddress",
           "type": "string",
           "description": "The email address of the user or group to which this permission refers."
         },
-        "expirationTime": {
-          "type": "string",
-          "description": "The time at which this permission will expire (RFC 3339 date-time). Expiration times have the following restrictions:  \n- They can only be set on user and group permissions \n- The time must be in the future \n- The time cannot be more than a year in the future",
-          "format": "date-time"
+        {
+          "name": "expirationTime",
+          "type": "SysTime",
+          "description": "The time at which this permission will expire (RFC 3339 date-time). Expiration times have the following restrictions:  \n- They can only be set on user and group permissions \n- The time must be in the future \n- The time cannot be more than a year in the future"
         },
-        "id": {
+        {
+          "name": "id",
           "type": "string",
           "description": "The ID of this permission. This is a unique identifier for the grantee, and is published in User resources as permissionId. IDs should be treated as opaque values."
         },
-        "kind": {
+        {
+          "name": "kind",
           "type": "string",
           "description": "Identifies what kind of resource this is. Value: the fixed string \"drive#permission\".",
           "default": "drive#permission"
         },
-        "permissionDetails": {
-          "type": "array",
-          "description": "Details of whether the permissions on this shared drive item are inherited or directly on this item. This is an output-only field which is present only for shared drive items.",
-          "items": {
-            "type": "object",
-            "properties": {
-              "inherited": {
-                "type": "bool",
-                "description": "Whether this permission is inherited. This field is always populated. This is an output-only field."
-              },
-              "inheritedFrom": {
-                "type": "string",
-                "description": "The ID of the item from which this permission is inherited. This is an output-only field."
-              },
-              "permissionType": {
-                "type": "string",
-                "description": "The permission type for this user. While new values may be added in future, the following are currently possible:  \n- file \n- member"
-              },
-              "role": {
-                "type": "string",
-                "description": "The primary role for this user. While new values may be added in the future, the following are currently possible:  \n- organizer \n- fileOrganizer \n- writer \n- commenter \n- reader"
-              }
-            }
-          }
+        {
+          "name": "permissionDetails",
+          "type": "PermissionDetails[]",
+          "description": "Details of whether the permissions on this shared drive item are inherited or directly on this item. This is an output-only field which is present only for shared drive items."
         },
-        "photoLink": {
+        {
+          "name": "photoLink",
           "type": "string",
           "description": "A link to the user's profile photo, if available."
         },
-        "role": {
+        {
+          "name": "role",
           "type": "string",
-          "description": "The role granted by this permission. While new values may be supported in the future, the following are currently allowed:  \n- owner \n- organizer \n- fileOrganizer \n- writer \n- commenter \n- reader",
-          "annotations": {
-            "required": [
-              "drive.permissions.create"
-            ]
-          }
+          "description": "The role granted by this permission. While new values may be supported in the future, the following are currently allowed:  \n- owner \n- organizer \n- fileOrganizer \n- writer \n- commenter \n- reader"
         },
-        "teamDrivePermissionDetails": {
-          "type": "array",
-          "description": "Deprecated - use permissionDetails instead.",
-          "items": {
-            "type": "object",
-            "properties": {
-              "inherited": {
-                "type": "bool",
-                "description": "Deprecated - use permissionDetails/inherited instead."
-              },
-              "inheritedFrom": {
-                "type": "string",
-                "description": "Deprecated - use permissionDetails/inheritedFrom instead."
-              },
-              "role": {
-                "type": "string",
-                "description": "Deprecated - use permissionDetails/role instead."
-              },
-              "teamDrivePermissionType": {
-                "type": "string",
-                "description": "Deprecated - use permissionDetails/permissionType instead."
-              }
-            }
-          }
+        {
+          "name": "teamDrivePermissionDetails",
+          "type": "TeamDrivePermissionDetails[]",
+          "description": "Deprecated - use permissionDetails instead."
         },
-        "type": {
+        {
+          "name": "type",
           "type": "string",
-          "description": "The type of the grantee. Valid values are:  \n- user \n- group \n- domain \n- anyone  When creating a permission, if type is user or group, you must provide an emailAddress for the user or group. When type is domain, you must provide a domain. There isn't extra information required for a anyone type.",
-          "annotations": {
-            "required": [
-              "drive.permissions.create"
-            ]
-          }
+          "description": "The type of the grantee. Valid values are:  \n- user \n- group \n- domain \n- anyone  When creating a permission, if type is user or group, you must provide an emailAddress for the user or group. When type is domain, you must provide a domain. There isn't extra information required for a anyone type."
         },
-        "view": {
+        {
+          "name": "view",
           "type": "string",
           "description": "Indicates the view for this permission. Only populated for permissions that belong to a view. published is the only supported value."
         }
-      }
+      ]
     },
-    "PermissionList": {
+    {
+      "modelName": "PermissionList",
       "id": "PermissionList",
-      "type": "object",
       "description": "A list of permissions for a file.",
-      "properties": {
-        "kind": {
+      "imports": [
+        "permission"
+      ],
+      "innerModels": [],
+      "properties": [
+        {
+          "name": "kind",
           "type": "string",
           "description": "Identifies what kind of resource this is. Value: the fixed string \"drive#permissionList\".",
           "default": "drive#permissionList"
         },
-        "nextPageToken": {
+        {
+          "name": "nextPageToken",
           "type": "string",
           "description": "The page token for the next page of permissions. This field will be absent if the end of the permissions list has been reached. If the token is rejected for any reason, it should be discarded, and pagination should be restarted from the first page of results."
         },
-        "permissions": {
-          "type": "array",
-          "description": "The list of permissions. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.",
-          "items": {
-            "$ref": "Permission"
-          }
+        {
+          "name": "permissions",
+          "type": "Permission[]",
+          "description": "The list of permissions. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched."
         }
-      }
+      ]
     },
-    "Reply": {
+    {
+      "modelName": "Reply",
       "id": "Reply",
-      "type": "object",
-      "description": "A reply to a comment on a file.",
-      "properties": {
-        "action": {
+      "description": "",
+      "innerModels": [],
+      "properties": [
+        {
+          "name": "action",
           "type": "string",
           "description": "The action the reply performed to the parent comment. Valid values are:  \n- resolve \n- reopen"
         },
-        "author": {
-          "$ref": "User",
+        {
+          "name": "author",
+          "type": "User",
+          "import": "User",
           "description": "The author of the reply. The author's email address and permission ID will not be populated."
         },
-        "content": {
+        {
+          "name": "content",
           "type": "string",
-          "description": "The plain text content of the reply. This field is used for setting the content, while htmlContent should be displayed. This is required on creates if no action is specified.",
-          "annotations": {
-            "required": [
-              "drive.replies.update"
-            ]
-          }
+          "description": "The plain text content of the reply. This field is used for setting the content, while htmlContent should be displayed. This is required on creates if no action is specified."
         },
-        "createdTime": {
-          "type": "string",
-          "description": "The time at which the reply was created (RFC 3339 date-time).",
-          "format": "date-time"
+        {
+          "name": "createdTime",
+          "type": "SysTime",
+          "description": "The time at which the reply was created (RFC 3339 date-time)."
         },
-        "deleted": {
+        {
+          "name": "deleted",
           "type": "bool",
           "description": "Whether the reply has been deleted. A deleted reply has no content."
         },
-        "htmlContent": {
+        {
+          "name": "htmlContent",
           "type": "string",
           "description": "The content of the reply with HTML formatting."
         },
-        "id": {
+        {
+          "name": "id",
           "type": "string",
           "description": "The ID of the reply."
         },
-        "kind": {
+        {
+          "name": "kind",
           "type": "string",
           "description": "Identifies what kind of resource this is. Value: the fixed string \"drive#reply\".",
           "default": "drive#reply"
         },
-        "modifiedTime": {
-          "type": "string",
-          "description": "The last time the reply was modified (RFC 3339 date-time).",
-          "format": "date-time"
+        {
+          "name": "modifiedTime",
+          "type": "SysTime",
+          "description": "The last time the reply was modified (RFC 3339 date-time)."
         }
-      }
+      ]
     },
-    "ReplyList": {
+    {
+      "modelName": "ReplyList",
       "id": "ReplyList",
-      "type": "object",
       "description": "A list of replies to a comment on a file.",
-      "properties": {
-        "kind": {
+      "imports": [
+        "reply"
+      ],
+      "innerModels": [],
+      "properties": [
+        {
+          "name": "kind",
           "type": "string",
           "description": "Identifies what kind of resource this is. Value: the fixed string \"drive#replyList\".",
           "default": "drive#replyList"
         },
-        "nextPageToken": {
+        {
+          "name": "nextPageToken",
           "type": "string",
           "description": "The page token for the next page of replies. This will be absent if the end of the replies list has been reached. If the token is rejected for any reason, it should be discarded, and pagination should be restarted from the first page of results."
         },
-        "replies": {
-          "type": "array",
-          "description": "The list of replies. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.",
-          "items": {
-            "$ref": "Reply"
-          }
+        {
+          "name": "replies",
+          "type": "Reply[]",
+          "description": "The list of replies. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched."
         }
-      }
+      ]
     },
-    "Revision": {
+    {
+      "modelName": "Revision",
       "id": "Revision",
-      "type": "object",
       "description": "The metadata for a revision to a file.",
-      "properties": {
-        "exportLinks": {
-          "type": "object",
-          "description": "Links for exporting Docs Editors files to specific formats.",
-          "additionalProperties": {
-            "type": "string",
-            "description": "A mapping from export format to URL"
-          }
+      "imports": [
+        "user"
+      ],
+      "innerModels": [],
+      "properties": [
+        {
+          "name": "exportLinks",
+          "type": "string[string]",
+          "description": "Links for exporting Docs Editors files to specific formats."
         },
-        "id": {
+        {
+          "name": "id",
           "type": "string",
           "description": "The ID of the revision."
         },
-        "keepForever": {
+        {
+          "name": "keepForever",
           "type": "bool",
           "description": "Whether to keep this revision forever, even if it is no longer the head revision. If not set, the revision will be automatically purged 30 days after newer content is uploaded. This can be set on a maximum of 200 revisions for a file.\nThis field is only applicable to files with binary content in Drive."
         },
-        "kind": {
+        {
+          "name": "kind",
           "type": "string",
           "description": "Identifies what kind of resource this is. Value: the fixed string \"drive#revision\".",
           "default": "drive#revision"
         },
-        "lastModifyingUser": {
-          "$ref": "User",
+        {
+          "name": "lastModifyingUser",
+          "type": "User",
           "description": "The last user to modify this revision."
         },
-        "md5Checksum": {
+        {
+          "name": "md5Checksum",
           "type": "string",
           "description": "The MD5 checksum of the revision's content. This is only applicable to files with binary content in Drive."
         },
-        "mimeType": {
+        {
+          "name": "mimeType",
           "type": "string",
           "description": "The MIME type of the revision."
         },
-        "modifiedTime": {
-          "type": "string",
-          "description": "The last time the revision was modified (RFC 3339 date-time).",
-          "format": "date-time"
+        {
+          "name": "modifiedTime",
+          "type": "SysTime",
+          "description": "The last time the revision was modified (RFC 3339 date-time)."
         },
-        "originalFilename": {
+        {
+          "name": "originalFilename",
           "type": "string",
           "description": "The original filename used to create this revision. This is only applicable to files with binary content in Drive."
         },
-        "publishAuto": {
+        {
+          "name": "publishAuto",
           "type": "bool",
           "description": "Whether subsequent revisions will be automatically republished. This is only applicable to Docs Editors files."
         },
-        "published": {
+        {
+          "name": "published",
           "type": "bool",
           "description": "Whether this revision is published. This is only applicable to Docs Editors files."
         },
-        "publishedLink": {
+        {
+          "name": "publishedLink",
           "type": "string",
           "description": "A link to the published revision. This is only populated for Google Sites files."
         },
-        "publishedOutsideDomain": {
+        {
+          "name": "publishedOutsideDomain",
           "type": "bool",
           "description": "Whether this revision is published outside the domain. This is only applicable to Docs Editors files."
         },
-        "size": {
-          "type": "string",
-          "description": "The size of the revision's content in bytes. This is only applicable to files with binary content in Drive.",
-          "format": "int64"
+        {
+          "name": "size",
+          "type": "long",
+          "description": "The size of the revision's content in bytes. This is only applicable to files with binary content in Drive."
         }
-      }
+      ]
     },
-    "RevisionList": {
+    {
+      "modelName": "RevisionList",
       "id": "RevisionList",
-      "type": "object",
       "description": "A list of revisions of a file.",
-      "properties": {
-        "kind": {
+      "imports": [
+        "revision"
+      ],
+      "innerModels": [],
+      "properties": [
+        {
+          "name": "kind",
           "type": "string",
           "description": "Identifies what kind of resource this is. Value: the fixed string \"drive#revisionList\".",
           "default": "drive#revisionList"
         },
-        "nextPageToken": {
+        {
+          "name": "nextPageToken",
           "type": "string",
           "description": "The page token for the next page of revisions. This will be absent if the end of the revisions list has been reached. If the token is rejected for any reason, it should be discarded, and pagination should be restarted from the first page of results."
         },
-        "revisions": {
-          "type": "array",
-          "description": "The list of revisions. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.",
-          "items": {
-            "$ref": "Revision"
-          }
+        {
+          "name": "revisions",
+          "type": "Revision[]",
+          "description": "The list of revisions. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched."
         }
-      }
+      ]
     },
-    "StartPageToken": {
+    {
+      "modelName": "StartPageToken",
       "id": "StartPageToken",
-      "type": "object",
-      "properties": {
-        "kind": {
+      "description": "",
+      "innerModels": [],
+      "properties": [
+        {
+          "name": "kind",
           "type": "string",
           "description": "Identifies what kind of resource this is. Value: the fixed string \"drive#startPageToken\".",
           "default": "drive#startPageToken"
         },
-        "startPageToken": {
+        {
+          "name": "startPageToken",
           "type": "string",
           "description": "The starting page token for listing changes."
         }
-      }
+      ]
     },
-    "TeamDrive": {
+    {
+      "modelName": "TeamDrive",
       "id": "TeamDrive",
-      "type": "object",
       "description": "Deprecated: use the drive collection instead.",
-      "properties": {
-        "backgroundImageFile": {
-          "type": "object",
+      "innerModels": [
+        {
+          "modelName": "BackgroundImageFile",
+          "id": "BackgroundImageFile",
           "description": "An image file and cropping parameters from which a background image for this Team Drive is set. This is a write only field; it can only be set on drive.teamdrives.update requests that don't set themeId. When specified, all fields of the backgroundImageFile must be set.",
-          "properties": {
-            "id": {
+          "innerModels": [],
+          "properties": [
+            {
+              "name": "id",
               "type": "string",
               "description": "The ID of an image file in Drive to use for the background image."
             },
-            "width": {
-              "type": "number",
-              "description": "The width of the cropped image in the closed range of 0 to 1. This value represents the width of the cropped image divided by the width of the entire image. The height is computed by applying a width to height aspect ratio of 80 to 9. The resulting image must be at least 1280 pixels wide and 144 pixels high.",
-              "format": "float"
+            {
+              "name": "width",
+              "type": "float",
+              "description": "The width of the cropped image in the closed range of 0 to 1. This value represents the width of the cropped image divided by the width of the entire image. The height is computed by applying a width to height aspect ratio of 80 to 9. The resulting image must be at least 1280 pixels wide and 144 pixels high."
             },
-            "xCoordinate": {
-              "type": "number",
-              "description": "The X coordinate of the upper left corner of the cropping area in the background image. This is a value in the closed range of 0 to 1. This value represents the horizontal distance from the left side of the entire image to the left side of the cropping area divided by the width of the entire image.",
-              "format": "float"
+            {
+              "name": "xCoordinate",
+              "type": "float",
+              "description": "The X coordinate of the upper left corner of the cropping area in the background image. This is a value in the closed range of 0 to 1. This value represents the horizontal distance from the left side of the entire image to the left side of the cropping area divided by the width of the entire image."
             },
-            "yCoordinate": {
-              "type": "number",
-              "description": "The Y coordinate of the upper left corner of the cropping area in the background image. This is a value in the closed range of 0 to 1. This value represents the vertical distance from the top side of the entire image to the top side of the cropping area divided by the height of the entire image.",
-              "format": "float"
+            {
+              "name": "yCoordinate",
+              "type": "float",
+              "description": "The Y coordinate of the upper left corner of the cropping area in the background image. This is a value in the closed range of 0 to 1. This value represents the vertical distance from the top side of the entire image to the top side of the cropping area divided by the height of the entire image."
             }
-          }
+          ]
         },
-        "backgroundImageLink": {
-          "type": "string",
-          "description": "A short-lived link to this Team Drive's background image."
-        },
-        "capabilities": {
-          "type": "object",
+        {
+          "modelName": "Capabilities",
+          "id": "Capabilities",
           "description": "Capabilities the current user has on this Team Drive.",
-          "properties": {
-            "canAddChildren": {
+          "innerModels": [],
+          "properties": [
+            {
+              "name": "canAddChildren",
               "type": "bool",
               "description": "Whether the current user can add children to folders in this Team Drive."
             },
-            "canChangeCopyRequiresWriterPermissionRestriction": {
+            {
+              "name": "canChangeCopyRequiresWriterPermissionRestriction",
               "type": "bool",
               "description": "Whether the current user can change the copyRequiresWriterPermission restriction of this Team Drive."
             },
-            "canChangeDomainUsersOnlyRestriction": {
+            {
+              "name": "canChangeDomainUsersOnlyRestriction",
               "type": "bool",
               "description": "Whether the current user can change the domainUsersOnly restriction of this Team Drive."
             },
-            "canChangeTeamDriveBackground": {
+            {
+              "name": "canChangeTeamDriveBackground",
               "type": "bool",
               "description": "Whether the current user can change the background of this Team Drive."
             },
-            "canChangeTeamMembersOnlyRestriction": {
+            {
+              "name": "canChangeTeamMembersOnlyRestriction",
               "type": "bool",
               "description": "Whether the current user can change the teamMembersOnly restriction of this Team Drive."
             },
-            "canComment": {
+            {
+              "name": "canComment",
               "type": "bool",
               "description": "Whether the current user can comment on files in this Team Drive."
             },
-            "canCopy": {
+            {
+              "name": "canCopy",
               "type": "bool",
               "description": "Whether the current user can copy files in this Team Drive."
             },
-            "canDeleteChildren": {
+            {
+              "name": "canDeleteChildren",
               "type": "bool",
               "description": "Whether the current user can delete children from folders in this Team Drive."
             },
-            "canDeleteTeamDrive": {
+            {
+              "name": "canDeleteTeamDrive",
               "type": "bool",
               "description": "Whether the current user can delete this Team Drive. Attempting to delete the Team Drive may still fail if there are untrashed items inside the Team Drive."
             },
-            "canDownload": {
+            {
+              "name": "canDownload",
               "type": "bool",
               "description": "Whether the current user can download files in this Team Drive."
             },
-            "canEdit": {
+            {
+              "name": "canEdit",
               "type": "bool",
               "description": "Whether the current user can edit files in this Team Drive"
             },
-            "canListChildren": {
+            {
+              "name": "canListChildren",
               "type": "bool",
               "description": "Whether the current user can list the children of folders in this Team Drive."
             },
-            "canManageMembers": {
+            {
+              "name": "canManageMembers",
               "type": "bool",
               "description": "Whether the current user can add members to this Team Drive or remove them or change their role."
             },
-            "canReadRevisions": {
+            {
+              "name": "canReadRevisions",
               "type": "bool",
               "description": "Whether the current user can read the revisions resource of files in this Team Drive."
             },
-            "canRemoveChildren": {
+            {
+              "name": "canRemoveChildren",
               "type": "bool",
               "description": "Deprecated - use canDeleteChildren or canTrashChildren instead."
             },
-            "canRename": {
+            {
+              "name": "canRename",
               "type": "bool",
               "description": "Whether the current user can rename files or folders in this Team Drive."
             },
-            "canRenameTeamDrive": {
+            {
+              "name": "canRenameTeamDrive",
               "type": "bool",
               "description": "Whether the current user can rename this Team Drive."
             },
-            "canShare": {
+            {
+              "name": "canShare",
               "type": "bool",
               "description": "Whether the current user can share files or folders in this Team Drive."
             },
-            "canTrashChildren": {
+            {
+              "name": "canTrashChildren",
               "type": "bool",
               "description": "Whether the current user can trash children from folders in this Team Drive."
             }
-          }
+          ]
         },
-        "colorRgb": {
+        {
+          "modelName": "Restrictions",
+          "id": "Restictions",
+          "description": "A set of restrictions that apply to this Team Drive or items inside this Team Drive.",
+          "innerModels": [],
+          "properties": [
+            {
+              "name": "adminManagedRestrictions",
+              "type": "bool",
+              "description": "Whether administrative privileges on this Team Drive are required to modify restrictions."
+            },
+            {
+              "name": "copyRequiresWriterPermission",
+              "type": "bool",
+              "description": "Whether the options to copy, print, or download files inside this Team Drive, should be disabled for readers and commenters. When this restriction is set to true, it will override the similarly named field to true for any file inside this Team Drive."
+            },
+            {
+              "name": "domainUsersOnly",
+              "type": "bool",
+              "description": "Whether access to this Team Drive and items inside this Team Drive is restricted to users of the domain to which this Team Drive belongs. This restriction may be overridden by other sharing policies controlled outside of this Team Drive."
+            },
+            {
+              "name": "teamMembersOnly",
+              "type": "bool",
+              "description": "Whether access to items inside this Team Drive is restricted to members of this Team Drive."
+            }
+          ]
+        }
+      ],
+      "properties": [
+        {
+          "name": "backgroundImageFile",
+          "type": "BackgroundImageFile",
+          "description": "An image file and cropping parameters from which a background image for this Team Drive is set. This is a write only field; it can only be set on drive.teamdrives.update requests that don't set themeId. When specified, all fields of the backgroundImageFile must be set."
+        },
+        {
+          "name": "backgroundImageLink",
+          "type": "string",
+          "description": "A short-lived link to this Team Drive's background image."
+        },
+        {
+          "name": "capabilities",
+          "type": "Capabilities",
+          "description": "Capabilities the current user has on this Team Drive."
+        },
+        {
+          "name": "colorRgb",
           "type": "string",
           "description": "The color of this Team Drive as an RGB hex string. It can only be set on a drive.teamdrives.update request that does not set themeId."
         },
-        "createdTime": {
-          "type": "string",
-          "description": "The time at which the Team Drive was created (RFC 3339 date-time).",
-          "format": "date-time"
+        {
+          "name": "createdTime",
+          "type": "SysTime",
+          "description": "The time at which the Team Drive was created (RFC 3339 date-time)."
         },
-        "id": {
+        {
+          "name": "id",
           "type": "string",
           "description": "The ID of this Team Drive which is also the ID of the top level folder of this Team Drive."
         },
-        "kind": {
+        {
+          "name": "kind",
           "type": "string",
           "description": "Identifies what kind of resource this is. Value: the fixed string \"drive#teamDrive\".",
           "default": "drive#teamDrive"
         },
-        "name": {
+        {
+          "name": "name",
           "type": "string",
           "description": "The name of this Team Drive."
         },
-        "restrictions": {
-          "type": "object",
-          "description": "A set of restrictions that apply to this Team Drive or items inside this Team Drive.",
-          "properties": {
-            "adminManagedRestrictions": {
-              "type": "bool",
-              "description": "Whether administrative privileges on this Team Drive are required to modify restrictions."
-            },
-            "copyRequiresWriterPermission": {
-              "type": "bool",
-              "description": "Whether the options to copy, print, or download files inside this Team Drive, should be disabled for readers and commenters. When this restriction is set to true, it will override the similarly named field to true for any file inside this Team Drive."
-            },
-            "domainUsersOnly": {
-              "type": "bool",
-              "description": "Whether access to this Team Drive and items inside this Team Drive is restricted to users of the domain to which this Team Drive belongs. This restriction may be overridden by other sharing policies controlled outside of this Team Drive."
-            },
-            "teamMembersOnly": {
-              "type": "bool",
-              "description": "Whether access to items inside this Team Drive is restricted to members of this Team Drive."
-            }
-          }
+        {
+          "name": "restrictions",
+          "type": "Restictions",
+          "description": "A set of restrictions that apply to this Team Drive or items inside this Team Drive."
         },
-        "themeId": {
+        {
+          "name": "themeId",
           "type": "string",
           "description": "The ID of the theme from which the background image and color will be set. The set of possible teamDriveThemes can be retrieved from a drive.about.get response. When not specified on a drive.teamdrives.create request, a random theme is chosen from which the background image and color are set. This is a write-only field; it can only be set on requests that don't set colorRgb or backgroundImageFile."
         }
-      }
+      ]
     },
-    "TeamDriveList": {
+    {
+      "modelName": "TeamDriveList",
       "id": "TeamDriveList",
-      "type": "object",
       "description": "A list of Team Drives.",
-      "properties": {
-        "kind": {
+      "imports": [
+        "teamdrive"
+      ],
+      "innerModels": [],
+      "properties": [
+        {
+          "name": "kind",
           "type": "string",
           "description": "Identifies what kind of resource this is. Value: the fixed string \"drive#teamDriveList\".",
           "default": "drive#teamDriveList"
         },
-        "nextPageToken": {
+        {
+          "name": "nextPageToken",
           "type": "string",
           "description": "The page token for the next page of Team Drives. This will be absent if the end of the Team Drives list has been reached. If the token is rejected for any reason, it should be discarded, and pagination should be restarted from the first page of results."
         },
-        "teamDrives": {
-          "type": "array",
-          "description": "The list of Team Drives. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched.",
-          "items": {
-            "$ref": "TeamDrive"
-          }
+        {
+          "name": "teamDrives",
+          "type": "TeamDrive[]",
+          "description": "The list of Team Drives. If nextPageToken is populated, then this list may be incomplete and an additional page of results should be fetched."
         }
-      }
+      ]
     },
-    "User": {
+    {
+      "modelName": "User",
       "id": "User",
-      "type": "object",
       "description": "Information about a Drive user.",
-      "properties": {
-        "displayName": {
+      "innerModels": [],
+      "properties": [
+        {
+          "name": "displayName",
           "type": "string",
           "description": "A plain text displayable name for this user."
         },
-        "emailAddress": {
+        {
+          "name": "emailAddress",
           "type": "string",
           "description": "The email address of the user. This may not be present in certain contexts if the user has not made their email address visible to the requester."
         },
-        "kind": {
+        {
+          "name": "kind",
           "type": "string",
           "description": "Identifies what kind of resource this is. Value: the fixed string \"drive#user\".",
           "default": "drive#user"
         },
-        "me": {
+        {
+          "name": "me",
           "type": "bool",
           "description": "Whether this user is the requesting user."
         },
-        "permissionId": {
+        {
+          "name": "permissionId",
           "type": "string",
           "description": "The user's ID as visible in Permission resources."
         },
-        "photoLink": {
+        {
+          "name": "photoLink",
           "type": "string",
           "description": "A link to the user's profile photo, if available."
         }
-      }
+      ]
     }
-  },
+  ],
   "resources": [
     {
       "resourceName": "about",
@@ -1855,21 +2161,11 @@
           "path": "about",
           "httpMethod": "GET",
           "description": "Gets information about the user, the user's Drive, and system capabilities.",
-          "response": "About",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.appdata",
-            "https://www.googleapis.com/auth/drive.file",
-            "https://www.googleapis.com/auth/drive.metadata",
-            "https://www.googleapis.com/auth/drive.metadata.readonly",
-            "https://www.googleapis.com/auth/drive.photos.readonly",
-            "https://www.googleapis.com/auth/drive.readonly"
-          ]
+          "response": "About"
         }
       ]
     },
     {
-      "class": "Changes",
       "resourceName": "changes",
       "methods": [
         {
@@ -1902,16 +2198,7 @@
               "description": "Deprecated use driveId instead."
             }
           ],
-          "response": "StartPageToken",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.appdata",
-            "https://www.googleapis.com/auth/drive.file",
-            "https://www.googleapis.com/auth/drive.metadata",
-            "https://www.googleapis.com/auth/drive.metadata.readonly",
-            "https://www.googleapis.com/auth/drive.photos.readonly",
-            "https://www.googleapis.com/auth/drive.readonly"
-          ]
+          "response": "StartPageToken"
         },
         {
           "methodName": "list",
@@ -1994,20 +2281,11 @@
             {
               "name": "pageToken",
               "type": "string",
-              "description": "The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method."
+              "description": "The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.",
+              "last": true
             }
           ],
-          "response": "ChangeList",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.appdata",
-            "https://www.googleapis.com/auth/drive.file",
-            "https://www.googleapis.com/auth/drive.metadata",
-            "https://www.googleapis.com/auth/drive.metadata.readonly",
-            "https://www.googleapis.com/auth/drive.photos.readonly",
-            "https://www.googleapis.com/auth/drive.readonly"
-          ],
-          "supportsSubscription": true
+          "response": "ChangeList"
         },
         {
           "methodName": "watch",
@@ -2090,26 +2368,16 @@
             {
               "name": "pageToken",
               "type": "string",
-              "description": "The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method."
+              "description": "The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.",
+              "last": true
             }
           ],
           "request": "Channel",
-          "response": "Channel",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.appdata",
-            "https://www.googleapis.com/auth/drive.file",
-            "https://www.googleapis.com/auth/drive.metadata",
-            "https://www.googleapis.com/auth/drive.metadata.readonly",
-            "https://www.googleapis.com/auth/drive.photos.readonly",
-            "https://www.googleapis.com/auth/drive.readonly"
-          ],
-          "supportsSubscription": true
+          "response": "Channel"
         }
       ]
     },
     {
-      "class": "Channels",
       "resourceName": "channels",
       "methods": [
         {
@@ -2118,21 +2386,11 @@
           "path": "channels/stop",
           "httpMethod": "POST",
           "description": "Stop watching resources through this channel",
-          "request": "Channel",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.appdata",
-            "https://www.googleapis.com/auth/drive.file",
-            "https://www.googleapis.com/auth/drive.metadata",
-            "https://www.googleapis.com/auth/drive.metadata.readonly",
-            "https://www.googleapis.com/auth/drive.photos.readonly",
-            "https://www.googleapis.com/auth/drive.readonly"
-          ]
+          "request": "Channel"
         }
       ]
     },
     {
-      "class": "Comments",
       "resourceName": "comments",
       "methods": [
         {
@@ -2153,11 +2411,7 @@
             }
           ],
           "request": "Comment",
-          "response": "Comment",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.file"
-          ]
+          "response": "Comment"
         },
         {
           "methodName": "delete",
@@ -2182,10 +2436,6 @@
               "pathParameter": true,
               "last": true
             }
-          ],
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.file"
           ]
         },
         {
@@ -2219,12 +2469,7 @@
               "last": true
             }
           ],
-          "response": "Comment",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.file",
-            "https://www.googleapis.com/auth/drive.readonly"
-          ]
+          "response": "Comment"
         },
         {
           "methodName": "list",
@@ -2266,12 +2511,7 @@
               "last": true
             }
           ],
-          "response": "CommentList",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.file",
-            "https://www.googleapis.com/auth/drive.readonly"
-          ]
+          "response": "CommentList"
         },
         {
           "methodName": "update",
@@ -2298,16 +2538,11 @@
             }
           ],
           "request": "Comment",
-          "response": "Comment",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.file"
-          ]
+          "response": "Comment"
         }
       ]
     },
     {
-      "class": "Drives",
       "resourceName": "drives",
       "methods": [
         {
@@ -2321,14 +2556,12 @@
             {
               "name": "requestId",
               "type": "string",
-              "description": "An ID, such as a random UUID, which uniquely identifies this user's request for idempotent creation of a shared drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same shared drive. If the shared drive already exists a 409 error will be returned."
+              "description": "An ID, such as a random UUID, which uniquely identifies this user's request for idempotent creation of a shared drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same shared drive. If the shared drive already exists a 409 error will be returned.",
+              "last": true
             }
           ],
           "request": "Drive",
-          "response": "Drive",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive"
-          ]
+          "response": "Drive"
         },
         {
           "methodName": "delete",
@@ -2346,9 +2579,6 @@
               "pathParameter": true,
               "last": true
             }
-          ],
-          "scopes": [
-            "https://www.googleapis.com/auth/drive"
           ]
         },
         {
@@ -2375,11 +2605,7 @@
               "last": true
             }
           ],
-          "response": "Drive",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.readonly"
-          ]
+          "response": "Drive"
         },
         {
           "methodName": "hide",
@@ -2398,10 +2624,7 @@
               "last": true
             }
           ],
-          "response": "Drive",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive"
-          ]
+          "response": "Drive"
         },
         {
           "methodName": "list",
@@ -2433,11 +2656,7 @@
               "default": "false"
             }
           ],
-          "response": "DriveList",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.readonly"
-          ]
+          "response": "DriveList"
         },
         {
           "methodName": "unhide",
@@ -2456,10 +2675,7 @@
               "last": true
             }
           ],
-          "response": "Drive",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive"
-          ]
+          "response": "Drive"
         },
         {
           "methodName": "update",
@@ -2486,15 +2702,11 @@
             }
           ],
           "request": "Drive",
-          "response": "Drive",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive"
-          ]
+          "response": "Drive"
         }
       ]
     },
     {
-      "class": "Files",
       "resourceName": "files",
       "methods": [
         {
@@ -2556,13 +2768,7 @@
             }
           ],
           "request": "File",
-          "response": "File",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.appdata",
-            "https://www.googleapis.com/auth/drive.file",
-            "https://www.googleapis.com/auth/drive.photos.readonly"
-          ]
+          "response": "File"
         },
         {
           "methodName": "create",
@@ -2620,29 +2826,21 @@
           ],
           "request": "File",
           "response": "File",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.appdata",
-            "https://www.googleapis.com/auth/drive.file"
-          ],
           "supportsMediaUpload": true,
           "mediaUpload": {
-            "accept": [
-              "*/*"
-            ],
-            "maxSize": "5120GB",
-            "protocols": {
-              "simple": {
+            "protocols": [
+              {
+                "name": "simple",
                 "multipart": true,
                 "path": "/upload/drive/v3/files"
               },
-              "resumable": {
+              {
+                "name": "resumable",
                 "multipart": true,
                 "path": "/resumable/upload/drive/v3/files"
               }
-            }
-          },
-          "supportsSubscription": true
+            ]
+          }
         },
         {
           "methodName": "delete",
@@ -2679,11 +2877,6 @@
               "pathParameter": true,
               "last": true
             }
-          ],
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.appdata",
-            "https://www.googleapis.com/auth/drive.file"
           ]
         },
         {
@@ -2699,9 +2892,6 @@
               "description": "Deprecated. If an item is not in a shared drive and its last parent is deleted but the item itself is not, the item will be placed under its owner's root.",
               "default": "false"
             }
-          ],
-          "scopes": [
-            "https://www.googleapis.com/auth/drive"
           ]
         },
         {
@@ -2714,24 +2904,18 @@
           "hasPathParameters": true,
           "parameterOrder": [
             {
+              "name": "mimeType",
+              "type": "string",
+              "description": "The MIME type of the format requested for this export."
+            },
+            {
               "name": "fileId",
               "type": "string",
               "description": "The ID of the file.",
               "pathParameter": true,
               "last": true
-            },
-            {
-              "name": "mimeType",
-              "type": "string",
-              "description": "The MIME type of the format requested for this export."
             }
-          ],
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.file",
-            "https://www.googleapis.com/auth/drive.readonly"
-          ],
-          "supportsMediaDownload": true
+          ]
         },
         {
           "methodName": "generateIds",
@@ -2753,12 +2937,7 @@
               "default": "drive"
             }
           ],
-          "response": "GeneratedIds",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.appdata",
-            "https://www.googleapis.com/auth/drive.file"
-          ]
+          "response": "GeneratedIds"
         },
         {
           "methodName": "get",
@@ -2801,18 +2980,7 @@
             }
           ],
           "response": "File",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.appdata",
-            "https://www.googleapis.com/auth/drive.file",
-            "https://www.googleapis.com/auth/drive.metadata",
-            "https://www.googleapis.com/auth/drive.metadata.readonly",
-            "https://www.googleapis.com/auth/drive.photos.readonly",
-            "https://www.googleapis.com/auth/drive.readonly"
-          ],
-          "supportsMediaDownload": true,
-          "useMediaDownloadService": true,
-          "supportsSubscription": true
+          "supportsMediaDownload": true
         },
         {
           "methodName": "list",
@@ -2824,8 +2992,7 @@
             {
               "name": "corpora",
               "type": "string",
-              "description": "Groupings of files to which the query applies. Supported groupings are: 'user' (files created by, opened by, or shared directly with the user), 'drive' (files in the specified shared drive as indicated by the 'driveId'), 'domain' (files shared to the user's domain), and 'allDrives' (A combination of 'user' and 'drive' for all drives where the user is a member). When able, use 'user' or 'drive', instead of 'allDrives', for efficiency.",
-              "location": "query"
+              "description": "Groupings of files to which the query applies. Supported groupings are: 'user' (files created by, opened by, or shared directly with the user), 'drive' (files in the specified shared drive as indicated by the 'driveId'), 'domain' (files shared to the user's domain), and 'allDrives' (A combination of 'user' and 'drive' for all drives where the user is a member). When able, use 'user' or 'drive', instead of 'allDrives', for efficiency."
             },
             {
               "name": "corpus",
@@ -2899,16 +3066,7 @@
               "description": "Deprecated use driveId instead."
             }
           ],
-          "response": "FileList",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.appdata",
-            "https://www.googleapis.com/auth/drive.file",
-            "https://www.googleapis.com/auth/drive.metadata",
-            "https://www.googleapis.com/auth/drive.metadata.readonly",
-            "https://www.googleapis.com/auth/drive.photos.readonly",
-            "https://www.googleapis.com/auth/drive.readonly"
-          ]
+          "response": "FileList"
         },
         {
           "methodName": "update",
@@ -2979,29 +3137,20 @@
           ],
           "request": "File",
           "response": "File",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.appdata",
-            "https://www.googleapis.com/auth/drive.file",
-            "https://www.googleapis.com/auth/drive.metadata",
-            "https://www.googleapis.com/auth/drive.scripts"
-          ],
           "supportsMediaUpload": true,
           "mediaUpload": {
-            "accept": [
-              "*/*"
-            ],
-            "maxSize": "5120GB",
-            "protocols": {
-              "simple": {
+            "protocols": [
+              {
+                "name": "simple",
                 "multipart": true,
                 "path": "/upload/drive/v3/files/{fileId}"
               },
-              "resumable": {
+              {
+                "name": "resumable",
                 "multipart": true,
                 "path": "/resumable/upload/drive/v3/files/{fileId}"
               }
-            }
+            ]
           }
         },
         {
@@ -3046,18 +3195,7 @@
           ],
           "request": "Channel",
           "response": "Channel",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.appdata",
-            "https://www.googleapis.com/auth/drive.file",
-            "https://www.googleapis.com/auth/drive.metadata",
-            "https://www.googleapis.com/auth/drive.metadata.readonly",
-            "https://www.googleapis.com/auth/drive.photos.readonly",
-            "https://www.googleapis.com/auth/drive.readonly"
-          ],
-          "supportsMediaDownload": true,
-          "useMediaDownloadService": true,
-          "supportsSubscription": true
+          "supportsMediaDownload": true
         }
       ]
     },
@@ -3130,11 +3268,7 @@
             }
           ],
           "request": "Permission",
-          "response": "Permission",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.file"
-          ]
+          "response": "Permission"
         },
         {
           "methodName": "delete",
@@ -3178,10 +3312,6 @@
               "pathParameter": true,
               "last": true
             }
-          ],
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.file"
           ]
         },
         {
@@ -3227,15 +3357,7 @@
               "last": true
             }
           ],
-          "response": "Permission",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.file",
-            "https://www.googleapis.com/auth/drive.metadata",
-            "https://www.googleapis.com/auth/drive.metadata.readonly",
-            "https://www.googleapis.com/auth/drive.photos.readonly",
-            "https://www.googleapis.com/auth/drive.readonly"
-          ]
+          "response": "Permission"
         },
         {
           "methodName": "list",
@@ -3288,15 +3410,7 @@
               "last": true
             }
           ],
-          "response": "PermissionList",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.file",
-            "https://www.googleapis.com/auth/drive.metadata",
-            "https://www.googleapis.com/auth/drive.metadata.readonly",
-            "https://www.googleapis.com/auth/drive.photos.readonly",
-            "https://www.googleapis.com/auth/drive.readonly"
-          ]
+          "response": "PermissionList"
         },
         {
           "methodName": "update",
@@ -3354,11 +3468,7 @@
             }
           ],
           "request": "Permission",
-          "response": "Permission",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.file"
-          ]
+          "response": "Permission"
         }
       ]
     },
@@ -3391,11 +3501,7 @@
             }
           ],
           "request": "Reply",
-          "response": "Reply",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.file"
-          ]
+          "response": "Reply"
         },
         {
           "methodName": "delete",
@@ -3427,10 +3533,6 @@
               "pathParameter": true,
               "last": true
             }
-          ],
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.file"
           ]
         },
         {
@@ -3471,12 +3573,7 @@
               "last": true
             }
           ],
-          "response": "Reply",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.file",
-            "https://www.googleapis.com/auth/drive.readonly"
-          ]
+          "response": "Reply"
         },
         {
           "methodName": "list",
@@ -3520,12 +3617,7 @@
               "last": true
             }
           ],
-          "response": "ReplyList",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.file",
-            "https://www.googleapis.com/auth/drive.readonly"
-          ]
+          "response": "ReplyList"
         },
         {
           "methodName": "update",
@@ -3559,11 +3651,7 @@
             }
           ],
           "request": "Reply",
-          "response": "Reply",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.file"
-          ]
+          "response": "Reply"
         }
       ]
     },
@@ -3594,11 +3682,6 @@
               "pathParameter": true,
               "last": true
             }
-          ],
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.appdata",
-            "https://www.googleapis.com/auth/drive.file"
           ]
         },
         {
@@ -3633,17 +3716,7 @@
             }
           ],
           "response": "Revision",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.appdata",
-            "https://www.googleapis.com/auth/drive.file",
-            "https://www.googleapis.com/auth/drive.metadata",
-            "https://www.googleapis.com/auth/drive.metadata.readonly",
-            "https://www.googleapis.com/auth/drive.photos.readonly",
-            "https://www.googleapis.com/auth/drive.readonly"
-          ],
-          "supportsMediaDownload": true,
-          "useMediaDownloadService": true
+          "supportsMediaDownload": true
         },
         {
           "methodName": "list",
@@ -3674,16 +3747,7 @@
               "last": true
             }
           ],
-          "response": "RevisionList",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.appdata",
-            "https://www.googleapis.com/auth/drive.file",
-            "https://www.googleapis.com/auth/drive.metadata",
-            "https://www.googleapis.com/auth/drive.metadata.readonly",
-            "https://www.googleapis.com/auth/drive.photos.readonly",
-            "https://www.googleapis.com/auth/drive.readonly"
-          ]
+          "response": "RevisionList"
         },
         {
           "methodName": "update",
@@ -3710,12 +3774,7 @@
             }
           ],
           "request": "Revision",
-          "response": "Revision",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.appdata",
-            "https://www.googleapis.com/auth/drive.file"
-          ]
+          "response": "Revision"
         }
       ]
     },
@@ -3739,10 +3798,7 @@
             }
           ],
           "request": "TeamDrive",
-          "response": "TeamDrive",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive"
-          ]
+          "response": "TeamDrive"
         },
         {
           "methodName": "delete",
@@ -3760,9 +3816,6 @@
               "pathParameter": true,
               "last": true
             }
-          ],
-          "scopes": [
-            "https://www.googleapis.com/auth/drive"
           ]
         },
         {
@@ -3782,18 +3835,14 @@
           ],
           "parameterOrder": [
             {
-              "name": "teamDriveId,",
+              "name": "teamDriveId",
               "type": "string",
               "description": "The ID of the Team Drive.",
               "pathParameter": true,
               "last": true
             }
           ],
-          "response": "TeamDrive",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.readonly"
-          ]
+          "response": "TeamDrive"
         },
         {
           "methodName": "list",
@@ -3825,11 +3874,7 @@
               "default": "false"
             }
           ],
-          "response": "TeamDriveList",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.readonly"
-          ]
+          "response": "TeamDriveList"
         },
         {
           "methodName": "update",
@@ -3856,10 +3901,7 @@
             }
           ],
           "request": "TeamDrive",
-          "response": "TeamDrive",
-          "scopes": [
-            "https://www.googleapis.com/auth/drive"
-          ]
+          "response": "TeamDrive"
         }
       ]
     }
